@@ -1,0 +1,62 @@
+{
+  "title": "Skyrise Tender Alert — dgMarket RSS → Gmail",
+  "description": "Monitors dgMarket RSS feed for infrastructure consulting tenders in Africa & Middle East. Filters by keyword relevance and sends email alerts to louai@skyrisecapitalpm.com",
+  "steps": [
+    {
+      "type": "trigger",
+      "app": "RSS by Zapier",
+      "event": "New Item in Feed",
+      "params": {
+        "url": "https://www.dgmarket.com/tenders/rssfeed.do?noticeType=gpr&country=DJ,ET,KE,TZ,SN,CI,CM,MA,DZ,SA,AE,UG,RW&sector=TRN,WTR,ENE,URB,ENV&donor=WB,AFDB,AFD,UNDP,EU&language=en,fr&maxAge=30"
+      }
+    },
+    {
+      "type": "filter",
+      "app": "Filter by Zapier",
+      "event": "Only continue if",
+      "conditions": [
+        {
+          "field": "title",
+          "operator": "contains",
+          "values": ["supervision","AMO","consultant","advisory","PMO","étude","feasibility","port","infrastructure","maîtrise d'ouvrage","engineering","project management"]
+        }
+      ]
+    },
+    {
+      "type": "action",
+      "app": "Gmail",
+      "event": "Send Email",
+      "params": {
+        "to": "louai@skyrisecapitalpm.com",
+        "subject": "[Tender Alert] {{title}}",
+        "body": "New tender opportunity detected:\n\nTitle: {{title}}\nPublished: {{pubDate}}\nSource: dgMarket\n\nDescription:\n{{summary}}\n\nLink: {{link}}\n\n---\nSkyrise Tender Intelligence · Auto-alert"
+      }
+    },
+    {
+      "type": "action",
+      "app": "Google Sheets",
+      "event": "Create Spreadsheet Row",
+      "params": {
+        "spreadsheet": "Skyrise Tender Pipeline",
+        "worksheet": "Raw Feed",
+        "columns": {
+          "A": "{{title}}",
+          "B": "{{pubDate}}",
+          "C": "{{link}}",
+          "D": "{{summary}}",
+          "E": "dgMarket",
+          "F": "Pending Review"
+        }
+      }
+    }
+  ],
+  "schedule": "every_6_hours",
+  "notes": {
+    "rss_url": "https://www.dgmarket.com/tenders/rssfeed.do?noticeType=gpr&country=DJ,ET,KE,TZ,SN,CI,CM,MA,DZ,SA,AE,UG,RW&sector=TRN,WTR,ENE,URB,ENV&donor=WB,AFDB,AFD,UNDP,EU&language=en,fr&maxAge=30",
+    "filter_keywords": ["supervision","AMO","consultant","advisory","PMO","étude","feasibility","port","infrastructure","maîtrise d'ouvrage","engineering","project management"],
+    "priority_countries": ["Djibouti","Ethiopia","Kenya","Tanzania","Senegal","Côte d'Ivoire","Cameroon","Morocco","Algeria","Saudi Arabia","UAE","Uganda","Rwanda"],
+    "financiers": ["World Bank","AfDB","AFD","UNDP","EU"],
+    "alert_recipient": "louai@skyrisecapitalpm.com",
+    "minimum_relevance": 75
+  }
+}
