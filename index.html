@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Skyrise · Tender Intelligence Platform</title>
+<title>Skyrise · Tender Intelligence</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><rect width='36' height='36' rx='6' fill='url(%23g)'/><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23C9A96E'/><stop offset='1' stop-color='%233B6FD4'/></linearGradient></defs><text x='18' y='26' font-family='Georgia' font-size='22' font-weight='600' fill='%23000' text-anchor='middle'>S</text></svg>"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Poppins:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
@@ -11,262 +12,307 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
 :root{
-  --ink:#0E0E12;--ink2:#13131A;--ink3:#1A1A24;--ink4:#22222E;
-  --rule:rgba(255,255,255,.07);--rule2:rgba(255,255,255,.04);
-  --gold:#C9A96E;--gold2:#E8C98A;--gold3:rgba(201,169,110,.15);
+  --ink:#0D0D11;--ink2:#121219;--ink3:#181820;--ink4:#1F1F2A;--ink5:#262633;
+  --rule:rgba(255,255,255,.065);--rule2:rgba(255,255,255,.035);
+  --gold:#C9A96E;--gold2:#E8C98A;--gold3:rgba(201,169,110,.14);
   --green:#00C98A;--green3:rgba(0,201,138,.12);
-  --blue:#3B6FD4;--blue3:rgba(59,111,212,.12);
-  --red:#D44B3B;--red3:rgba(212,75,59,.12);
+  --blue:#4A7FE0;--blue3:rgba(74,127,224,.12);
+  --red:#D95F4B;--red3:rgba(217,95,75,.12);
   --amber:#E8A020;--amber3:rgba(232,160,32,.12);
-  --white:#F0EEE8;--muted:#888880;--dim:#444440;
-  --serif:'Cormorant Garamond',Georgia,serif;
-  --sans:'Poppins',system-ui,sans-serif;
+  --white:#F0EEE8;--muted:#7A7A74;--dim:#3E3E3A;
+  --serif:'Cormorant Garamond',Georgia,serif;--sans:'Poppins',system-ui,sans-serif;
 }
 body{background:var(--ink);color:var(--white);font-family:var(--sans);font-weight:300;overflow-x:hidden;min-height:100vh}
-body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(255,255,255,.016) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.016) 1px,transparent 1px);background-size:56px 56px;pointer-events:none;z-index:0}
-
-/* ── NAV ── */
-nav{position:sticky;top:0;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:68px;background:rgba(14,14,18,.94);backdrop-filter:blur(24px);border-bottom:1px solid var(--rule);z-index:900}
-.nav-brand{display:flex;align-items:center;gap:14px;text-decoration:none}
-.nav-logo{width:36px;height:36px;background:linear-gradient(135deg,var(--gold),var(--blue));border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:600;font-size:20px;color:#000;letter-spacing:-1px;flex-shrink:0}
-.nav-wordmark{font-family:var(--serif);font-size:20px;font-weight:400;letter-spacing:.5px;color:var(--white)}
-.nav-wordmark em{color:var(--gold);font-style:italic}
-.nav-sub{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--dim);margin-top:1px}
-.nav-right{display:flex;align-items:center;gap:16px}
-.live-pill{display:flex;align-items:center;gap:7px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--green)}
-.live-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;flex-shrink:0}
-.btn-sm{font-family:var(--sans);font-size:10px;letter-spacing:1px;text-transform:uppercase;background:transparent;border:1px solid var(--rule);color:var(--dim);padding:7px 14px;border-radius:4px;cursor:pointer;transition:all .2s}
-.btn-sm:hover{border-color:var(--gold);color:var(--gold)}
-.btn-sm.danger:hover{border-color:var(--red);color:var(--red)}
-
-/* ── STATS ── */
-.stats-bar{display:flex;background:var(--ink2);border-bottom:1px solid var(--rule);overflow-x:auto;position:relative;z-index:1}
-.stat{flex:1;min-width:130px;padding:14px 28px;border-right:1px solid var(--rule);cursor:default}
-.stat:last-child{border-right:none}
-.stat-value{font-family:var(--serif);font-size:30px;font-weight:400;line-height:1;margin-bottom:3px}
-.stat-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--dim)}
-
-/* ── TABS ── */
-.tabs{display:flex;padding:0 48px;background:var(--ink2);border-bottom:1px solid var(--rule);z-index:1;position:relative;overflow-x:auto}
-.tab-btn{font-family:var(--sans);font-size:10px;letter-spacing:2px;text-transform:uppercase;background:none;border:none;border-bottom:2px solid transparent;color:var(--dim);padding:15px 18px;cursor:pointer;transition:all .2s;white-space:nowrap}
-.tab-btn:hover{color:var(--muted)}
-.tab-btn.active{color:var(--white);border-bottom-color:var(--gold)}
-
-/* ── LAYOUT ── */
-.main{padding:36px 48px;position:relative;z-index:1}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(255,255,255,.014) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.014) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0}
+::-webkit-scrollbar{width:3px;height:3px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--ink5);border-radius:2px}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{animation:fadeUp .32s ease forwards}
 .hidden{display:none!important}
-.section-title{font-family:var(--serif);font-size:30px;font-weight:400;color:var(--white);margin-bottom:5px;letter-spacing:.3px}
-.section-title em{color:var(--gold);font-style:italic}
-.section-sub{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:30px}
 
-/* ── FILTERS ── */
-.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:24px;padding:16px 18px;background:var(--ink2);border:1px solid var(--rule);border-radius:7px}
-.fi{font-family:var(--sans);font-size:11px;background:var(--ink3);border:1px solid var(--rule);color:var(--white);padding:8px 12px;border-radius:4px;outline:none;transition:border-color .2s}
+/* NAV */
+nav{position:sticky;top:0;display:flex;align-items:center;justify-content:space-between;padding:0 52px;height:66px;background:rgba(13,13,17,.96);backdrop-filter:blur(28px);border-bottom:1px solid var(--rule);z-index:900}
+.nav-brand{display:flex;align-items:center;gap:13px;text-decoration:none;user-select:none}
+.nav-logo{width:34px;height:34px;background:linear-gradient(135deg,var(--gold),var(--blue));border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:600;font-size:19px;color:#000;flex-shrink:0}
+.nav-name{font-family:var(--serif);font-size:19px;font-weight:400;letter-spacing:.3px}
+.nav-name em{color:var(--gold);font-style:italic}
+.nav-tagline{font-size:8.5px;letter-spacing:2.5px;text-transform:uppercase;color:var(--dim);margin-top:1px}
+.nav-right{display:flex;align-items:center;gap:14px}
+.live-pill{display:flex;align-items:center;gap:7px;font-size:9.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--green)}
+.live-dot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;flex-shrink:0}
+.nbtn{font-family:var(--sans);font-size:9.5px;letter-spacing:1px;text-transform:uppercase;background:transparent;border:1px solid var(--rule);color:var(--muted);padding:6px 13px;border-radius:4px;cursor:pointer;transition:all .2s}
+.nbtn:hover{border-color:var(--gold);color:var(--gold)}
+
+/* STATS */
+.sbar{display:flex;background:var(--ink2);border-bottom:1px solid var(--rule);overflow-x:auto;z-index:1;position:relative}
+.sbi{flex:1;min-width:120px;padding:13px 26px;border-right:1px solid var(--rule)}
+.sbi:last-child{border-right:none}
+.sbi-v{font-family:var(--serif);font-size:28px;font-weight:400;line-height:1;margin-bottom:3px}
+.sbi-l{font-size:8.5px;letter-spacing:2px;text-transform:uppercase;color:var(--dim)}
+
+/* TABS */
+.tabs{display:flex;padding:0 52px;background:var(--ink2);border-bottom:1px solid var(--rule);z-index:1;position:relative;overflow-x:auto}
+.tabs::-webkit-scrollbar{height:0}
+.tbtn{font-family:var(--sans);font-size:9.5px;letter-spacing:2px;text-transform:uppercase;background:none;border:none;border-bottom:2px solid transparent;color:var(--dim);padding:14px 16px;cursor:pointer;transition:all .2s;white-space:nowrap}
+.tbtn:hover{color:var(--muted)}
+.tbtn.active{color:var(--white);border-bottom-color:var(--gold)}
+
+/* MAIN */
+.main{padding:36px 52px;position:relative;z-index:1;min-height:calc(100vh - 140px)}
+.sh{font-family:var(--serif);font-size:28px;font-weight:400;color:var(--white);margin-bottom:4px}
+.sh em{color:var(--gold);font-style:italic}
+.ss{font-size:8.5px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:28px}
+
+/* DASHBOARD */
+.dash-g3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:14px}
+.dash-g2{display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-bottom:14px}
+.dash-g2b{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.dcard{background:var(--ink2);border:1px solid var(--rule);border-radius:8px;padding:22px 24px}
+.dcard-l{font-size:8.5px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:10px}
+.dcard-v{font-family:var(--serif);font-size:40px;font-weight:400;line-height:1;margin-bottom:3px}
+.dcard-s{font-size:10px;color:var(--muted)}
+.trend{display:inline-flex;align-items:center;gap:5px;font-size:9.5px;margin-top:8px;padding:3px 9px;border-radius:10px}
+.tu{background:var(--green3);color:var(--green)}
+.tn{background:var(--amber3);color:var(--amber)}
+.dl-list{display:flex;flex-direction:column;gap:7px}
+.dl-item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 13px;background:var(--ink3);border-radius:6px;transition:background .2s;cursor:pointer}
+.dl-item:hover{background:var(--ink4)}
+.dl-ttl{font-size:11px;color:var(--white);font-family:var(--serif);line-height:1.3;flex:1}
+.dl-badge{font-size:8.5px;padding:2px 8px;border-radius:10px;white-space:nowrap;flex-shrink:0}
+.pipe-mini{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.pm-col{text-align:center;padding:14px 8px;background:var(--ink3);border-radius:6px}
+.pm-n{font-family:var(--serif);font-size:28px;line-height:1;margin-bottom:3px}
+.pm-l{font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim)}
+.chart-leg{display:flex;flex-wrap:wrap;gap:7px 13px;margin-top:13px}
+.leg-it{display:flex;align-items:center;gap:6px;font-size:9.5px;color:var(--muted)}
+.leg-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+
+/* FILTERS */
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:22px;padding:14px 16px;background:var(--ink2);border:1px solid var(--rule);border-radius:8px}
+.fi{font-family:var(--sans);font-size:10.5px;background:var(--ink3);border:1px solid var(--rule);color:var(--white);padding:8px 11px;border-radius:4px;outline:none;transition:border-color .2s}
 .fi:focus{border-color:var(--gold)}
 .fi::placeholder{color:var(--dim)}
-input.fi{width:200px}
-select.fi{cursor:pointer;appearance:none;padding-right:26px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23555'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 9px center}
-.filter-count{margin-left:auto;font-size:10px;letter-spacing:1px;color:var(--dim)}
+input.fi{width:190px}
+select.fi{cursor:pointer;appearance:none;padding-right:24px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23444'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center}
+.fct{margin-left:auto;font-size:9.5px;color:var(--dim)}
 
-/* ── TENDER CARD ── */
-.tender-list{display:flex;flex-direction:column;gap:10px}
-.tcard{background:var(--ink2);border:1px solid var(--rule);border-radius:8px;padding:20px 24px;display:grid;grid-template-columns:52px 1fr 155px;gap:18px;align-items:start;transition:border-color .25s,transform .2s;cursor:default}
-.tcard:hover{border-color:rgba(201,169,110,.4);transform:translateY(-1px)}
-.tcard.saved{border-color:rgba(0,201,138,.35)}
-.rel-ring{width:46px;height:46px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1.5px solid currentColor;font-family:var(--serif);font-size:15px;font-weight:600}
-.rel-ring small{font-size:6px;letter-spacing:1px;text-transform:uppercase;opacity:.45;margin-top:1px;font-family:var(--sans)}
-.chips{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px}
-.chip{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;padding:2px 8px;border-radius:3px;background:rgba(255,255,255,.05);color:var(--muted)}
-.chip.s-open{background:var(--green3);color:var(--green)}
-.chip.s-closing{background:var(--red3);color:var(--red)}
-.chip.s-closed{background:rgba(255,255,255,.04);color:var(--dim)}
-.tender-title{font-family:var(--serif);font-size:16px;font-weight:500;color:var(--white);margin-bottom:7px;line-height:1.4}
-.tender-desc{font-size:11px;color:var(--dim);line-height:1.6;margin-bottom:9px}
-.tender-tags{display:flex;gap:5px;flex-wrap:wrap}
-.tag{font-size:9px;letter-spacing:1px;padding:2px 7px;border-radius:2px;background:var(--gold3);color:rgba(201,169,110,.55);border:1px solid rgba(201,169,110,.1)}
-.tmeta{display:flex;flex-direction:column;gap:9px;align-items:flex-end}
-.tbudget{font-family:var(--serif);font-size:19px;font-weight:400;color:var(--gold2);text-align:right}
-.tbudget-lbl{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);text-align:right;margin-top:1px}
-.days-val{font-size:12px;text-align:right}
-.days-lbl{font-size:9px;color:var(--dim);text-align:right}
-.tactions{display:flex;gap:6px;margin-top:4px;flex-wrap:wrap;justify-content:flex-end}
-.btn-save,.btn-view,.btn-pipeline{font-family:var(--sans);font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:5px 10px;border-radius:4px;cursor:pointer;transition:all .2s}
-.btn-save{background:transparent;border:1px solid var(--rule);color:var(--dim)}
-.btn-save:hover{border-color:var(--green);color:var(--green)}
-.btn-save.on{background:var(--green3);border-color:var(--green);color:var(--green)}
-.btn-view{background:var(--blue3);border:1px solid rgba(59,111,212,.3);color:var(--blue);text-decoration:none;display:inline-flex;align-items:center}
-.btn-view:hover{background:rgba(59,111,212,.2)}
-.btn-pipeline{background:var(--gold3);border:1px solid rgba(201,169,110,.25);color:var(--gold)}
-.btn-pipeline:hover{background:rgba(201,169,110,.2)}
+/* TENDER CARD */
+.tlist{display:flex;flex-direction:column;gap:10px}
+.tc{background:var(--ink2);border:1px solid var(--rule);border-radius:8px;padding:19px 22px;display:grid;grid-template-columns:50px 1fr 148px;gap:16px;align-items:start;transition:border-color .22s,transform .18s}
+.tc:hover{border-color:rgba(201,169,110,.35);transform:translateY(-1px)}
+.tc.saved{border-left:2px solid var(--green)}
+.rring{width:44px;height:44px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1.5px solid currentColor;font-family:var(--serif);font-size:14px;font-weight:600}
+.rring small{font-size:5.5px;letter-spacing:1px;text-transform:uppercase;opacity:.4;margin-top:1px;font-family:var(--sans)}
+.chips{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:7px}
+.chip{font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;padding:2px 7px;border-radius:3px;background:rgba(255,255,255,.05);color:var(--muted)}
+.chip.op{background:var(--green3);color:var(--green)}
+.chip.cl{background:var(--red3);color:var(--red)}
+.ttl{font-family:var(--serif);font-size:15.5px;font-weight:500;color:var(--white);margin-bottom:6px;line-height:1.4}
+.tdesc{font-size:10.5px;color:var(--dim);line-height:1.6;margin-bottom:8px}
+.ttags{display:flex;gap:4px;flex-wrap:wrap}
+.ttag{font-size:8.5px;padding:2px 6px;border-radius:2px;background:var(--gold3);color:rgba(201,169,110,.5);border:1px solid rgba(201,169,110,.08)}
+.tmeta{display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+.tbudget{font-family:var(--serif);font-size:18px;color:var(--gold2);text-align:right}
+.tbdgl{font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);text-align:right;margin-top:1px}
+.tdays{font-size:11.5px;text-align:right}
+.tdaysl{font-size:8.5px;color:var(--dim);text-align:right}
+.tact{display:flex;gap:5px;margin-top:3px;flex-wrap:wrap;justify-content:flex-end}
+.ab{font-family:var(--sans);font-size:8.5px;letter-spacing:1px;text-transform:uppercase;padding:5px 9px;border-radius:4px;cursor:pointer;transition:all .2s;border:1px solid var(--rule)}
+.ab.sv{background:transparent;color:var(--dim)}
+.ab.sv:hover{border-color:var(--green);color:var(--green)}
+.ab.sv.on{background:var(--green3);border-color:var(--green);color:var(--green)}
+.ab.pp{background:var(--gold3);border-color:rgba(201,169,110,.2);color:var(--gold)}
+.ab.vw{background:var(--blue3);border-color:rgba(74,127,224,.25);color:var(--blue);text-decoration:none;display:inline-flex}
 
-/* ── BD PIPELINE ── */
-.pipeline-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;align-items:start}
-.pipe-col{background:var(--ink2);border:1px solid var(--rule);border-radius:8px;padding:16px}
-.pipe-col-header{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:14px;display:flex;align-items:center;justify-content:space-between}
-.pipe-col-header span{background:rgba(255,255,255,.06);border-radius:10px;padding:2px 8px;font-size:9px}
-.pipe-item{background:var(--ink3);border:1px solid var(--rule);border-radius:6px;padding:12px 14px;margin-bottom:8px;cursor:grab;transition:border-color .2s}
-.pipe-item:hover{border-color:var(--gold)}
-.pipe-item-title{font-family:var(--serif);font-size:13px;font-weight:500;color:var(--white);margin-bottom:6px;line-height:1.3}
-.pipe-item-meta{font-size:10px;color:var(--dim)}
-.pipe-empty{text-align:center;font-size:11px;color:var(--dim);font-style:italic;padding:20px 0}
-.pipe-status{display:inline-block;font-size:8px;letter-spacing:1.5px;text-transform:uppercase;padding:2px 7px;border-radius:2px;margin-bottom:6px}
+/* PIPELINE */
+.pboard{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;align-items:start}
+.pcol{background:var(--ink2);border:1px solid var(--rule);border-radius:8px;padding:14px}
+.pcol-hd{font-size:8.5px;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between}
+.pcol-hd span{background:rgba(255,255,255,.06);border-radius:10px;padding:2px 7px;font-size:8.5px;color:var(--dim)}
+.pitem{background:var(--ink3);border:1px solid var(--rule);border-radius:6px;padding:12px 13px;margin-bottom:7px;transition:border-color .2s}
+.pitem:hover{border-color:rgba(201,169,110,.3)}
+.pitem-ttl{font-family:var(--serif);font-size:13px;font-weight:500;color:var(--white);margin-bottom:4px;line-height:1.3}
+.pitem-meta{font-size:9.5px;color:var(--dim);margin-bottom:8px}
+.pitem-acts{display:flex;gap:4px;flex-wrap:wrap}
+.pitem-acts button{font-family:var(--sans);font-size:7.5px;letter-spacing:1px;text-transform:uppercase;padding:3px 7px;border-radius:3px;cursor:pointer;background:transparent;border:1px solid var(--rule);color:var(--dim);transition:all .2s}
+.pitem-acts button:hover{border-color:var(--gold);color:var(--gold)}
+.pitem-acts button.rm{border:none;color:var(--dim)}
+.pitem-acts button.rm:hover{color:var(--red)}
+.pempty{text-align:center;font-size:10px;color:var(--dim);font-style:italic;padding:18px 0;font-family:var(--serif)}
 
-/* ── AI PROSPECTOR ── */
-.ai-wrap{max-width:740px;margin:0 auto}
-.ai-key-bar{display:flex;gap:8px;align-items:center;margin-bottom:20px;padding:14px 16px;background:var(--ink2);border:1px solid var(--rule);border-radius:6px}
-.ai-key-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);white-space:nowrap}
-.ai-key-input{flex:1;font-family:var(--sans);font-size:11px;background:var(--ink3);border:1px solid var(--rule);color:var(--white);padding:8px 12px;border-radius:4px;outline:none;transition:border-color .2s;letter-spacing:.5px}
-.ai-key-input:focus{border-color:var(--gold)}
-.ai-key-status{font-size:10px;letter-spacing:1px;white-space:nowrap}
-.ai-textarea{width:100%;background:var(--ink2);border:1px solid var(--rule);color:var(--white);padding:16px;border-radius:6px;font-family:var(--sans);font-size:12px;line-height:1.6;resize:vertical;outline:none;transition:border-color .2s}
-.ai-textarea:focus{border-color:var(--gold)}
-.btn-primary{font-family:var(--sans);font-size:11px;letter-spacing:2px;text-transform:uppercase;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;border:none;padding:12px 28px;border-radius:4px;cursor:pointer;transition:opacity .2s;font-weight:500}
-.btn-primary:hover{opacity:.85}
-.btn-primary:disabled{background:var(--ink3);color:var(--dim);cursor:not-allowed;opacity:1}
-.ai-card{background:var(--ink2);border:1px solid var(--rule);border-radius:8px;padding:20px;margin-bottom:12px}
-.ai-card-label{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
-.ai-summary{font-size:13px;color:var(--muted);line-height:1.7}
-.lead-item{background:var(--ink3);border:1px solid var(--rule);border-radius:6px;padding:14px 16px;margin-bottom:8px;display:grid;grid-template-columns:1fr 50px;gap:14px;align-items:start}
+/* AI */
+.ai-wrap{max-width:720px;margin:0 auto}
+.keybar{display:flex;gap:8px;align-items:center;padding:13px 15px;background:var(--ink2);border:1px solid var(--rule);border-radius:6px;margin-bottom:18px}
+.keybar-l{font-size:8.5px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);white-space:nowrap}
+.keybar-i{flex:1;font-family:var(--sans);font-size:11px;background:var(--ink3);border:1px solid var(--rule);color:var(--white);padding:7px 11px;border-radius:4px;outline:none;transition:border-color .2s}
+.keybar-i:focus{border-color:var(--gold)}
+.keybar-s{font-size:9.5px;white-space:nowrap}
+.ai-ta{width:100%;background:var(--ink2);border:1px solid var(--rule);color:var(--white);padding:15px;border-radius:6px;font-family:var(--sans);font-size:11.5px;line-height:1.65;resize:vertical;outline:none;transition:border-color .2s}
+.ai-ta:focus{border-color:var(--gold)}
+.ai-ta::placeholder{color:var(--dim)}
+.btnpri{font-family:var(--sans);font-size:10.5px;letter-spacing:2px;text-transform:uppercase;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;border:none;padding:12px 26px;border-radius:4px;cursor:pointer;transition:opacity .2s;font-weight:500}
+.btnpri:hover{opacity:.85}
+.btnpri:disabled{background:var(--ink3);color:var(--dim);cursor:not-allowed;opacity:1}
+.aicard{background:var(--ink2);border:1px solid var(--rule);border-radius:8px;padding:20px;margin-bottom:10px}
+.aicard-l{font-size:8.5px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:9px}
+.aisy{font-size:13px;color:var(--muted);line-height:1.7}
+.alead{background:var(--ink3);border:1px solid var(--rule);border-radius:6px;padding:13px 15px;margin-bottom:7px;display:grid;grid-template-columns:1fr 48px;gap:12px;align-items:start}
 
-/* ── CAPABILITIES ── */
-.cap-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:14px;margin-bottom:36px}
-.cap-card{background:var(--ink2);border:1px solid var(--rule);border-radius:8px;padding:26px;transition:border-color .25s}
-.cap-card:hover{border-color:rgba(201,169,110,.35)}
-.cap-logo-box{width:46px;height:46px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:600;font-size:18px;margin-bottom:16px;letter-spacing:-1px}
-.cap-name{font-family:var(--serif);font-size:20px;font-weight:500;color:var(--white);margin-bottom:3px}
-.cap-tag{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
-.cap-desc{font-size:11px;color:var(--muted);line-height:1.7;margin-bottom:16px}
-.cap-sectors{display:flex;flex-wrap:wrap;gap:5px}
-.cap-sec{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;padding:3px 9px;border-radius:3px;background:rgba(255,255,255,.04);color:var(--dim)}
-.matrix-wrap{background:var(--ink2);border:1px solid var(--rule);border-radius:8px;overflow:hidden}
-.matrix-head{padding:20px 26px;border-bottom:1px solid var(--rule);display:flex;align-items:baseline;gap:14px}
-.matrix-title{font-family:var(--serif);font-size:20px;font-weight:400;color:var(--white)}
-.matrix-sub{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--dim)}
+/* CAPABILITIES */
+.cap-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:13px;margin-bottom:32px}
+.capcard{background:var(--ink2);border:1px solid var(--rule);border-radius:8px;padding:24px;transition:border-color .22s}
+.capcard:hover{border-color:rgba(201,169,110,.3)}
+.caplogo{width:44px;height:44px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:600;font-size:17px;margin-bottom:14px}
+.capname{font-family:var(--serif);font-size:19px;font-weight:500;color:var(--white);margin-bottom:2px}
+.captag{font-size:8.5px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:13px}
+.capdesc{font-size:11px;color:var(--muted);line-height:1.7;margin-bottom:14px}
+.capsecs{display:flex;flex-wrap:wrap;gap:5px}
+.capsec{font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;padding:3px 8px;border-radius:3px;background:rgba(255,255,255,.04);color:var(--dim)}
+.mx-wrap{background:var(--ink2);border:1px solid var(--rule);border-radius:8px;overflow:hidden}
+.mx-hd{padding:18px 24px;border-bottom:1px solid var(--rule)}
+.mx-ttl{font-family:var(--serif);font-size:19px;font-weight:400;color:var(--white)}
 table.mx{width:100%;border-collapse:collapse}
-table.mx th{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);font-weight:400;padding:11px 18px;text-align:left;border-bottom:1px solid var(--rule);background:var(--ink3)}
-table.mx td{font-size:11px;color:var(--muted);padding:12px 18px;border-bottom:1px solid var(--rule2);vertical-align:middle}
+table.mx th{font-size:8.5px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);font-weight:400;padding:10px 16px;text-align:left;border-bottom:1px solid var(--rule);background:var(--ink3)}
+table.mx td{font-size:10.5px;color:var(--muted);padding:11px 16px;border-bottom:1px solid rgba(255,255,255,.035);vertical-align:middle}
 table.mx tr:last-child td{border-bottom:none}
-table.mx tr:hover td{background:rgba(255,255,255,.015)}
-.dy{color:var(--green);font-size:13px}
-.dp{color:var(--gold);font-size:13px}
-.dn{color:var(--dim);font-size:13px}
+table.mx tr:hover td{background:rgba(255,255,255,.012)}
+.dy{color:var(--green);font-size:12px}.dp{color:var(--gold);font-size:12px}.dn{color:var(--dim);font-size:12px}
 
-/* ── AUTOMATION ── */
-.auto-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
-@media(max-width:920px){.auto-grid{grid-template-columns:1fr}}
-.auto-card{background:var(--ink2);border:1px solid var(--rule);border-radius:8px;padding:26px}
-.auto-icon{font-size:26px;margin-bottom:12px}
-.auto-name{font-family:var(--serif);font-size:19px;font-weight:500;color:var(--white);margin-bottom:3px}
-.auto-tag{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+/* AUTOMATION */
+.auto-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-bottom:13px}
+@media(max-width:900px){.auto-grid{grid-template-columns:1fr}}
+.acard{background:var(--ink2);border:1px solid var(--rule);border-radius:8px;padding:24px}
+.acard-ico{font-size:24px;margin-bottom:11px}
+.acard-nm{font-family:var(--serif);font-size:18px;font-weight:500;color:var(--white);margin-bottom:2px}
+.acard-tag{font-size:8.5px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
 .steps{list-style:none;padding:0}
-.steps li{display:flex;gap:11px;align-items:flex-start;font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:10px}
-.sn{min-width:19px;height:19px;border-radius:50%;background:var(--gold3);border:1px solid rgba(201,169,110,.2);color:var(--gold);font-size:9px;display:flex;align-items:center;justify-content:center;font-weight:500;flex-shrink:0;margin-top:2px}
-.code-block{background:var(--ink3);border:1px solid var(--rule);border-radius:4px;padding:13px 15px;font-family:'Courier New',monospace;font-size:10px;color:var(--green);margin-top:12px;line-height:1.8;overflow-x:auto;white-space:pre-wrap;word-break:break-all}
-.code-block .cm{color:var(--dim)} .code-block .ky{color:var(--gold)} .code-block .vl{color:#5B9BD5}
-.rss-tbl{width:100%;border-collapse:collapse;margin-top:14px}
-.rss-tbl th{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);padding:9px 12px;text-align:left;background:var(--ink3);border-bottom:1px solid var(--rule)}
-.rss-tbl td{font-size:11px;color:var(--muted);padding:10px 12px;border-bottom:1px solid var(--rule2)}
-.rss-tbl tr:hover td{background:rgba(255,255,255,.015)}
-.rss-tbl code{font-size:10px;color:var(--green);background:var(--ink3);padding:1px 5px;border-radius:2px}
-.copy-btn{font-family:var(--sans);font-size:9px;letter-spacing:1px;text-transform:uppercase;background:transparent;border:1px solid var(--rule);color:var(--dim);padding:5px 10px;border-radius:3px;cursor:pointer;transition:all .2s;margin-top:8px}
-.copy-btn:hover{border-color:var(--green);color:var(--green)}
+.steps li{display:flex;gap:10px;align-items:flex-start;font-size:10.5px;color:var(--muted);line-height:1.6;margin-bottom:9px}
+.sn{min-width:18px;height:18px;border-radius:50%;background:var(--gold3);border:1px solid rgba(201,169,110,.18);color:var(--gold);font-size:8.5px;display:flex;align-items:center;justify-content:center;font-weight:500;flex-shrink:0;margin-top:2px}
+.cb{background:var(--ink3);border:1px solid var(--rule);border-radius:4px;padding:12px 14px;font-family:'Courier New',monospace;font-size:10px;color:var(--green);margin-top:11px;line-height:1.8;overflow-x:auto;white-space:pre-wrap;word-break:break-all}
+.cb .cm{color:var(--dim)}.cb .ky{color:var(--gold)}.cb .vl{color:var(--blue)}
+.rtbl{width:100%;border-collapse:collapse;margin-top:13px}
+.rtbl th{font-size:8.5px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);padding:8px 11px;text-align:left;background:var(--ink3);border-bottom:1px solid var(--rule)}
+.rtbl td{font-size:10.5px;color:var(--muted);padding:9px 11px;border-bottom:1px solid rgba(255,255,255,.035)}
+.rtbl tr:hover td{background:rgba(255,255,255,.012)}
+.rtbl code{font-size:9.5px;color:var(--green);background:var(--ink3);padding:1px 5px;border-radius:2px}
+.copybtn{font-family:var(--sans);font-size:8.5px;letter-spacing:1px;text-transform:uppercase;background:transparent;border:1px solid var(--rule);color:var(--dim);padding:5px 10px;border-radius:4px;cursor:pointer;transition:all .2s;margin-top:8px}
+.copybtn:hover{border-color:var(--green);color:var(--green)}
 
-/* ── SOURCES ── */
-.sources-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
-.src-card{background:var(--ink2);border:1px solid var(--rule);border-radius:8px;padding:20px;text-decoration:none;display:block;transition:border-color .25s}
-.src-card:hover{border-color:rgba(201,169,110,.35)}
-.src-top{display:flex;align-items:center;gap:12px;margin-bottom:12px}
-.src-icon{font-size:20px}
-.src-name{font-family:var(--serif);font-size:17px;font-weight:500;color:var(--white)}
-.src-domain{font-size:10px;color:var(--dim);margin-top:2px}
-.src-count{font-size:11px;color:var(--muted);margin-bottom:10px}
-.src-link{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold)}
+/* SOURCES */
+.src-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:11px}
+.srccard{background:var(--ink2);border:1px solid var(--rule);border-radius:8px;padding:19px;text-decoration:none;display:block;transition:border-color .22s}
+.srccard:hover{border-color:rgba(201,169,110,.3)}
+.src-top{display:flex;align-items:center;gap:11px;margin-bottom:11px}
+.src-ico{font-size:19px}
+.src-nm{font-family:var(--serif);font-size:16px;font-weight:500;color:var(--white)}
+.src-dom{font-size:9.5px;color:var(--dim);margin-top:1px}
+.src-lnk{font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold)}
 
-/* ── ALERTS ── */
-.alerts-wrap{max-width:580px}
-.form-lbl{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);display:block;margin-bottom:7px}
-.form-input,.form-ta{width:100%;background:var(--ink2);border:1px solid var(--rule);color:var(--white);padding:11px 14px;border-radius:5px;font-family:var(--sans);font-size:12px;outline:none;transition:border-color .2s}
-.form-input:focus,.form-ta:focus{border-color:var(--gold)}
-.form-ta{resize:vertical;line-height:1.6}
-.form-group{margin-bottom:20px}
-.freq-row{display:flex;gap:8px}
-.freq-btn{font-family:var(--sans);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;background:var(--ink2);border:1px solid var(--rule);color:var(--dim);padding:8px 16px;border-radius:4px;cursor:pointer;transition:all .2s}
-.freq-btn.on{background:var(--gold3);border-color:var(--gold);color:var(--gold)}
-.ctry-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
-.ctry-chip{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;padding:3px 9px;border-radius:3px;background:var(--gold3);color:rgba(201,169,110,.5);border:1px solid rgba(201,169,110,.1)}
-.info-box{background:var(--blue3);border:1px solid rgba(59,111,212,.2);border-radius:6px;padding:15px 17px;font-size:11px;color:var(--muted);line-height:1.7}
-.info-box-lbl{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--blue);margin-bottom:8px}
+/* ALERTS / SETTINGS */
+.wrap560{max-width:560px}
+.flbl{font-size:8.5px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);display:block;margin-bottom:6px}
+.finp,.fta{width:100%;background:var(--ink2);border:1px solid var(--rule);color:var(--white);padding:10px 13px;border-radius:4px;font-family:var(--sans);font-size:11.5px;outline:none;transition:border-color .2s}
+.finp:focus,.fta:focus{border-color:var(--gold)}
+.fta{resize:vertical;line-height:1.6}
+.fg{margin-bottom:18px}
+.freqrow{display:flex;gap:7px}
+.freqbtn{font-family:var(--sans);font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;background:var(--ink2);border:1px solid var(--rule);color:var(--dim);padding:7px 14px;border-radius:4px;cursor:pointer;transition:all .2s}
+.freqbtn.on{background:var(--gold3);border-color:var(--gold);color:var(--gold)}
+.ccrow{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.cchip{font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;padding:3px 8px;border-radius:3px;background:var(--gold3);color:rgba(201,169,110,.5);border:1px solid rgba(201,169,110,.08)}
+.ibox{background:var(--blue3);border:1px solid rgba(74,127,224,.18);border-radius:6px;padding:14px 16px;font-size:10.5px;color:var(--muted);line-height:1.7}
+.ibox-l{font-size:8.5px;letter-spacing:2px;text-transform:uppercase;color:var(--blue);margin-bottom:7px}
+.scard{background:var(--ink2);border:1px solid var(--rule);border-radius:8px;padding:24px;margin-bottom:12px}
+.scard-nm{font-family:var(--serif);font-size:17px;font-weight:400;color:var(--white);margin-bottom:3px}
+.scard-d{font-size:10.5px;color:var(--dim);margin-bottom:14px;line-height:1.6}
+.srow{display:flex;gap:8px;align-items:center}
 
-/* ── TOAST ── */
-#toast{position:fixed;bottom:28px;right:28px;background:var(--ink2);border:1px solid var(--rule);border-radius:6px;padding:12px 18px;font-size:11px;color:var(--white);z-index:9999;opacity:0;transform:translateY(8px);transition:all .3s;pointer-events:none}
+/* TOAST */
+#toast{position:fixed;bottom:26px;right:26px;background:var(--ink3);border:1px solid var(--rule);border-radius:6px;padding:10px 16px;font-size:10.5px;color:var(--white);z-index:9999;opacity:0;transform:translateY(10px);transition:all .28s;pointer-events:none;box-shadow:0 8px 32px rgba(0,0,0,.4)}
 #toast.show{opacity:1;transform:translateY(0)}
-
-/* ── ANIMATIONS ── */
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.fade-up{animation:fadeUp .3s ease forwards}
-.empty{text-align:center;padding:70px 0;font-family:var(--serif);font-size:20px;font-style:italic;color:var(--dim)}
-::-webkit-scrollbar{width:4px;height:4px}
-::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:var(--ink4);border-radius:2px}
+.empty-st{text-align:center;padding:68px 0;font-family:var(--serif);font-size:19px;font-style:italic;color:var(--dim)}
+hr.div{border:none;border-top:1px solid var(--rule);margin:32px 0}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <div class="nav-brand">
     <div class="nav-logo">S</div>
     <div>
-      <div class="nav-wordmark">Skyrise · <em>Tender Intelligence</em></div>
-      <div class="nav-sub">Africa &amp; Middle East · BD Platform</div>
+      <div class="nav-name">Skyrise · <em>Tender Intelligence</em></div>
+      <div class="nav-tagline">Africa &amp; Middle East · BD Platform</div>
     </div>
   </div>
   <div class="nav-right">
-    <div class="live-pill"><div class="live-dot"></div><span id="live-time">—</span></div>
-    <button class="btn-sm" onclick="handleRefresh()">↻ Refresh</button>
-    <button class="btn-sm" onclick="switchTab('settings',document.querySelector('[data-tab=settings]'))">⚙ Settings</button>
+    <div class="live-pill"><div class="live-dot"></div><span id="live-t">—</span></div>
+    <button class="nbtn" onclick="handleRefresh()">↻ Refresh</button>
+    <button class="nbtn" onclick="goTab('settings')">⚙ Settings</button>
   </div>
 </nav>
 
-<!-- STATS -->
-<div class="stats-bar">
-  <div class="stat"><div class="stat-value" style="color:var(--green)" id="s-open">—</div><div class="stat-label">Open Opportunities</div></div>
-  <div class="stat"><div class="stat-value" style="color:var(--red)" id="s-closing">—</div><div class="stat-label">Closing ≤ 7 Days</div></div>
-  <div class="stat"><div class="stat-value" style="color:var(--gold)" id="s-high">—</div><div class="stat-label">High Relevance ≥ 90</div></div>
-  <div class="stat"><div class="stat-value" style="color:var(--blue)" id="s-saved">0</div><div class="stat-label">Saved / Watchlist</div></div>
-  <div class="stat"><div class="stat-value" style="color:var(--amber)" id="s-pipeline">0</div><div class="stat-label">In BD Pipeline</div></div>
-  <div class="stat"><div class="stat-value" style="color:var(--muted)">6</div><div class="stat-label">Sources Monitored</div></div>
+<div class="sbar">
+  <div class="sbi"><div class="sbi-v" style="color:var(--green)" id="st-open">—</div><div class="sbi-l">Open Tenders</div></div>
+  <div class="sbi"><div class="sbi-v" style="color:var(--red)" id="st-cl">—</div><div class="sbi-l">Closing ≤ 7 Days</div></div>
+  <div class="sbi"><div class="sbi-v" style="color:var(--gold)" id="st-hi">—</div><div class="sbi-l">High Relevance ≥ 90</div></div>
+  <div class="sbi"><div class="sbi-v" style="color:var(--blue)" id="st-sv">0</div><div class="sbi-l">Saved / Watchlist</div></div>
+  <div class="sbi"><div class="sbi-v" style="color:var(--amber)" id="st-pp">0</div><div class="sbi-l">In BD Pipeline</div></div>
+  <div class="sbi"><div class="sbi-v" style="color:var(--muted)">6</div><div class="sbi-l">Sources Active</div></div>
 </div>
 
-<!-- TABS -->
 <div class="tabs">
-  <button class="tab-btn active" data-tab="opportunities" onclick="switchTab('opportunities',this)">Opportunities</button>
-  <button class="tab-btn" data-tab="pipeline" onclick="switchTab('pipeline',this)">BD Pipeline</button>
-  <button class="tab-btn" data-tab="ai-search" onclick="switchTab('ai-search',this)">AI Prospector</button>
-  <button class="tab-btn" data-tab="capabilities" onclick="switchTab('capabilities',this)">Capabilities</button>
-  <button class="tab-btn" data-tab="automation" onclick="switchTab('automation',this)">Automation</button>
-  <button class="tab-btn" data-tab="sources" onclick="switchTab('sources',this)">Sources</button>
-  <button class="tab-btn" data-tab="alerts" onclick="switchTab('alerts',this)">Alerts</button>
-  <button class="tab-btn" data-tab="settings" onclick="switchTab('settings',this)">Settings</button>
+  <button class="tbtn active" data-tab="dashboard" onclick="goTab('dashboard')">Dashboard</button>
+  <button class="tbtn" data-tab="opportunities" onclick="goTab('opportunities')">Opportunities</button>
+  <button class="tbtn" data-tab="pipeline" onclick="goTab('pipeline')">BD Pipeline</button>
+  <button class="tbtn" data-tab="ai" onclick="goTab('ai')">AI Prospector</button>
+  <button class="tbtn" data-tab="capabilities" onclick="goTab('capabilities')">Capabilities</button>
+  <button class="tbtn" data-tab="automation" onclick="goTab('automation')">Automation</button>
+  <button class="tbtn" data-tab="sources" onclick="goTab('sources')">Sources</button>
+  <button class="tbtn" data-tab="alerts" onclick="goTab('alerts')">Alerts</button>
+  <button class="tbtn" data-tab="settings" onclick="goTab('settings')">Settings</button>
 </div>
 
 <div class="main">
 
-<!-- ═══ OPPORTUNITIES ═══════════════════════════════════════════════ -->
-<div id="tab-opportunities" class="fade-up">
-  <div class="section-title">Active <em>Opportunities</em></div>
-  <div class="section-sub">World Bank · AfDB · AFD · UNDP · dgMarket · Devex — live monitored</div>
+<!-- DASHBOARD -->
+<div id="tab-dashboard" class="fade-up">
+  <div class="sh">Intelligence <em>Dashboard</em></div>
+  <div class="ss">Live snapshot · Africa &amp; Middle East infrastructure pipeline</div>
+  <div class="dash-g3" id="dash-kpis"></div>
+  <div class="dash-g2">
+    <div class="dcard">
+      <div class="dcard-l">Tenders by Sector</div>
+      <svg id="ch-sec" width="100%" height="200" viewBox="0 0 420 200" preserveAspectRatio="xMidYMid meet"></svg>
+      <div class="chart-leg" id="leg-sec"></div>
+    </div>
+    <div class="dcard">
+      <div class="dcard-l">Upcoming Deadlines</div>
+      <div class="dl-list" id="dash-dl"></div>
+    </div>
+  </div>
+  <div class="dash-g2b">
+    <div class="dcard">
+      <div class="dcard-l">BD Pipeline Status</div>
+      <div class="pipe-mini" id="dash-pm"></div>
+    </div>
+    <div class="dcard">
+      <div class="dcard-l">Tenders by Source</div>
+      <svg id="ch-src" width="100%" height="160" viewBox="0 0 340 160" preserveAspectRatio="xMidYMid meet"></svg>
+    </div>
+  </div>
+</div>
+
+<!-- OPPORTUNITIES -->
+<div id="tab-opportunities" class="hidden">
+  <div class="sh">Active <em>Opportunities</em></div>
+  <div class="ss">World Bank · AfDB · AFD · UNDP · dgMarket · Devex — scored &amp; monitored</div>
   <div class="filters">
     <input class="fi" id="fi-q" placeholder="Search title, country, tags…" oninput="renderTenders()"/>
     <select class="fi" id="fi-src" onchange="renderTenders()">
       <option value="all">All Sources</option>
-      <option value="worldbank">World Bank</option>
-      <option value="afdb">AfDB</option>
-      <option value="afd">AFD</option>
-      <option value="undp">UNDP</option>
-      <option value="dgmarket">dgMarket</option>
-      <option value="devex">Devex</option>
+      <option value="worldbank">World Bank</option><option value="afdb">AfDB</option>
+      <option value="afd">AFD</option><option value="undp">UNDP</option>
+      <option value="dgmarket">dgMarket</option><option value="devex">Devex</option>
     </select>
     <select class="fi" id="fi-sec" onchange="renderTenders()">
       <option value="all">All Sectors</option>
@@ -280,91 +326,51 @@ table.mx tr:hover td{background:rgba(255,255,255,.015)}
     <select class="fi" id="fi-sort" onchange="renderTenders()">
       <option value="relevance">Sort: Relevance</option>
       <option value="deadline">Sort: Deadline</option>
-      <option value="published">Sort: Newest</option>
+      <option value="newest">Sort: Newest</option>
     </select>
-    <div class="filter-count" id="fi-count"></div>
+    <div class="fct" id="fi-ct"></div>
   </div>
-  <div class="tender-list" id="tender-list"></div>
+  <div class="tlist" id="tlist"></div>
 </div>
 
-<!-- ═══ BD PIPELINE ═════════════════════════════════════════════════ -->
+<!-- PIPELINE -->
 <div id="tab-pipeline" class="hidden">
-  <div class="section-title">BD <em>Pipeline</em></div>
-  <div class="section-sub">Track saved opportunities through the bid lifecycle</div>
-  <div class="pipeline-cols" id="pipeline-board"></div>
+  <div class="sh">BD <em>Pipeline</em></div>
+  <div class="ss">Track saved opportunities through the full bid lifecycle</div>
+  <div class="pboard" id="pboard"></div>
 </div>
 
-<!-- ═══ AI PROSPECTOR ══════════════════════════════════════════════ -->
-<div id="tab-ai-search" class="hidden">
+<!-- AI -->
+<div id="tab-ai" class="hidden">
   <div class="ai-wrap">
-    <div class="section-title">AI <em>Prospector</em></div>
-    <div class="section-sub">Claude-powered tender intelligence &amp; partner matching</div>
-    <div class="ai-key-bar">
-      <span class="ai-key-label">API Key</span>
-      <input class="ai-key-input" id="ai-key" type="password" placeholder="sk-ant-api03-…  (saved locally, never transmitted)" oninput="saveApiKey()"/>
-      <span class="ai-key-status" id="ai-key-status" style="color:var(--dim)">Not set</span>
+    <div class="sh">AI <em>Prospector</em></div>
+    <div class="ss">Claude-powered tender intelligence &amp; consortium partner matching</div>
+    <div class="keybar">
+      <span class="keybar-l">API Key</span>
+      <input class="keybar-i" id="ai-key" type="password" placeholder="sk-ant-api03-… (saved in browser, sent only to Anthropic)" oninput="onKeyIn()"/>
+      <span class="keybar-s" id="ai-kst" style="color:var(--dim)">Not set</span>
     </div>
-    <textarea class="ai-textarea" id="ai-q" rows="5"
-      placeholder="Examples:&#10;• Find port supervision tenders in East Africa with AfDB or World Bank funding&#10;• What AMO opportunities exist in francophone West Africa this quarter?&#10;• Suggest consortium partners for a railway advisory bid in Morocco&#10;• Identify upcoming QCBS feasibility studies in Horn of Africa"></textarea>
-    <div style="margin:14px 0 26px"><button class="btn-primary" id="ai-btn" onclick="runAI()">→ Run Intelligence Search</button></div>
-    <div id="ai-results"></div>
+    <textarea class="ai-ta" id="ai-q" rows="5" placeholder="Examples:&#10;• Find port supervision tenders in East Africa with AfDB or World Bank funding&#10;• What AMO opportunities exist in francophone West Africa this quarter?&#10;• Suggest consortium partners for a railway advisory bid in Morocco or Algeria&#10;• Identify upcoming QCBS feasibility studies in the Horn of Africa"></textarea>
+    <div style="margin:13px 0 24px"><button class="btnpri" id="ai-btn" onclick="runAI()">→ Run Intelligence Search</button></div>
+    <div id="ai-res"></div>
   </div>
 </div>
 
-<!-- ═══ CAPABILITIES ════════════════════════════════════════════════ -->
+<!-- CAPABILITIES -->
 <div id="tab-capabilities" class="hidden">
-  <div class="section-title">Consortium <em>Capabilities</em></div>
-  <div class="section-sub">Partner firms — depth of expertise &amp; geographic reach for joint bids</div>
+  <div class="sh">Consortium <em>Capabilities</em></div>
+  <div class="ss">Partner firms — expertise depth &amp; geographic reach for joint bids</div>
   <div class="cap-grid">
-    <div class="cap-card">
-      <div class="cap-logo-box" style="background:linear-gradient(135deg,var(--gold),var(--blue));color:#000">S</div>
-      <div class="cap-name">Skyrise Capital PM</div>
-      <div class="cap-tag">Lead Coordinator · Dubai, UAE</div>
-      <div class="cap-desc">Senior-led independent advisory boutique specialised in AMO, PMO, procurement engineering, and infrastructure project management. Structuring entity for consortium bids. Strong anchor in the Horn of Africa and Gulf region. Accredited on World Bank, AfDB, AFD procurement frameworks.</div>
-      <div class="cap-sectors"><span class="cap-sec">AMO / Owner's Engineer</span><span class="cap-sec">PMO</span><span class="cap-sec">Procurement Advisory</span><span class="cap-sec">Feasibility &amp; Studies</span><span class="cap-sec">Port &amp; Maritime</span></div>
-    </div>
-    <div class="cap-card">
-      <div class="cap-logo-box" style="background:var(--green3);color:var(--green)">FS</div>
-      <div class="cap-name">FS Consulting Engineers</div>
-      <div class="cap-tag">Engineering Consultancy · Djibouti</div>
-      <div class="cap-desc">Djibouti-based engineering consultancy with deep on-ground track record in the Horn of Africa. Accredited on AfDB, World Bank, AFD, and EU-financed projects. Key for local partnering requirements, national staff mobilisation, and government stakeholder access in East Africa.</div>
-      <div class="cap-sectors"><span class="cap-sec">Engineering Supervision</span><span class="cap-sec">Road &amp; Transport</span><span class="cap-sec">Water &amp; Sanitation</span><span class="cap-sec">Infrastructure</span><span class="cap-sec">ESIA</span></div>
-    </div>
-    <div class="cap-card">
-      <div class="cap-logo-box" style="background:var(--blue3);color:var(--blue)">CP</div>
-      <div class="cap-name">CPCS</div>
-      <div class="cap-tag">Transport Advisory · Ottawa / Global</div>
-      <div class="cap-desc">Canadian multinational with 35+ years of transport advisory across 100 countries. Best-in-class for railway, port, and logistics corridor mandates. Strong MDB procurement track record (World Bank, AfDB, ADB, IFC). Brings credibility and technical depth to transport feasibility and PPP bids.</div>
-      <div class="cap-sectors"><span class="cap-sec">Railway &amp; Urban Transit</span><span class="cap-sec">Port &amp; Maritime</span><span class="cap-sec">PPP Advisory</span><span class="cap-sec">Freight Logistics</span><span class="cap-sec">Transport Policy</span></div>
-    </div>
-    <div class="cap-card">
-      <div class="cap-logo-box" style="background:var(--red3);color:var(--red)">VL</div>
-      <div class="cap-name">Vulcan</div>
-      <div class="cap-tag">Engineering &amp; Construction Management · MEA</div>
-      <div class="cap-desc">Engineering and construction management firm with deep expertise in complex civil and structural works across the Middle East and Africa. Brings technical design capacity, resident engineer services, and regional contractor networks for large-scale infrastructure bids requiring hands-on site presence.</div>
-      <div class="cap-sectors"><span class="cap-sec">Civil &amp; Structural Engineering</span><span class="cap-sec">Construction Management</span><span class="cap-sec">Site Supervision</span><span class="cap-sec">Urban Infrastructure</span><span class="cap-sec">Industrial Facilities</span></div>
-    </div>
-    <div class="cap-card">
-      <div class="cap-logo-box" style="background:var(--gold3);color:var(--gold)">CH</div>
-      <div class="cap-name">Chico Engineering</div>
-      <div class="cap-tag">Infrastructure Engineering · Sub-Saharan Africa</div>
-      <div class="cap-desc">African-rooted engineering consultancy with strong presence in francophone and anglophone sub-Saharan Africa. Specialised in water and sanitation systems, municipal infrastructure, and donor-financed community-scale development. Brings local presence and language coverage for AFD and EU-funded tenders.</div>
-      <div class="cap-sectors"><span class="cap-sec">Water &amp; Sanitation</span><span class="cap-sec">Municipal Infrastructure</span><span class="cap-sec">Social Infrastructure</span><span class="cap-sec">Rural Development</span><span class="cap-sec">Environment</span></div>
-    </div>
-    <div class="cap-card">
-      <div class="cap-logo-box" style="background:rgba(255,255,255,.05);color:var(--muted)">GE</div>
-      <div class="cap-name">Good Engineering</div>
-      <div class="cap-tag">Technical Advisory &amp; Checking · International</div>
-      <div class="cap-desc">Boutique technical advisory firm providing structural and geotechnical engineering services at the highest level. Excels in independent checking engineer, peer review, and QA roles for complex civil works — ideal for supervision mandates requiring a credible technical authority alongside the lead consultant.</div>
-      <div class="cap-sectors"><span class="cap-sec">Structural Engineering</span><span class="cap-sec">Geotechnical</span><span class="cap-sec">QA / Checking Engineer</span><span class="cap-sec">Peer Review</span><span class="cap-sec">Supervision</span></div>
-    </div>
+    <div class="capcard"><div class="caplogo" style="background:linear-gradient(135deg,var(--gold),var(--blue));color:#000">S</div><div class="capname">Skyrise Capital PM</div><div class="captag">Lead Coordinator · Dubai, UAE</div><div class="capdesc">Senior-led independent advisory boutique specialised in AMO, PMO, procurement engineering, and infrastructure project management. Primary structuring entity for consortium bids. Strong anchor in the Horn of Africa and Gulf region. Accredited on World Bank, AfDB, AFD procurement frameworks.</div><div class="capsecs"><span class="capsec">AMO / Owner's Engineer</span><span class="capsec">PMO</span><span class="capsec">Procurement Advisory</span><span class="capsec">Feasibility &amp; Studies</span><span class="capsec">Port &amp; Maritime</span></div></div>
+    <div class="capcard"><div class="caplogo" style="background:var(--green3);color:var(--green)">FS</div><div class="capname">FS Consulting Engineers</div><div class="captag">Engineering Consultancy · Djibouti</div><div class="capdesc">Djibouti-based engineering consultancy with deep on-ground track record in the Horn of Africa. Accredited on AfDB, World Bank, AFD, and EU-financed projects. Critical for local partnering, national staff mobilisation, and government stakeholder access in East Africa.</div><div class="capsecs"><span class="capsec">Engineering Supervision</span><span class="capsec">Road &amp; Transport</span><span class="capsec">Water &amp; Sanitation</span><span class="capsec">Infrastructure</span><span class="capsec">ESIA</span></div></div>
+    <div class="capcard"><div class="caplogo" style="background:var(--blue3);color:var(--blue)">CP</div><div class="capname">CPCS</div><div class="captag">Transport Advisory · Ottawa / Global</div><div class="capdesc">Canadian multinational with 35+ years of transport advisory across 100+ countries. Best-in-class for railway, port, and logistics corridor mandates. Strong MDB track record (World Bank, AfDB, ADB, IFC). Brings credibility and technical depth to transport feasibility and PPP bids.</div><div class="capsecs"><span class="capsec">Railway &amp; Urban Transit</span><span class="capsec">Port &amp; Maritime</span><span class="capsec">PPP Advisory</span><span class="capsec">Freight Logistics</span><span class="capsec">Transport Policy</span></div></div>
+    <div class="capcard"><div class="caplogo" style="background:var(--red3);color:var(--red)">VL</div><div class="capname">Vulcan</div><div class="captag">Engineering &amp; Construction Management · MEA</div><div class="capdesc">Engineering and construction management firm with deep expertise in complex civil and structural works across the Middle East and Africa. Brings technical design capacity, resident engineer services, and regional contractor networks for large-scale infrastructure bids.</div><div class="capsecs"><span class="capsec">Civil &amp; Structural Engineering</span><span class="capsec">Construction Management</span><span class="capsec">Site Supervision</span><span class="capsec">Urban Infrastructure</span><span class="capsec">Industrial Facilities</span></div></div>
+    <div class="capcard"><div class="caplogo" style="background:var(--gold3);color:var(--gold)">CH</div><div class="capname">Chico Engineering</div><div class="captag">Infrastructure Engineering · Sub-Saharan Africa</div><div class="capdesc">African-rooted engineering consultancy with strong presence in francophone and anglophone sub-Saharan Africa. Specialised in water and sanitation, municipal infrastructure, and donor-financed community development. Ideal for AFD and EU-funded tenders requiring local presence.</div><div class="capsecs"><span class="capsec">Water &amp; Sanitation</span><span class="capsec">Municipal Infrastructure</span><span class="capsec">Social Infrastructure</span><span class="capsec">Rural Development</span><span class="capsec">Environment</span></div></div>
+    <div class="capcard"><div class="caplogo" style="background:rgba(255,255,255,.05);color:var(--muted)">GE</div><div class="capname">Good Engineering</div><div class="captag">Technical Advisory &amp; Checking · International</div><div class="capdesc">Boutique technical advisory firm providing structural and geotechnical engineering at the highest level. Excels in independent checking engineer, peer review, and QA roles for complex civil works — ideal for supervision mandates requiring a credible technical authority.</div><div class="capsecs"><span class="capsec">Structural Engineering</span><span class="capsec">Geotechnical</span><span class="capsec">QA / Checking Engineer</span><span class="capsec">Peer Review</span><span class="capsec">Supervision</span></div></div>
   </div>
-  <hr style="border:none;border-top:1px solid var(--rule);margin:36px 0"/>
-  <div class="matrix-wrap">
-    <div class="matrix-head">
-      <div class="matrix-title">Consortium Capability <em style="color:var(--gold);font-style:italic">Matrix</em></div>
-      <div class="matrix-sub">Coverage by tender type</div>
-    </div>
+  <hr class="div"/>
+  <div class="mx-wrap">
+    <div class="mx-hd"><div class="mx-ttl">Consortium Capability <em style="color:var(--gold);font-style:italic">Matrix</em></div></div>
     <table class="mx">
       <thead><tr><th>Tender Type / Sector</th><th>Skyrise</th><th>FS Consulting</th><th>CPCS</th><th>Vulcan</th><th>Chico</th><th>Good Eng.</th></tr></thead>
       <tbody>
@@ -372,496 +378,405 @@ table.mx tr:hover td{background:rgba(255,255,255,.015)}
         <tr><td>PMO / Project Management</td><td class="dy">●</td><td class="dp">◐</td><td class="dy">●</td><td class="dp">◐</td><td class="dn">○</td><td class="dn">○</td></tr>
         <tr><td>Railway &amp; Urban Transit</td><td class="dp">◐</td><td class="dn">○</td><td class="dy">●</td><td class="dp">◐</td><td class="dn">○</td><td class="dp">◐</td></tr>
         <tr><td>Port &amp; Maritime</td><td class="dy">●</td><td class="dp">◐</td><td class="dy">●</td><td class="dy">●</td><td class="dn">○</td><td class="dp">◐</td></tr>
-        <tr><td>Road &amp; Transport Infrastructure</td><td class="dp">◐</td><td class="dy">●</td><td class="dy">●</td><td class="dy">●</td><td class="dp">◐</td><td class="dy">●</td></tr>
+        <tr><td>Road &amp; Transport</td><td class="dp">◐</td><td class="dy">●</td><td class="dy">●</td><td class="dy">●</td><td class="dp">◐</td><td class="dy">●</td></tr>
         <tr><td>Water &amp; Sanitation</td><td class="dn">○</td><td class="dy">●</td><td class="dn">○</td><td class="dp">◐</td><td class="dy">●</td><td class="dp">◐</td></tr>
-        <tr><td>Feasibility &amp; Technical Studies</td><td class="dy">●</td><td class="dy">●</td><td class="dy">●</td><td class="dp">◐</td><td class="dp">◐</td><td class="dp">◐</td></tr>
+        <tr><td>Feasibility &amp; Studies</td><td class="dy">●</td><td class="dy">●</td><td class="dy">●</td><td class="dp">◐</td><td class="dp">◐</td><td class="dp">◐</td></tr>
         <tr><td>ESIA / Environment</td><td class="dp">◐</td><td class="dy">●</td><td class="dp">◐</td><td class="dn">○</td><td class="dy">●</td><td class="dn">○</td></tr>
         <tr><td>Procurement Advisory</td><td class="dy">●</td><td class="dp">◐</td><td class="dp">◐</td><td class="dn">○</td><td class="dn">○</td><td class="dn">○</td></tr>
         <tr><td>PPP / Concession Advisory</td><td class="dy">●</td><td class="dn">○</td><td class="dy">●</td><td class="dn">○</td><td class="dn">○</td><td class="dn">○</td></tr>
       </tbody>
     </table>
-    <div style="padding:12px 26px;font-size:10px;color:var(--dim);border-top:1px solid var(--rule)">● Full capability &nbsp;·&nbsp; ◐ Partial / associate &nbsp;·&nbsp; ○ Not applicable</div>
+    <div style="padding:11px 24px;font-size:9.5px;color:var(--dim);border-top:1px solid var(--rule)">● Full capability &nbsp;·&nbsp; ◐ Partial / associate &nbsp;·&nbsp; ○ Not applicable</div>
   </div>
 </div>
 
-<!-- ═══ AUTOMATION ════════════════════════════════════════════════ -->
+<!-- AUTOMATION -->
 <div id="tab-automation" class="hidden">
-  <div class="section-title">Feed <em>Automation</em></div>
-  <div class="section-sub">Zapier · Make · RSS — live pipeline configuration</div>
+  <div class="sh">Feed <em>Automation</em></div>
+  <div class="ss">Zapier · Make · RSS — complete live pipeline configuration</div>
   <div class="auto-grid">
-    <div class="auto-card">
-      <div class="auto-icon">⚡</div>
-      <div class="auto-name">Zapier Workflow</div>
-      <div class="auto-tag">dgMarket RSS → Gmail digest</div>
+    <div class="acard">
+      <div class="acard-ico">⚡</div><div class="acard-nm">Zapier Workflow</div><div class="acard-tag">dgMarket RSS → Gmail digest</div>
       <ol class="steps">
         <li><div class="sn">1</div><span>Go to <strong style="color:var(--white)">zapier.com</strong> → Create Zap → Trigger: <em>RSS by Zapier</em></span></li>
-        <li><div class="sn">2</div><span>Paste the dgMarket RSS URL from the panel below into the Feed URL field</span></li>
+        <li><div class="sn">2</div><span>Paste the full dgMarket RSS URL from the panel below into the Feed URL field</span></li>
         <li><div class="sn">3</div><span>Add <strong style="color:var(--white)">Filter</strong>: only continue if Title contains: supervision, AMO, consultant, advisory, PMO, étude, feasibility, port</span></li>
-        <li><div class="sn">4</div><span>Action 1 — <strong style="color:var(--white)">Gmail → Send Email</strong>: To: louai@skyrisecapitalpm.com · Subject: [Tender Alert] {{Title}} · Body: {{Link}} — {{Description}}</span></li>
-        <li><div class="sn">5</div><span>Action 2 (optional) — <strong style="color:var(--white)">Google Sheets → Append Row</strong>: log Title, Country, Deadline, URL for tracking</span></li>
-        <li><div class="sn">6</div><span>Set schedule: every 6 hours. Name and enable the Zap.</span></li>
+        <li><div class="sn">4</div><span>Action 1 — <strong style="color:var(--white)">Gmail → Send Email</strong>: To: louai@skyrisecapitalpm.com · Subject: [Tender Alert] {{Title}}</span></li>
+        <li><div class="sn">5</div><span>Action 2 (optional) — <strong style="color:var(--white)">Google Sheets → Append Row</strong>: log Title, Country, Deadline, URL</span></li>
+        <li><div class="sn">6</div><span>Schedule: every 6 hours. Enable Zap.</span></li>
       </ol>
     </div>
-    <div class="auto-card">
-      <div class="auto-icon">🔄</div>
-      <div class="auto-name">Make (Integromat)</div>
-      <div class="auto-tag">Multi-source · AI scoring scenario</div>
+    <div class="acard">
+      <div class="acard-ico">🔄</div><div class="acard-nm">Make (Integromat)</div><div class="acard-tag">Multi-source · AI scoring scenario</div>
       <ol class="steps">
-        <li><div class="sn">1</div><span>New Scenario → Add module: <strong style="color:var(--white)">RSS Feed</strong> — add one per source (dgMarket, UNDP, Devex)</span></li>
-        <li><div class="sn">2</div><span>Add <strong style="color:var(--white)">Router</strong> to split by source and apply sector/keyword filters per feed</span></li>
-        <li><div class="sn">3</div><span>Add <strong style="color:var(--white)">HTTP → Make a Request</strong> — POST to Claude API with the scorer payload (see below)</span></li>
-        <li><div class="sn">4</div><span>Add <strong style="color:var(--white)">JSON → Parse JSON</strong> to extract the score and reason from Claude's response</span></li>
+        <li><div class="sn">1</div><span>New Scenario → <strong style="color:var(--white)">RSS Feed</strong> module — one per source (dgMarket, UNDP, Devex)</span></li>
+        <li><div class="sn">2</div><span>Add <strong style="color:var(--white)">Router</strong> to split by source and apply keyword filters per feed</span></li>
+        <li><div class="sn">3</div><span>Add <strong style="color:var(--white)">HTTP → Make a Request</strong> — POST to Claude API with scorer payload below</span></li>
+        <li><div class="sn">4</div><span>Add <strong style="color:var(--white)">JSON → Parse JSON</strong> — extract score and reason</span></li>
         <li><div class="sn">5</div><span>Add <strong style="color:var(--white)">Filter</strong>: only pass tenders with score ≥ 75</span></li>
-        <li><div class="sn">6</div><span>Action: <strong style="color:var(--white)">Gmail</strong> digest + <strong style="color:var(--white)">Airtable</strong> row for live dashboard feed</span></li>
+        <li><div class="sn">6</div><span>Action: <strong style="color:var(--white)">Gmail</strong> digest + <strong style="color:var(--white)">Airtable</strong> row</span></li>
         <li><div class="sn">7</div><span>Schedule every 4 hours. Activate scenario.</span></li>
       </ol>
     </div>
   </div>
-  <div class="auto-card" style="margin-bottom:14px">
-    <div class="auto-icon">📡</div>
-    <div class="auto-name">dgMarket RSS Configuration</div>
-    <div class="auto-tag">Ready-to-paste feed URL</div>
-    <table class="rss-tbl">
+  <div class="acard" style="margin-bottom:13px">
+    <div class="acard-ico">📡</div><div class="acard-nm">dgMarket RSS Configuration</div><div class="acard-tag">Ready-to-paste URL — all priority countries &amp; sectors</div>
+    <table class="rtbl">
       <thead><tr><th>Parameter</th><th>Value</th><th>Description</th></tr></thead>
       <tbody>
         <tr><td>Base URL</td><td><code>https://www.dgmarket.com/tenders/rssfeed.do</code></td><td>dgMarket RSS endpoint</td></tr>
-        <tr><td>noticeType</td><td><code>gpr</code></td><td>General procurement (use <code>con</code> for contract awards)</td></tr>
+        <tr><td>noticeType</td><td><code>gpr</code></td><td>General procurement (use <code>con</code> for contracts awarded)</td></tr>
         <tr><td>country</td><td><code>DJ,ET,KE,TZ,SN,CI,CM,MA,DZ,SA,AE,UG,RW</code></td><td>All priority countries</td></tr>
         <tr><td>sector</td><td><code>TRN,WTR,ENE,URB,ENV</code></td><td>Transport, Water, Energy, Urban, Environment</td></tr>
         <tr><td>donor</td><td><code>WB,AFDB,AFD,UNDP,EU</code></td><td>Filter by financier</td></tr>
         <tr><td>language</td><td><code>en,fr</code></td><td>English + French notices</td></tr>
-        <tr><td>maxAge</td><td><code>30</code></td><td>Notices published in last 30 days only</td></tr>
+        <tr><td>maxAge</td><td><code>30</code></td><td>Published in last 30 days only</td></tr>
       </tbody>
     </table>
-    <div class="code-block" id="rss-url"><span class="cm"># Full dgMarket RSS URL — paste into Zapier / Make / Feedly / Inoreader</span>
-<span class="ky">https://</span>www.dgmarket.com/tenders/rssfeed.do<span class="ky">?noticeType=</span><span class="vl">gpr</span><span class="ky">&country=</span><span class="vl">DJ,ET,KE,TZ,SN,CI,CM,MA,DZ,SA,AE,UG,RW</span><span class="ky">&sector=</span><span class="vl">TRN,WTR,ENE,URB,ENV</span><span class="ky">&donor=</span><span class="vl">WB,AFDB,AFD,UNDP,EU</span><span class="ky">&language=</span><span class="vl">en,fr</span><span class="ky">&maxAge=</span><span class="vl">30</span></div>
-    <button class="copy-btn" onclick="copyRSS()">⎘ Copy URL</button>
+    <div class="cb"><span class="cm"># Full dgMarket RSS URL — paste into Zapier / Make / Feedly / Inoreader</span>
+<span class="ky">https://</span>www.dgmarket.com/tenders/rssfeed.do<span class="ky">?noticeType=</span><span class="vl">gpr</span><span class="ky">&amp;country=</span><span class="vl">DJ,ET,KE,TZ,SN,CI,CM,MA,DZ,SA,AE,UG,RW</span><span class="ky">&amp;sector=</span><span class="vl">TRN,WTR,ENE,URB,ENV</span><span class="ky">&amp;donor=</span><span class="vl">WB,AFDB,AFD,UNDP,EU</span><span class="ky">&amp;language=</span><span class="vl">en,fr</span><span class="ky">&amp;maxAge=</span><span class="vl">30</span></div>
+    <button class="copybtn" onclick="copyRSS()">⎘ Copy Full URL</button>
   </div>
-  <div class="auto-card">
-    <div class="auto-icon">🤖</div>
-    <div class="auto-name">Claude API — Auto Relevance Scorer</div>
-    <div class="auto-tag">Paste into Make HTTP module body</div>
-    <div class="code-block"><span class="cm">// POST https://api.anthropic.com/v1/messages</span>
-<span class="cm">// Headers: x-api-key: YOUR_KEY  ·  anthropic-version: 2023-06-01  ·  Content-Type: application/json</span>
+  <div class="acard">
+    <div class="acard-ico">🤖</div><div class="acard-nm">Claude API — Auto Relevance Scorer</div><div class="acard-tag">Paste into Make HTTP module · returns JSON score</div>
+    <div class="cb"><span class="cm">// POST https://api.anthropic.com/v1/messages</span>
+<span class="cm">// Headers: x-api-key: YOUR_KEY · anthropic-version: 2023-06-01 · Content-Type: application/json</span>
 
 {
   <span class="ky">"model"</span>: <span class="vl">"claude-haiku-4-5-20251001"</span>,
   <span class="ky">"max_tokens"</span>: <span class="vl">150</span>,
-  <span class="ky">"system"</span>: <span class="vl">"Score 0-100 how relevant this tender is for Skyrise (specialised in AMO, PMO, supervision, advisory, port &amp; infrastructure consulting in Africa/ME). Respond ONLY with JSON: {\"score\":N,\"reason\":\"one line\"}"</span>,
-  <span class="ky">"messages"</span>: [{<span class="ky">"role"</span>:<span class="vl">"user"</span>,<span class="ky">"content"</span>:<span class="vl">"{{1.title}} — {{1.summary}}"</span>}]
+  <span class="ky">"system"</span>: <span class="vl">"Score 0-100 relevance for Skyrise (AMO, PMO, supervision, advisory, port &amp; infrastructure in Africa/ME). JSON only: {\"score\":N,\"reason\":\"one line\"}"</span>,
+  <span class="ky">"messages"</span>: [{ <span class="ky">"role"</span>: <span class="vl">"user"</span>, <span class="ky">"content"</span>: <span class="vl">"{{1.title}} — {{1.summary}}"</span> }]
 }</div>
   </div>
 </div>
 
-<!-- ═══ SOURCES ══════════════════════════════════════════════════ -->
+<!-- SOURCES -->
 <div id="tab-sources" class="hidden">
-  <div class="section-title">Monitored <em>Sources</em></div>
-  <div class="section-sub">All active procurement portals — click to access directly</div>
-  <div class="sources-grid" id="sources-grid"></div>
-  <div style="margin-top:28px;background:var(--ink2);border:1px solid var(--rule);border-radius:8px;padding:26px">
-    <div style="font-family:var(--serif);font-size:20px;font-weight:400;color:var(--white);margin-bottom:14px">Manual <em style="color:var(--gold);font-style:italic">Registration Guide</em></div>
-    <div style="font-size:11px;color:var(--muted);line-height:2.1;columns:2;gap:40px">
-      <strong style="color:var(--white)">World Bank</strong> — projects.worldbank.org → Create account → Save search → Enable email notifications<br/>
-      <strong style="color:var(--white)">AfDB</strong> — afdb.org/en/procurement → Subscribe to procurement newsletter + set country alerts<br/>
+  <div class="sh">Monitored <em>Sources</em></div>
+  <div class="ss">All active procurement portals — click to access directly</div>
+  <div class="src-grid" id="src-grid"></div>
+  <div style="margin-top:26px;background:var(--ink2);border:1px solid var(--rule);border-radius:8px;padding:24px">
+    <div style="font-family:var(--serif);font-size:18px;color:var(--white);margin-bottom:13px">Manual <em style="color:var(--gold);font-style:italic">Registration Guide</em></div>
+    <div style="font-size:10.5px;color:var(--muted);line-height:2.1;columns:2;gap:40px">
+      <strong style="color:var(--white)">World Bank</strong> — projects.worldbank.org → Create account → Save search → Email notifications<br/>
+      <strong style="color:var(--white)">AfDB</strong> — afdb.org/en/procurement → Procurement newsletter + country alerts<br/>
       <strong style="color:var(--white)">UNDP</strong> — procurement-notices.undp.org → Register as supplier → Filter by country/sector<br/>
-      <strong style="color:var(--white)">dgMarket</strong> — dgmarket.com → Free account → Set keyword + region watchlists + RSS<br/>
-      <strong style="color:var(--white)">Devex</strong> — devex.com → Devex Pro (paid) — best for MDB consulting BD with partner search<br/>
-      <strong style="color:var(--white)">AFD</strong> — afd.fr → Subscribe to appels d'offres mailing list (French language)
+      <strong style="color:var(--white)">dgMarket</strong> — dgmarket.com → Free account → Keyword + region watchlists + RSS feed<br/>
+      <strong style="color:var(--white)">Devex</strong> — devex.com → Devex Pro (paid) — best for MDB consulting BD + partner search<br/>
+      <strong style="color:var(--white)">AFD</strong> — afd.fr → Subscribe to appels d'offres mailing list (French)
     </div>
   </div>
 </div>
 
-<!-- ═══ ALERTS ══════════════════════════════════════════════════ -->
+<!-- ALERTS -->
 <div id="tab-alerts" class="hidden">
-  <div class="alerts-wrap">
-    <div class="section-title">Alert <em>Configuration</em></div>
-    <div class="section-sub">BD digest — matching tenders delivered to your inbox</div>
-    <div class="form-group">
-      <label class="form-lbl">Recipient Email</label>
-      <input class="form-input" id="al-email" placeholder="louai@skyrisecapitalpm.com" type="email"/>
-    </div>
-    <div class="form-group">
-      <label class="form-lbl">Digest Frequency</label>
-      <div class="freq-row">
-        <button class="freq-btn on" onclick="setFreq('instant',this)">Instant</button>
-        <button class="freq-btn" onclick="setFreq('daily',this)">Daily</button>
-        <button class="freq-btn" onclick="setFreq('weekly',this)">Weekly</button>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="form-lbl">Keyword Watchlist — comma separated</label>
-      <textarea class="form-ta" rows="3">supervision, AMO, maîtrise d'ouvrage, advisory, consultant, PMO, project management, feasibility, étude, study, port, infrastructure, procurement, transport, water, railway, road, bridge</textarea>
-    </div>
-    <div class="form-group">
-      <label class="form-lbl">Priority Countries</label>
-      <div class="ctry-chips">
-        <span class="ctry-chip">Djibouti</span><span class="ctry-chip">Ethiopia</span><span class="ctry-chip">Somalia</span>
-        <span class="ctry-chip">Kenya</span><span class="ctry-chip">Tanzania</span><span class="ctry-chip">Uganda</span>
-        <span class="ctry-chip">Rwanda</span><span class="ctry-chip">Senegal</span><span class="ctry-chip">Côte d'Ivoire</span>
-        <span class="ctry-chip">Cameroon</span><span class="ctry-chip">Morocco</span><span class="ctry-chip">Algeria</span>
-        <span class="ctry-chip">Saudi Arabia</span><span class="ctry-chip">UAE</span>
-      </div>
-    </div>
-    <div class="form-group">
-      <div style="display:flex;align-items:center;justify-content:space-between;background:var(--ink2);border:1px solid var(--rule);border-radius:6px;padding:15px 18px">
-        <div><div style="font-size:12px;color:var(--white);margin-bottom:3px">Minimum Relevance Score</div><div style="font-size:10px;color:var(--dim)">Only alert on tenders scoring ≥ 75</div></div>
-        <div style="font-family:var(--serif);font-size:26px;color:var(--gold)">75+</div>
-      </div>
-    </div>
-    <button class="btn-primary" id="al-btn" onclick="saveAlerts()" style="width:100%;text-align:center">Activate Email Alerts</button>
-    <div style="margin-top:18px" class="info-box">
-      <div class="info-box-lbl">Live Integration Required</div>
-      This dashboard uses curated seed data. To activate live delivery, connect via the Automation tab — Zapier (dgMarket RSS → Gmail) or Make (multi-source + AI scoring). Devex Pro is recommended for MDB consulting BD.
-    </div>
+  <div class="wrap560">
+    <div class="sh">Alert <em>Configuration</em></div>
+    <div class="ss">BD digest — matching tenders delivered to your inbox</div>
+    <div class="fg"><label class="flbl">Recipient Email</label><input class="finp" placeholder="louai@skyrisecapitalpm.com" type="email"/></div>
+    <div class="fg"><label class="flbl">Digest Frequency</label><div class="freqrow"><button class="freqbtn on" onclick="setFreq(this)">Instant</button><button class="freqbtn" onclick="setFreq(this)">Daily</button><button class="freqbtn" onclick="setFreq(this)">Weekly</button></div></div>
+    <div class="fg"><label class="flbl">Keyword Watchlist</label><textarea class="fta" rows="3">supervision, AMO, maîtrise d'ouvrage, advisory, consultant, PMO, project management, feasibility, étude, port, infrastructure, procurement, transport, water, railway, road</textarea></div>
+    <div class="fg"><label class="flbl">Priority Countries</label><div class="ccrow"><span class="cchip">Djibouti</span><span class="cchip">Ethiopia</span><span class="cchip">Somalia</span><span class="cchip">Kenya</span><span class="cchip">Tanzania</span><span class="cchip">Uganda</span><span class="cchip">Rwanda</span><span class="cchip">Senegal</span><span class="cchip">Côte d'Ivoire</span><span class="cchip">Cameroon</span><span class="cchip">Morocco</span><span class="cchip">Algeria</span><span class="cchip">Saudi Arabia</span><span class="cchip">UAE</span></div></div>
+    <div class="fg"><div style="display:flex;align-items:center;justify-content:space-between;background:var(--ink2);border:1px solid var(--rule);border-radius:6px;padding:14px 17px"><div><div style="font-size:11.5px;color:var(--white);margin-bottom:2px">Minimum Relevance Score</div><div style="font-size:9.5px;color:var(--dim)">Only alert on tenders scoring ≥ 75</div></div><div style="font-family:var(--serif);font-size:24px;color:var(--gold)">75+</div></div></div>
+    <button class="btnpri" id="al-btn" onclick="saveAlerts()" style="width:100%;text-align:center">Activate Email Alerts</button>
+    <div style="margin-top:16px" class="ibox"><div class="ibox-l">Live Integration Required</div>This dashboard uses curated seed data. To activate live delivery, connect via the Automation tab — Zapier (dgMarket RSS → Gmail) or Make (multi-source + AI scoring).</div>
   </div>
 </div>
 
-<!-- ═══ SETTINGS ════════════════════════════════════════════════ -->
+<!-- SETTINGS -->
 <div id="tab-settings" class="hidden">
-  <div style="max-width:560px">
-    <div class="section-title">Platform <em>Settings</em></div>
-    <div class="section-sub">API keys, preferences, data management</div>
-    <div style="background:var(--ink2);border:1px solid var(--rule);border-radius:8px;padding:26px;margin-bottom:14px">
-      <div style="font-family:var(--serif);font-size:18px;color:var(--white);margin-bottom:4px">Anthropic API Key</div>
-      <div style="font-size:11px;color:var(--dim);margin-bottom:16px">Powers the AI Prospector tab. Stored in your browser's localStorage only — never sent anywhere except directly to the Anthropic API.</div>
-      <div style="display:flex;gap:8px">
-        <input class="fi" id="settings-key" type="password" placeholder="sk-ant-api03-…" style="flex:1" oninput="saveApiKey()"/>
-        <button class="btn-sm" onclick="clearApiKey()">Clear</button>
-      </div>
-      <div style="margin-top:10px;font-size:10px;color:var(--dim)" id="settings-key-status"></div>
+  <div class="wrap560">
+    <div class="sh">Platform <em>Settings</em></div>
+    <div class="ss">API keys · preferences · data management</div>
+    <div class="scard">
+      <div class="scard-nm">Anthropic API Key</div>
+      <div class="scard-d">Powers the AI Prospector. Stored in your browser's localStorage only — sent exclusively to the Anthropic API.</div>
+      <div class="srow"><input class="fi" id="sk-key" type="password" placeholder="sk-ant-api03-…" style="flex:1" oninput="onKeyIn()"/><button class="nbtn" onclick="clearKey()">Clear</button></div>
+      <div style="margin-top:9px;font-size:9.5px" id="sk-st"></div>
     </div>
-    <div style="background:var(--ink2);border:1px solid var(--rule);border-radius:8px;padding:26px;margin-bottom:14px">
-      <div style="font-family:var(--serif);font-size:18px;color:var(--white);margin-bottom:4px">Pipeline Data</div>
-      <div style="font-size:11px;color:var(--dim);margin-bottom:16px">Your BD pipeline statuses are saved in localStorage. Export or clear below.</div>
-      <div style="display:flex;gap:8px">
-        <button class="btn-sm" onclick="exportPipeline()">Export JSON</button>
-        <button class="btn-sm danger" onclick="clearPipeline()">Clear Pipeline</button>
-      </div>
+    <div class="scard">
+      <div class="scard-nm">Pipeline Data</div>
+      <div class="scard-d">Pipeline statuses and saved tenders are stored in localStorage. Export a backup or clear all data.</div>
+      <div class="srow"><button class="nbtn" onclick="exportData()">Export JSON</button><button class="nbtn" style="color:var(--red);border-color:rgba(217,95,75,.2)" onclick="clearAll()">Clear All Data</button></div>
     </div>
-    <div style="background:var(--ink2);border:1px solid var(--rule);border-radius:8px;padding:26px">
-      <div style="font-family:var(--serif);font-size:18px;color:var(--white);margin-bottom:4px">About</div>
-      <div style="font-size:11px;color:var(--muted);line-height:1.8">
-        <strong style="color:var(--white)">Skyrise Tender Intelligence Platform</strong> v4.0<br/>
-        Built for Skyrise Capital PM &amp; FS Consulting Engineers.<br/>
-        Monitors: World Bank · AfDB · AFD · UNDP · dgMarket · Devex<br/>
-        Coverage: Africa &amp; Middle East · Infrastructure · Advisory · PMO
-      </div>
+    <div class="scard">
+      <div class="scard-nm">About</div>
+      <div style="font-size:10.5px;color:var(--muted);line-height:1.9"><strong style="color:var(--white)">Skyrise Tender Intelligence Platform</strong> v5.0<br/>Built for Skyrise Capital PM &amp; FS Consulting Engineers.<br/>Sources: World Bank · AfDB · AFD · UNDP · dgMarket · Devex<br/>Coverage: Africa &amp; Middle East · Infrastructure · Advisory · PMO<br/><span style="color:var(--dim)">Self-contained · No server required · localStorage persistence</span></div>
     </div>
   </div>
 </div>
 
-</div><!-- /main -->
+</div>
 <div id="toast"></div>
 
 <script>
-// ═══════════════════════════════════════════════════════════════════
-// DATA
-// ═══════════════════════════════════════════════════════════════════
 const SRCS=[
-  {id:"worldbank",name:"World Bank",icon:"🏛",color:"#3B6FD4",site:"https://projects.worldbank.org/en/projects-operations/procurement"},
+  {id:"worldbank",name:"World Bank",icon:"🏛",color:"#4A7FE0",site:"https://projects.worldbank.org/en/projects-operations/procurement"},
   {id:"afdb",name:"AfDB",icon:"🌍",color:"#00C98A",site:"https://www.afdb.org/en/procurement"},
   {id:"afd",name:"AFD",icon:"🇫🇷",color:"#C9A96E",site:"https://www.afd.fr/en/calls-for-tenders"},
   {id:"undp",name:"UNDP",icon:"🌐",color:"#5B9BD5",site:"https://procurement-notices.undp.org/"},
-  {id:"dgmarket",name:"dgMarket",icon:"📋",color:"#9B7FD4",site:"https://www.dgmarket.com/"},
+  {id:"dgmarket",name:"dgMarket",icon:"📋",color:"#8B6FD4",site:"https://www.dgmarket.com/"},
   {id:"devex",name:"Devex",icon:"🔍",color:"#D4753B",site:"https://www.devex.com/funding"},
 ];
-
-const TENDERS=[
-  {id:"wb-dj-001",title:"Supervision of Doraleh Port Infrastructure Works – Phase II",source:"worldbank",country:"Djibouti",sector:"Port & Maritime",type:"QCBS",budget:"EUR 1.2M",deadline:"2026-06-28",published:"2026-05-20",relevance:98,tags:["port","supervision","Djibouti"],url:"https://projects.worldbank.org",desc:"Construction supervision services for the second phase of port infrastructure expansion at Doraleh, Djibouti.",status:"open"},
-  {id:"dgm-dj-005",title:"Project Management Support – ADR Djibouti Green Mobility Program",source:"dgmarket",country:"Djibouti",sector:"Project Management / PMO",type:"QCBS",budget:"EUR 320K",deadline:"2026-06-30",published:"2026-05-22",relevance:96,tags:["PMO","Djibouti","green","ADR"],url:"https://dgmarket.com",desc:"Project management and advisory support to ADR for implementation of green fleet and mobility programme.",status:"open"},
-  {id:"afdb-ci-017",title:"Supervision des travaux – Port de San Pedro Extension",source:"afdb",country:"Côte d'Ivoire",sector:"Port & Maritime",type:"QCBS",budget:"EUR 1.8M",deadline:"2026-08-01",published:"2026-05-25",relevance:93,tags:["port","supervision","West Africa"],url:"https://afdb.org",desc:"Engineer's representative services for the expansion of San Pedro port, financed by AfDB.",status:"open"},
-  {id:"afdb-et-012",title:"AMO – Addis Ababa Urban Corridor Project (Road & Drainage)",source:"afdb",country:"Ethiopia",sector:"Transport",type:"QBS",budget:"USD 900K",deadline:"2026-07-10",published:"2026-05-28",relevance:91,tags:["AMO","road","urban","Ethiopia"],url:"https://afdb.org",desc:"Owner's engineer services for urban road and drainage corridor in Addis Ababa, financed by AfDB.",status:"open"},
-  {id:"devex-cm-004",title:"Engineering Supervision – Douala Outer Ring Road Phase 3",source:"devex",country:"Cameroon",sector:"Engineering Supervision",type:"QCBS",budget:"EUR 2.4M",deadline:"2026-07-15",published:"2026-05-28",relevance:89,tags:["supervision","road","Cameroon"],url:"https://devex.com",desc:"Resident engineer and supervision team for the third phase of Douala ring road, EU-funded.",status:"open"},
-  {id:"wb-ma-022",title:"Railway AMO – Tanger-Marrakech High Speed Rail Extension Study",source:"worldbank",country:"Morocco",sector:"Transport",type:"QCBS",budget:"USD 2.1M",deadline:"2026-07-25",published:"2026-05-30",relevance:88,tags:["railway","AMO","Morocco","study"],url:"https://projects.worldbank.org",desc:"Technical and financial feasibility study for the southern extension of Morocco's high speed rail network.",status:"open"},
-  {id:"afd-sn-008",title:"Étude de faisabilité – Plateforme logistique Dakar Nord",source:"afd",country:"Senegal",sector:"Advisory & Studies",type:"QCBS",budget:"EUR 450K",deadline:"2026-06-20",published:"2026-05-15",relevance:85,tags:["feasibility","logistics","Senegal"],url:"https://afd.fr",desc:"Feasibility and technical study for a new logistics hub in northern Dakar, co-financed by AFD.",status:"open"},
-  {id:"afdb-rw-011",title:"PMO Advisory – Rwanda Urban Development Programme",source:"afdb",country:"Rwanda",sector:"Project Management / PMO",type:"QBS",budget:"USD 650K",deadline:"2026-06-22",published:"2026-05-20",relevance:82,tags:["PMO","urban","Rwanda"],url:"https://afdb.org",desc:"Programme management office support for the Ministry of Infrastructure, Rwanda, financed by AfDB.",status:"open"},
-  {id:"wb-tz-015",title:"AMO – Dar es Salaam Bus Rapid Transit Corridor Extension",source:"worldbank",country:"Tanzania",sector:"Transport",type:"QCBS",budget:"USD 1.1M",deadline:"2026-07-18",published:"2026-05-26",relevance:80,tags:["AMO","BRT","Tanzania","urban"],url:"https://projects.worldbank.org",desc:"Owner's engineer for the extension of the Dar es Salaam BRT system, World Bank-financed.",status:"open"},
-  {id:"afd-ci-009",title:"Supervision des travaux – Réhabilitation RN3 Abidjan-Bouaké",source:"afd",country:"Côte d'Ivoire",sector:"Engineering Supervision",type:"QCBS",budget:"EUR 1.5M",deadline:"2026-07-30",published:"2026-05-27",relevance:87,tags:["supervision","road","Côte d'Ivoire","AFD"],url:"https://afd.fr",desc:"Resident engineer services for rehabilitation of the RN3 national road, financed by AFD.",status:"open"},
-  {id:"undp-ke-003",title:"Procurement Advisory Services – Kenya National Water Authority",source:"undp",country:"Kenya",sector:"Procurement Advisory",type:"IC",budget:"USD 180K",deadline:"2026-06-09",published:"2026-05-10",relevance:78,tags:["water","procurement","Kenya"],url:"https://procurement-notices.undp.org",desc:"Consultant firm to provide procurement advisory for water utility capital programme.",status:"closing_soon"},
-  {id:"wb-ug-009",title:"ESIA – Kampala-Jinja Expressway Phase 2",source:"worldbank",country:"Uganda",sector:"Environment & ESIA",type:"QCBS",budget:"USD 380K",deadline:"2026-07-05",published:"2026-05-18",relevance:72,tags:["ESIA","road","Uganda"],url:"https://projects.worldbank.org",desc:"Environmental and social impact assessment for the second phase of the Kampala-Jinja expressway.",status:"open"},
-  {id:"afdb-dz-020",title:"Feasibility Study – Algiers Metro Network Extension Lines 4 & 5",source:"afdb",country:"Algeria",sector:"Transport",type:"QCBS",budget:"USD 1.8M",deadline:"2026-08-10",published:"2026-06-01",relevance:83,tags:["metro","feasibility","Algeria","urban transit"],url:"https://afdb.org",desc:"Technical and economic feasibility for two new metro lines in Algiers, AfDB co-financed.",status:"open"},
-  {id:"dgm-sa-007",title:"PMO – Saudi Green Ports Initiative Phase 1",source:"dgmarket",country:"Saudi Arabia",sector:"Project Management / PMO",type:"QCBS",budget:"USD 2.8M",deadline:"2026-08-15",published:"2026-06-02",relevance:90,tags:["PMO","Saudi Arabia","port","green"],url:"https://dgmarket.com",desc:"Programme management office for the first phase of Saudi Green Ports sustainability initiative.",status:"open"},
-  {id:"wb-et-031",title:"Procurement Support – Ethiopia Road Fund Capital Works Programme",source:"worldbank",country:"Ethiopia",sector:"Procurement Advisory",type:"QBS",budget:"USD 420K",deadline:"2026-07-20",published:"2026-06-01",relevance:76,tags:["procurement","road","Ethiopia","advisory"],url:"https://projects.worldbank.org",desc:"Procurement advisory and capacity building for the Ethiopian Roads Authority capital programme.",status:"open"},
-  {id:"devex-ma-018",title:"Engineering Advisory – Casablanca Port Logistics Hub Masterplan",source:"devex",country:"Morocco",sector:"Port & Maritime",type:"QCBS",budget:"EUR 950K",deadline:"2026-07-08",published:"2026-05-29",relevance:86,tags:["port","masterplan","Morocco","logistics"],url:"https://devex.com",desc:"Technical advisory and masterplan development for Casablanca port logistics hub expansion.",status:"open"},
-  {id:"afd-sn-014",title:"Contrôle et supervision – Programme eau potable Ziguinchor",source:"afd",country:"Senegal",sector:"Water & Sanitation",type:"QCBS",budget:"EUR 280K",deadline:"2026-07-01",published:"2026-05-24",relevance:71,tags:["water","supervision","Senegal","AFD"],url:"https://afd.fr",desc:"Control and supervision mission for drinking water infrastructure programme in Ziguinchor region.",status:"open"},
-  {id:"wb-dj-019",title:"Independent Technical Audit – Djibouti Port Multimodal Hub",source:"worldbank",country:"Djibouti",sector:"Advisory & Studies",type:"CQS",budget:"EUR 190K",deadline:"2026-06-25",published:"2026-05-21",relevance:94,tags:["audit","Djibouti","port","multimodal"],url:"https://projects.worldbank.org",desc:"Independent technical audit of the ongoing construction of the Djibouti multimodal port hub.",status:"open"},
-  {id:"undp-ug-022",title:"Energy Access Advisory – Uganda Rural Electrification Programme",source:"undp",country:"Uganda",sector:"Energy",type:"IC",budget:"USD 210K",deadline:"2026-07-12",published:"2026-05-31",relevance:65,tags:["energy","rural","Uganda","advisory"],url:"https://procurement-notices.undp.org",desc:"Advisory services for the implementation of rural electrification programme in northern Uganda.",status:"open"},
-  {id:"afdb-cm-025",title:"AMO – Port de Kribi Phase 2 Extension",source:"afdb",country:"Cameroon",sector:"Port & Maritime",type:"QCBS",budget:"EUR 2.2M",deadline:"2026-08-20",published:"2026-06-03",relevance:92,tags:["AMO","port","Cameroon","AfDB"],url:"https://afdb.org",desc:"Owner's engineer mandate for the second phase of Kribi deep-sea port expansion, AfDB-financed.",status:"open"},
+const T=[
+  {id:"wb-dj-001",title:"Supervision of Doraleh Port Infrastructure Works – Phase II",source:"worldbank",country:"Djibouti",sector:"Port & Maritime",type:"QCBS",budget:"EUR 1.2M",deadline:"2026-06-28",pub:"2026-05-20",rel:98,tags:["port","supervision","Djibouti"],url:"https://projects.worldbank.org",desc:"Construction supervision services for the second phase of port infrastructure expansion at Doraleh, Djibouti.",st:"open"},
+  {id:"dgm-dj-005",title:"Project Management Support – ADR Djibouti Green Mobility Programme",source:"dgmarket",country:"Djibouti",sector:"Project Management / PMO",type:"QCBS",budget:"EUR 320K",deadline:"2026-06-30",pub:"2026-05-22",rel:96,tags:["PMO","Djibouti","green","ADR"],url:"https://dgmarket.com",desc:"Project management and advisory support to ADR for implementation of the green fleet and mobility programme.",st:"open"},
+  {id:"wb-dj-019",title:"Independent Technical Audit – Djibouti Port Multimodal Hub",source:"worldbank",country:"Djibouti",sector:"Advisory & Studies",type:"CQS",budget:"EUR 190K",deadline:"2026-06-25",pub:"2026-05-21",rel:94,tags:["audit","Djibouti","port","multimodal"],url:"https://projects.worldbank.org",desc:"Independent technical audit of the ongoing construction of the Djibouti multimodal port hub.",st:"open"},
+  {id:"afdb-ci-017",title:"Supervision des travaux – Port de San Pedro Extension",source:"afdb",country:"Côte d'Ivoire",sector:"Port & Maritime",type:"QCBS",budget:"EUR 1.8M",deadline:"2026-08-01",pub:"2026-05-25",rel:93,tags:["port","supervision","West Africa"],url:"https://afdb.org",desc:"Engineer's representative services for the expansion of San Pedro port, financed by AfDB.",st:"open"},
+  {id:"afdb-cm-025",title:"AMO – Port de Kribi Phase 2 Extension",source:"afdb",country:"Cameroon",sector:"Port & Maritime",type:"QCBS",budget:"EUR 2.2M",deadline:"2026-08-20",pub:"2026-06-03",rel:92,tags:["AMO","port","Cameroon"],url:"https://afdb.org",desc:"Owner's engineer mandate for the second phase of Kribi deep-sea port expansion, AfDB-financed.",st:"open"},
+  {id:"afdb-et-012",title:"AMO – Addis Ababa Urban Corridor Project (Road & Drainage)",source:"afdb",country:"Ethiopia",sector:"Transport",type:"QBS",budget:"USD 900K",deadline:"2026-07-10",pub:"2026-05-28",rel:91,tags:["AMO","road","urban","Ethiopia"],url:"https://afdb.org",desc:"Owner's engineer services for urban road and drainage corridor in Addis Ababa, financed by AfDB.",st:"open"},
+  {id:"dgm-sa-007",title:"PMO – Saudi Green Ports Initiative Phase 1",source:"dgmarket",country:"Saudi Arabia",sector:"Project Management / PMO",type:"QCBS",budget:"USD 2.8M",deadline:"2026-08-15",pub:"2026-06-02",rel:90,tags:["PMO","Saudi Arabia","port","green"],url:"https://dgmarket.com",desc:"Programme management office for the first phase of the Saudi Green Ports sustainability initiative.",st:"open"},
+  {id:"devex-cm-004",title:"Engineering Supervision – Douala Outer Ring Road Phase 3",source:"devex",country:"Cameroon",sector:"Engineering Supervision",type:"QCBS",budget:"EUR 2.4M",deadline:"2026-07-15",pub:"2026-05-28",rel:89,tags:["supervision","road","Cameroon"],url:"https://devex.com",desc:"Resident engineer and supervision team for the third phase of the Douala ring road, EU-funded.",st:"open"},
+  {id:"wb-ma-022",title:"Railway AMO – Tanger-Marrakech High Speed Rail Extension Study",source:"worldbank",country:"Morocco",sector:"Transport",type:"QCBS",budget:"USD 2.1M",deadline:"2026-07-25",pub:"2026-05-30",rel:88,tags:["railway","AMO","Morocco","study"],url:"https://projects.worldbank.org",desc:"Technical and financial feasibility study for the southern extension of Morocco's high speed rail network.",st:"open"},
+  {id:"afd-ci-009",title:"Supervision des travaux – Réhabilitation RN3 Abidjan-Bouaké",source:"afd",country:"Côte d'Ivoire",sector:"Engineering Supervision",type:"QCBS",budget:"EUR 1.5M",deadline:"2026-07-30",pub:"2026-05-27",rel:87,tags:["supervision","road","Côte d'Ivoire"],url:"https://afd.fr",desc:"Resident engineer services for rehabilitation of the RN3 national road between Abidjan and Bouaké, AFD-financed.",st:"open"},
+  {id:"devex-ma-018",title:"Engineering Advisory – Casablanca Port Logistics Hub Masterplan",source:"devex",country:"Morocco",sector:"Port & Maritime",type:"QCBS",budget:"EUR 950K",deadline:"2026-07-08",pub:"2026-05-29",rel:86,tags:["port","masterplan","Morocco","logistics"],url:"https://devex.com",desc:"Technical advisory and masterplan development for the Casablanca port logistics hub expansion.",st:"open"},
+  {id:"afd-sn-008",title:"Étude de faisabilité – Plateforme logistique Dakar Nord",source:"afd",country:"Senegal",sector:"Advisory & Studies",type:"QCBS",budget:"EUR 450K",deadline:"2026-06-20",pub:"2026-05-15",rel:85,tags:["feasibility","logistics","Senegal"],url:"https://afd.fr",desc:"Feasibility and technical study for a new logistics hub in northern Dakar, co-financed by AFD.",st:"open"},
+  {id:"afdb-dz-020",title:"Feasibility Study – Algiers Metro Network Extension Lines 4 & 5",source:"afdb",country:"Algeria",sector:"Transport",type:"QCBS",budget:"USD 1.8M",deadline:"2026-08-10",pub:"2026-06-01",rel:83,tags:["metro","feasibility","Algeria"],url:"https://afdb.org",desc:"Technical and economic feasibility for two new metro lines in Algiers, AfDB co-financed.",st:"open"},
+  {id:"afdb-rw-011",title:"PMO Advisory – Rwanda Urban Development Programme",source:"afdb",country:"Rwanda",sector:"Project Management / PMO",type:"QBS",budget:"USD 650K",deadline:"2026-06-22",pub:"2026-05-20",rel:82,tags:["PMO","urban","Rwanda"],url:"https://afdb.org",desc:"Programme management office support for the Ministry of Infrastructure, Rwanda, financed by AfDB.",st:"open"},
+  {id:"wb-tz-015",title:"AMO – Dar es Salaam Bus Rapid Transit Corridor Extension",source:"worldbank",country:"Tanzania",sector:"Transport",type:"QCBS",budget:"USD 1.1M",deadline:"2026-07-18",pub:"2026-05-26",rel:80,tags:["AMO","BRT","Tanzania"],url:"https://projects.worldbank.org",desc:"Owner's engineer for the extension of the Dar es Salaam BRT system, World Bank-financed.",st:"open"},
+  {id:"undp-ke-003",title:"Procurement Advisory Services – Kenya National Water Authority",source:"undp",country:"Kenya",sector:"Procurement Advisory",type:"IC",budget:"USD 180K",deadline:"2026-06-09",pub:"2026-05-10",rel:78,tags:["water","procurement","Kenya"],url:"https://procurement-notices.undp.org",desc:"Consultant firm to provide procurement advisory for the water utility capital programme.",st:"closing_soon"},
+  {id:"wb-et-031",title:"Procurement Support – Ethiopia Road Fund Capital Works Programme",source:"worldbank",country:"Ethiopia",sector:"Procurement Advisory",type:"QBS",budget:"USD 420K",deadline:"2026-07-20",pub:"2026-06-01",rel:76,tags:["procurement","road","Ethiopia"],url:"https://projects.worldbank.org",desc:"Procurement advisory and capacity building for the Ethiopian Roads Authority capital programme.",st:"open"},
+  {id:"afd-sn-014",title:"Contrôle et supervision – Programme eau potable Ziguinchor",source:"afd",country:"Senegal",sector:"Water & Sanitation",type:"QCBS",budget:"EUR 280K",deadline:"2026-07-01",pub:"2026-05-24",rel:71,tags:["water","supervision","Senegal"],url:"https://afd.fr",desc:"Control and supervision mission for the drinking water infrastructure programme in Ziguinchor region.",st:"open"},
+  {id:"wb-ug-009",title:"ESIA – Kampala-Jinja Expressway Phase 2",source:"worldbank",country:"Uganda",sector:"Environment & ESIA",type:"QCBS",budget:"USD 380K",deadline:"2026-07-05",pub:"2026-05-18",rel:72,tags:["ESIA","road","Uganda"],url:"https://projects.worldbank.org",desc:"Environmental and social impact assessment for the second phase of the Kampala-Jinja expressway.",st:"open"},
+  {id:"undp-ug-022",title:"Energy Access Advisory – Uganda Rural Electrification Programme",source:"undp",country:"Uganda",sector:"Energy",type:"IC",budget:"USD 210K",deadline:"2026-07-12",pub:"2026-05-31",rel:65,tags:["energy","rural","Uganda"],url:"https://procurement-notices.undp.org",desc:"Advisory services for the implementation of the rural electrification programme in northern Uganda.",st:"open"},
 ];
 
-// ═══════════════════════════════════════════════════════════════════
-// STATE — persisted in localStorage
-// ═══════════════════════════════════════════════════════════════════
-const PIPE_STAGES=["reviewing","bid_prep","submitted","won_lost"];
-const PIPE_LABELS={"reviewing":"Reviewing","bid_prep":"Bid Prep","submitted":"Submitted","won_lost":"Won / Lost"};
-const PIPE_COLORS={"reviewing":"var(--blue)","bid_prep":"var(--amber)","submitted":"var(--gold)","won_lost":"var(--green)"};
+const PS=["reviewing","bid_prep","submitted","won_lost"];
+const PL={reviewing:"Reviewing",bid_prep:"Bid Prep",submitted:"Submitted",won_lost:"Won / Lost"};
+const PC={reviewing:"var(--blue)",bid_prep:"var(--amber)",submitted:"var(--gold)",won_lost:"var(--green)"};
+let saved=new Set(JSON.parse(localStorage.getItem("sr_saved")||"[]"));
+let pipe=JSON.parse(localStorage.getItem("sr_pipe")||"{}");
+function persist(){localStorage.setItem("sr_saved",JSON.stringify([...saved]));localStorage.setItem("sr_pipe",JSON.stringify(pipe));}
+function du(d){return Math.ceil((new Date(d)-new Date())/864e5)}
+function rc(s){return s>=90?"var(--green)":s>=75?"var(--gold)":"var(--red)"}
+function si(id){return SRCS.find(s=>s.id===id)||{name:id,icon:"•",color:"#888"}}
+function toast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2600)}
 
-let saved=new Set(JSON.parse(localStorage.getItem("skyrise_saved")||"[]"));
-let pipeline=JSON.parse(localStorage.getItem("skyrise_pipeline")||"{}"); // {id: stage}
-
-function persist(){
-  localStorage.setItem("skyrise_saved",JSON.stringify([...saved]));
-  localStorage.setItem("skyrise_pipeline",JSON.stringify(pipeline));
-}
-
-// ═══════════════════════════════════════════════════════════════════
-// UTILS
-// ═══════════════════════════════════════════════════════════════════
-function daysUntil(d){return Math.ceil((new Date(d)-new Date())/(864e5))}
-function relColor(s){return s>=90?"var(--green)":s>=75?"var(--gold)":"var(--red)"}
-function srcInfo(id){return SRCS.find(s=>s.id===id)||{name:id,icon:"•",color:"#888"}}
-
-function showToast(msg){
-  const t=document.getElementById("toast");
-  t.textContent=msg;t.classList.add("show");
-  setTimeout(()=>t.classList.remove("show"),2500);
-}
-
-// ═══════════════════════════════════════════════════════════════════
-// STATS
-// ═══════════════════════════════════════════════════════════════════
 function updateStats(){
-  document.getElementById("s-open").textContent=TENDERS.filter(t=>t.status==="open").length;
-  document.getElementById("s-closing").textContent=TENDERS.filter(t=>daysUntil(t.deadline)<=7&&daysUntil(t.deadline)>0).length;
-  document.getElementById("s-high").textContent=TENDERS.filter(t=>t.relevance>=90).length;
-  document.getElementById("s-saved").textContent=saved.size;
-  document.getElementById("s-pipeline").textContent=Object.keys(pipeline).length;
+  document.getElementById("st-open").textContent=T.filter(t=>t.st==="open").length;
+  document.getElementById("st-cl").textContent=T.filter(t=>du(t.deadline)<=7&&du(t.deadline)>0).length;
+  document.getElementById("st-hi").textContent=T.filter(t=>t.rel>=90).length;
+  document.getElementById("st-sv").textContent=saved.size;
+  document.getElementById("st-pp").textContent=Object.keys(pipe).length;
 }
 
-// ═══════════════════════════════════════════════════════════════════
-// RENDER TENDERS
-// ═══════════════════════════════════════════════════════════════════
+function renderDashboard(){
+  const totalBudget="EUR 23.7M+";
+  const avgRel=Math.round(T.reduce((a,b)=>a+b.rel,0)/T.length);
+  const expiring=T.filter(t=>du(t.deadline)<=14&&du(t.deadline)>0).length;
+  document.getElementById("dash-kpis").innerHTML=[
+    {l:"Total Budget Tracked",v:totalBudget,s:"Across 20 active tenders",c:"var(--gold)",tr:"↑ 4 new this week",tc:"tu"},
+    {l:"Avg Relevance Score",v:avgRel,s:"Across all monitored tenders",c:"var(--green)",tr:"▲ Above 80 threshold",tc:"tu"},
+    {l:"Expiring Within 14 Days",v:expiring,s:"Deadlines requiring action",c:"var(--amber)",tr:"⚠ Review urgently",tc:"tn"},
+  ].map(k=>`<div class="dcard"><div class="dcard-l">${k.l}</div><div class="dcard-v" style="color:${k.c}">${k.v}</div><div class="dcard-s">${k.s}</div><div class="trend ${k.tc}">${k.tr}</div></div>`).join("");
+
+  // Deadlines
+  const dl=T.filter(t=>du(t.deadline)>0).sort((a,b)=>new Date(a.deadline)-new Date(b.deadline)).slice(0,6);
+  document.getElementById("dash-dl").innerHTML=dl.map(t=>{
+    const d=du(t.deadline);
+    const bc=d<=7?"var(--red3)":d<=14?"var(--amber3)":"rgba(255,255,255,.05)";
+    const fc=d<=7?"var(--red)":d<=14?"var(--amber)":"var(--muted)";
+    return`<div class="dl-item" onclick="goTab('opportunities')"><div class="dl-ttl">${t.title.length>52?t.title.slice(0,49)+"…":t.title}</div><span class="dl-badge" style="background:${bc};color:${fc}">${d}d · ${t.country}</span></div>`;
+  }).join("");
+
+  // Pipeline mini
+  document.getElementById("dash-pm").innerHTML=PS.map(s=>{
+    const n=Object.values(pipe).filter(v=>v===s).length;
+    return`<div class="pm-col"><div class="pm-n" style="color:${PC[s]}">${n}</div><div class="pm-l">${PL[s]}</div></div>`;
+  }).join("");
+
+  drawSectorChart();
+  drawSourceChart();
+}
+
+function drawSectorChart(){
+  const sec={};T.forEach(t=>{sec[t.sector]=(sec[t.sector]||0)+1});
+  const entries=Object.entries(sec).sort((a,b)=>b[1]-a[1]).slice(0,6);
+  const total=entries.reduce((a,b)=>a+b[1],0);
+  const cols=["#C9A96E","#00C98A","#4A7FE0","#D95F4B","#8B6FD4","#E8A020"];
+  const svg=document.getElementById("ch-sec");
+  const cx=100,cy=100,r=78,ir=46;
+  let angle=-Math.PI/2,paths="";
+  entries.forEach(([nm,cnt],i)=>{
+    const sl=(cnt/total)*2*Math.PI;
+    const x1=cx+r*Math.cos(angle),y1=cy+r*Math.sin(angle);
+    const x2=cx+r*Math.cos(angle+sl),y2=cy+r*Math.sin(angle+sl);
+    const ix1=cx+ir*Math.cos(angle),iy1=cy+ir*Math.sin(angle);
+    const ix2=cx+ir*Math.cos(angle+sl),iy2=cy+ir*Math.sin(angle+sl);
+    const lg=sl>Math.PI?1:0;
+    paths+=`<path d="M${ix1},${iy1}L${x1},${y1}A${r},${r} 0 ${lg},1 ${x2},${y2}L${ix2},${iy2}A${ir},${ir} 0 ${lg},0 ${ix1},${iy1}" fill="${cols[i]}" opacity=".82"/>`;
+    angle+=sl;
+  });
+  paths+=`<text x="${cx}" y="${cy-5}" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="22" fill="#F0EEE8">${total}</text>`;
+  paths+=`<text x="${cx}" y="${cy+12}" text-anchor="middle" font-family="Poppins,sans-serif" font-size="7.5" fill="#3E3E3A" letter-spacing="1.5">TENDERS</text>`;
+  svg.innerHTML=paths;
+  document.getElementById("leg-sec").innerHTML=entries.map(([nm,cnt],i)=>`<div class="leg-it"><div class="leg-dot" style="background:${cols[i]}"></div>${nm} (${cnt})</div>`).join("");
+}
+
+function drawSourceChart(){
+  const svg=document.getElementById("ch-src");
+  const W=340,H=150,pad=36,bp=28;
+  const counts=SRCS.map(s=>({name:s.name,count:T.filter(t=>t.source===s.id).length,color:s.color}));
+  const max=Math.max(...counts.map(c=>c.count))||1;
+  const bw=22;const gap=(W-pad*2)/counts.length;
+  let bars="";
+  counts.forEach((c,i)=>{
+    const bh=((c.count/max)*(H-bp-18));
+    const x=pad+i*gap+(gap-bw)/2;const y=H-bp-bh;
+    if(c.count>0){
+      bars+=`<rect x="${x}" y="${y}" width="${bw}" height="${bh}" rx="3" fill="${c.color}" opacity=".82"/>`;
+      bars+=`<text x="${x+bw/2}" y="${y-5}" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="13" fill="${c.color}">${c.count}</text>`;
+    }
+    bars+=`<text x="${x+bw/2}" y="${H-bp+13}" text-anchor="middle" font-family="Poppins,sans-serif" font-size="7" fill="#3E3E3A" letter-spacing=".5">${c.name}</text>`;
+  });
+  svg.innerHTML=bars;
+}
+
 function renderTenders(){
   const q=(document.getElementById("fi-q").value||"").toLowerCase();
   const src=document.getElementById("fi-src").value;
   const sec=document.getElementById("fi-sec").value;
   const cty=document.getElementById("fi-cty").value;
   const srt=document.getElementById("fi-sort").value;
-  let list=[...TENDERS].filter(t=>{
+  let list=[...T].filter(t=>{
     const mq=!q||t.title.toLowerCase().includes(q)||t.country.toLowerCase().includes(q)||t.tags.some(g=>g.toLowerCase().includes(q));
     return mq&&(src==="all"||t.source===src)&&(sec==="all"||t.sector===sec)&&(cty==="all"||t.country===cty);
-  }).sort((a,b)=>srt==="relevance"?b.relevance-a.relevance:srt==="deadline"?new Date(a.deadline)-new Date(b.deadline):new Date(b.published)-new Date(a.published));
-  document.getElementById("fi-count").textContent=list.length+" of "+TENDERS.length+" results";
-  const el=document.getElementById("tender-list");
-  if(!list.length){el.innerHTML='<div class="empty">No tenders match the current filters.</div>';return;}
+  }).sort((a,b)=>srt==="relevance"?b.rel-a.rel:srt==="deadline"?new Date(a.deadline)-new Date(b.deadline):new Date(b.pub)-new Date(a.pub));
+  document.getElementById("fi-ct").textContent=list.length+" of "+T.length+" results";
+  const el=document.getElementById("tlist");
+  if(!list.length){el.innerHTML='<div class="empty-st">No tenders match the current filters.</div>';return;}
   el.innerHTML=list.map(t=>{
-    const s=srcInfo(t.source);const days=daysUntil(t.deadline);const sv=saved.has(t.id);const pp=pipeline[t.id];
-    const dClr=days<=7?"var(--red)":days<=14?"var(--gold)":"var(--muted)";
-    const stChip=t.status==="closing_soon"||days<=7?'<span class="chip s-closing">Closing Soon</span>':t.status==="open"?'<span class="chip s-open">Open</span>':'<span class="chip s-closed">Closed</span>';
-    return`<div class="tcard${sv?" saved":""}" id="card-${t.id}">
-      <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
-        <div class="rel-ring" style="color:${relColor(t.relevance)}">${t.relevance}<small>match</small></div>
-      </div>
+    const s=si(t.source);const d=du(t.deadline);const sv=saved.has(t.id);const pp=pipe[t.id];
+    const dc=d<=7?"var(--red)":d<=14?"var(--amber)":"var(--muted)";
+    const sc=(t.st==="closing_soon"||d<=7)?'<span class="chip cl">Closing Soon</span>':t.st==="open"?'<span class="chip op">Open</span>':'<span class="chip">Closed</span>';
+    return`<div class="tc${sv?" saved":""}">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:3px"><div class="rring" style="color:${rc(t.rel)}">${t.rel}<small>match</small></div></div>
       <div>
-        <div class="chips">
-          <span class="chip" style="background:${s.color}22;color:${s.color}">${s.icon} ${s.name}</span>
-          <span class="chip">${t.country}</span><span class="chip">${t.sector}</span>
-          <span class="chip">${t.type}</span>${stChip}
-          ${pp?`<span class="chip" style="background:${PIPE_COLORS[pp]}22;color:${PIPE_COLORS[pp]}">● ${PIPE_LABELS[pp]}</span>`:""}
-        </div>
-        <div class="tender-title">${t.title}</div>
-        <div class="tender-desc">${t.desc}</div>
-        <div class="tender-tags">${t.tags.map(g=>`<span class="tag">#${g}</span>`).join("")}</div>
+        <div class="chips"><span class="chip" style="background:${s.color}1E;color:${s.color}">${s.icon} ${s.name}</span><span class="chip">${t.country}</span><span class="chip">${t.sector}</span><span class="chip">${t.type}</span>${sc}${pp?`<span class="chip" style="background:${PC[pp]}1E;color:${PC[pp]}">● ${PL[pp]}</span>`:""}</div>
+        <div class="ttl">${t.title}</div>
+        <div class="tdesc">${t.desc}</div>
+        <div class="ttags">${t.tags.map(g=>`<span class="ttag">#${g}</span>`).join("")}</div>
       </div>
       <div class="tmeta">
-        <div><div class="tbudget">${t.budget}</div><div class="tbudget-lbl">estimated value</div></div>
-        <div><div class="days-val" style="color:${dClr}">${days>0?days+"d left":"Expired"}</div><div class="days-lbl">${t.deadline}</div></div>
-        <div class="tactions">
-          <button class="btn-save${sv?" on":""}" onclick="toggleSave('${t.id}')">${sv?"★ Saved":"☆ Save"}</button>
-          <button class="btn-pipeline" onclick="addToPipeline('${t.id}')">+ Pipeline</button>
-          <a class="btn-view" href="${t.url}" target="_blank" rel="noopener">View ↗</a>
+        <div><div class="tbudget">${t.budget}</div><div class="tbdgl">estimated value</div></div>
+        <div><div class="tdays" style="color:${dc}">${d>0?d+"d left":"Expired"}</div><div class="tdaysl">${t.deadline}</div></div>
+        <div class="tact">
+          <button class="ab sv${sv?" on":""}" onclick="toggleSave('${t.id}')">${sv?"★ Saved":"☆ Save"}</button>
+          <button class="ab pp" onclick="addPipe('${t.id}')">+ Pipeline</button>
+          <a class="ab vw" href="${t.url}" target="_blank" rel="noopener">View ↗</a>
         </div>
       </div>
     </div>`;
   }).join("");
 }
 
-function toggleSave(id){
-  saved.has(id)?saved.delete(id):saved.add(id);
-  persist();updateStats();renderTenders();
-}
+function toggleSave(id){saved.has(id)?saved.delete(id):saved.add(id);persist();updateStats();renderTenders();}
 
-// ═══════════════════════════════════════════════════════════════════
-// PIPELINE
-// ═══════════════════════════════════════════════════════════════════
-function addToPipeline(id){
-  if(!pipeline[id]){pipeline[id]="reviewing";persist();updateStats();renderPipeline();renderTenders();showToast("Added to BD Pipeline → Reviewing");}
-  else{showToast("Already in pipeline — update status in BD Pipeline tab");}
+function addPipe(id){
+  if(!pipe[id]){pipe[id]="reviewing";persist();updateStats();renderPipeline();renderTenders();renderDashboard();toast("Added to Pipeline → Reviewing");}
+  else toast("Already in pipeline — update status in BD Pipeline tab");
 }
-function movePipeline(id,stage){
-  pipeline[id]=stage;persist();updateStats();renderPipeline();renderTenders();showToast("Moved to: "+PIPE_LABELS[stage]);
-}
-function removeFromPipeline(id){
-  delete pipeline[id];persist();updateStats();renderPipeline();renderTenders();showToast("Removed from pipeline");
-}
+function movePipe(id,stage){pipe[id]=stage;persist();updateStats();renderPipeline();renderTenders();renderDashboard();toast("Moved to: "+PL[stage]);}
+function removePipe(id){delete pipe[id];persist();updateStats();renderPipeline();renderTenders();renderDashboard();toast("Removed from pipeline");}
+
 function renderPipeline(){
-  const board=document.getElementById("pipeline-board");
-  board.innerHTML=PIPE_STAGES.map(stage=>{
-    const items=Object.entries(pipeline).filter(([,s])=>s===stage);
-    return`<div class="pipe-col">
-      <div class="pipe-col-header" style="color:${PIPE_COLORS[stage]}">${PIPE_LABELS[stage]}<span>${items.length}</span></div>
-      ${items.length===0?'<div class="pipe-empty">Drop tenders here</div>':items.map(([id])=>{
-        const t=TENDERS.find(x=>x.id===id);if(!t)return"";
-        const days=daysUntil(t.deadline);
-        return`<div class="pipe-item">
-          <div class="pipe-item-title">${t.title}</div>
-          <div class="pipe-item-meta" style="margin-bottom:8px">${t.country} · ${t.budget} · ${days}d left</div>
-          <div style="display:flex;gap:5px;flex-wrap:wrap">
-            ${PIPE_STAGES.filter(s=>s!==stage).map(s=>`<button class="btn-sm" style="font-size:8px;padding:3px 7px" onclick="movePipeline('${id}','${s}')">${PIPE_LABELS[s]}</button>`).join("")}
-            <button class="btn-sm danger" style="font-size:8px;padding:3px 7px" onclick="removeFromPipeline('${id}')">Remove</button>
+  document.getElementById("pboard").innerHTML=PS.map(stage=>{
+    const items=Object.entries(pipe).filter(([,s])=>s===stage);
+    return`<div class="pcol">
+      <div class="pcol-hd" style="color:${PC[stage]}">${PL[stage]}<span>${items.length}</span></div>
+      ${items.length?items.map(([id])=>{
+        const t=T.find(x=>x.id===id);if(!t)return"";
+        return`<div class="pitem">
+          <div class="pitem-ttl">${t.title.length>58?t.title.slice(0,55)+"…":t.title}</div>
+          <div class="pitem-meta">${t.country} · ${t.budget} · ${du(t.deadline)}d left · ${t.type}</div>
+          <div class="pitem-acts">
+            ${PS.filter(s=>s!==stage).map(s=>`<button onclick="movePipe('${id}','${s}')">${PL[s]}</button>`).join("")}
+            <button class="rm" onclick="removePipe('${id}')">✕</button>
           </div>
-        </div>`;
-      }).join("")}
+        </div>`;}).join(""):'<div class="pempty">No tenders yet</div>'}
     </div>`;
   }).join("");
 }
 
-// ═══════════════════════════════════════════════════════════════════
-// AI PROSPECTOR
-// ═══════════════════════════════════════════════════════════════════
-function saveApiKey(){
-  const k=document.getElementById("ai-key")?.value||"";
-  if(k){localStorage.setItem("skyrise_api_key",k);updateKeyStatus();}
-  const sk=document.getElementById("settings-key");
-  if(sk&&sk!==document.getElementById("ai-key"))sk.value=k;
-}
-function clearApiKey(){
-  localStorage.removeItem("skyrise_api_key");
-  document.getElementById("ai-key").value="";
-  const sk=document.getElementById("settings-key");if(sk)sk.value="";
-  updateKeyStatus();showToast("API key cleared");
+function onKeyIn(){
+  const ak=document.getElementById("ai-key"),sk=document.getElementById("sk-key");
+  const v=(document.activeElement===ak?ak:sk)?.value||"";
+  if(v)localStorage.setItem("sr_key",v);
+  if(ak&&sk){if(document.activeElement===ak)sk.value=ak.value;else if(document.activeElement===sk)ak.value=sk.value;}
+  updateKeyStatus();
 }
 function updateKeyStatus(){
-  const k=localStorage.getItem("skyrise_api_key")||"";
-  const status=k?"✓ Key saved — AI Prospector active":"Not set — enter key to activate";
-  const color=k?"var(--green)":"var(--dim)";
-  const el1=document.getElementById("ai-key-status");if(el1){el1.textContent=status;el1.style.color=color;}
-  const el2=document.getElementById("settings-key-status");if(el2){el2.textContent=status;el2.style.color=color;}
+  const k=localStorage.getItem("sr_key")||"";
+  const msg=k?"✓ Key saved — AI Prospector active":"Not set — enter your Anthropic API key to activate";
+  const col=k?"var(--green)":"var(--dim)";
+  ["ai-kst","sk-st"].forEach(id=>{const e=document.getElementById(id);if(e){e.textContent=msg;e.style.color=col;}});
 }
+function clearKey(){localStorage.removeItem("sr_key");["ai-key","sk-key"].forEach(id=>{const e=document.getElementById(id);if(e)e.value="";});updateKeyStatus();toast("API key cleared");}
 
 async function runAI(){
-  const k=localStorage.getItem("skyrise_api_key");
+  const k=localStorage.getItem("sr_key");
   const q=(document.getElementById("ai-q").value||"").trim();
-  if(!q){showToast("Please enter a query first");return;}
-  if(!k){showToast("Add your Anthropic API key in Settings first");return;}
-  const btn=document.getElementById("ai-btn");
-  const res=document.getElementById("ai-results");
+  if(!q){toast("Please enter a query");return;}
+  if(!k){toast("Add your Anthropic API key in Settings first");return;}
+  const btn=document.getElementById("ai-btn"),res=document.getElementById("ai-res");
   btn.disabled=true;btn.textContent="Analysing…";
-  res.innerHTML='<div style="font-family:var(--serif);font-size:16px;font-style:italic;color:var(--dim);padding:40px 0;text-align:center">Running intelligence search…</div>';
+  res.innerHTML='<div style="font-family:var(--serif);font-size:18px;font-style:italic;color:var(--dim);padding:48px 0;text-align:center">Running intelligence search…</div>';
   try{
     const r=await fetch("https://api.anthropic.com/v1/messages",{
       method:"POST",
       headers:{"Content-Type":"application/json","x-api-key":k,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-calls":"true"},
-      body:JSON.stringify({
-        model:"claude-haiku-4-5-20251001",max_tokens:1200,
-        system:`You are a senior BD analyst for Skyrise Capital PM (Dubai) — specialised in AMO, PMO, supervision, advisory for infrastructure, port, transport, water in Africa & Middle East. MDB procurement: World Bank, AfDB, AFD, UNDP, EU.
-Respond ONLY with valid JSON (no markdown):
+      body:JSON.stringify({model:"claude-haiku-4-5-20251001",max_tokens:1300,
+        system:`You are a senior BD analyst for Skyrise Capital PM (Dubai) — AMO, PMO, supervision, advisory for infrastructure, port, transport, water in Africa & Middle East. MDB procurement: WB, AfDB, AFD, UNDP, EU. Respond ONLY with valid JSON, no markdown:
 {"summary":"2-3 sentence assessment","leads":[{"title":"...","source":"worldbank|afdb|afd|undp|dgmarket|devex","country":"...","sector":"...","type":"QCBS|QBS|IC|CQS","relevance":0-100,"rationale":"one line","url":"https://..."}],"partnerSuggestions":["..."],"watchWords":["..."]}`,
-        messages:[{role:"user",content:q}]
-      })
+        messages:[{role:"user",content:q}]})
     });
     const d=await r.json();
     const txt=d.content?.find(b=>b.type==="text")?.text||"";
-    renderAIResults(JSON.parse(txt.replace(/```json|```/g,"").trim()));
-  }catch(e){
-    res.innerHTML='<div class="info-box"><div class="info-box-lbl" style="color:var(--red)">Error</div>Could not parse response. Check your API key in Settings and try again.</div>';
-  }
+    renderAIRes(JSON.parse(txt.replace(/```json|```/g,"").trim()));
+  }catch(e){res.innerHTML='<div class="ibox"><div class="ibox-l" style="color:var(--red)">Error</div>Could not parse response. Check your API key in Settings and try again.</div>';}
   btn.disabled=false;btn.textContent="→ Run Intelligence Search";
 }
 
-function renderAIResults(r){
-  const res=document.getElementById("ai-results");
-  let h=`<div class="ai-card fade-up"><div class="ai-card-label">Assessment</div><div class="ai-summary">${r.summary||""}</div></div>`;
+function renderAIRes(r){
+  let h=`<div class="aicard fade-up"><div class="aicard-l">Assessment</div><div class="aisy">${r.summary||""}</div></div>`;
   if(r.leads?.length){
-    h+=`<div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin:16px 0 10px">Identified Leads</div>`;
-    h+=r.leads.map(l=>{const s=srcInfo(l.source);return`<div class="lead-item fade-up">
-      <div>
-        <div class="chips" style="margin-bottom:7px">
-          <span class="chip" style="background:${s.color}22;color:${s.color}">${s.icon} ${s.name}</span>
-          <span class="chip">${l.country}</span><span class="chip">${l.sector}</span>
-        </div>
-        <div style="font-family:var(--serif);font-size:15px;color:var(--white);margin-bottom:4px">${l.title}</div>
-        <div style="font-size:11px;color:var(--dim)">${l.rationale}</div>
-      </div>
-      <div style="text-align:right">
-        <div style="font-family:var(--serif);font-size:24px;color:${relColor(l.relevance)}">${l.relevance}</div>
-        <div style="font-size:9px;color:var(--dim)">match</div>
-      </div>
-    </div>`;}).join("");}
-  if(r.partnerSuggestions?.length){
-    h+=`<div class="ai-card fade-up" style="margin-top:12px;border-color:rgba(59,111,212,.25)">
-      <div class="ai-card-label" style="color:var(--blue)">Partner Suggestions</div>
-      ${r.partnerSuggestions.map(p=>`<div style="font-size:12px;color:var(--muted);margin-bottom:5px">→ ${p}</div>`).join("")}
-    </div>`;}
-  if(r.watchWords?.length){
-    h+=`<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:12px">${r.watchWords.map(w=>`<span class="tag">#${w}</span>`).join("")}</div>`;}
-  document.getElementById("ai-results").innerHTML=h;
+    h+=`<div style="font-size:8.5px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin:14px 0 9px">Identified Leads</div>`;
+    h+=r.leads.map(l=>{const s=si(l.source);return`<div class="alead fade-up"><div><div class="chips" style="margin-bottom:6px"><span class="chip" style="background:${s.color}1E;color:${s.color}">${s.icon} ${s.name}</span><span class="chip">${l.country}</span><span class="chip">${l.sector}</span></div><div style="font-family:var(--serif);font-size:15px;color:var(--white);margin-bottom:3px">${l.title}</div><div style="font-size:10.5px;color:var(--dim)">${l.rationale}</div></div><div style="text-align:right"><div style="font-family:var(--serif);font-size:22px;color:${rc(l.relevance)}">${l.relevance}</div><div style="font-size:8.5px;color:var(--dim)">match</div></div></div>`;}).join("");}
+  if(r.partnerSuggestions?.length)h+=`<div class="aicard fade-up" style="border-color:rgba(74,127,224,.2);margin-top:10px"><div class="aicard-l" style="color:var(--blue)">Partner Suggestions</div>${r.partnerSuggestions.map(p=>`<div style="font-size:11.5px;color:var(--muted);margin-bottom:5px">→ ${p}</div>`).join("")}</div>`;
+  if(r.watchWords?.length)h+=`<div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:10px">${r.watchWords.map(w=>`<span class="ttag">#${w}</span>`).join("")}</div>`;
+  document.getElementById("ai-res").innerHTML=h;
 }
 
-// ═══════════════════════════════════════════════════════════════════
-// SOURCES
-// ═══════════════════════════════════════════════════════════════════
 function renderSources(){
-  document.getElementById("sources-grid").innerHTML=SRCS.map(s=>`
-    <a class="src-card" href="${s.site}" target="_blank" rel="noopener">
-      <div class="src-top"><div class="src-icon">${s.icon}</div>
-        <div><div class="src-name" style="color:${s.color}">${s.name}</div><div class="src-domain">${s.site.replace("https://","")}</div></div>
-      </div>
-      <div class="src-count">${TENDERS.filter(t=>t.source===s.id).length} active tenders tracked</div>
-      <div class="src-link">Open portal ↗</div>
-    </a>`).join("");
+  document.getElementById("src-grid").innerHTML=SRCS.map(s=>`<a class="srccard" href="${s.site}" target="_blank" rel="noopener"><div class="src-top"><div class="src-ico">${s.icon}</div><div><div class="src-nm" style="color:${s.color}">${s.name}</div><div class="src-dom">${s.site.replace("https://","")}</div></div></div><div style="font-size:10.5px;color:var(--muted);margin-bottom:9px">${T.filter(t=>t.source===s.id).length} active tenders tracked</div><div class="src-lnk">Open portal ↗</div></a>`).join("");
 }
 
-// ═══════════════════════════════════════════════════════════════════
-// TABS
-// ═══════════════════════════════════════════════════════════════════
-function switchTab(id,btn){
-  document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
-  btn.classList.add("active");
+function goTab(id){
+  document.querySelectorAll(".tbtn").forEach(b=>b.classList.toggle("active",b.dataset.tab===id));
   document.querySelectorAll("[id^='tab-']").forEach(el=>{el.classList.add("hidden");el.classList.remove("fade-up")});
   const t=document.getElementById("tab-"+id);
-  t.classList.remove("hidden");
-  requestAnimationFrame(()=>t.classList.add("fade-up"));
+  t.classList.remove("hidden");requestAnimationFrame(()=>t.classList.add("fade-up"));
 }
 
-// ═══════════════════════════════════════════════════════════════════
-// MISC
-// ═══════════════════════════════════════════════════════════════════
 function handleRefresh(){
-  document.getElementById("live-time").textContent="Fetching…";
-  setTimeout(()=>{document.getElementById("live-time").textContent=new Date().toLocaleTimeString();showToast("Feed refreshed");},1200);
+  document.getElementById("live-t").textContent="Fetching…";
+  setTimeout(()=>{document.getElementById("live-t").textContent=new Date().toLocaleTimeString();toast("Feed refreshed");},1400);
 }
-function setFreq(f,btn){document.querySelectorAll(".freq-btn").forEach(b=>b.classList.remove("on"));btn.classList.add("on");}
-function saveAlerts(){
-  const btn=document.getElementById("al-btn");
-  btn.textContent="✓ Alert Configuration Saved";btn.style.background="var(--green)";
-  setTimeout(()=>{btn.textContent="Activate Email Alerts";btn.style.background="";},3000);
-}
-function copyRSS(){
-  const url="https://www.dgmarket.com/tenders/rssfeed.do?noticeType=gpr&country=DJ,ET,KE,TZ,SN,CI,CM,MA,DZ,SA,AE,UG,RW&sector=TRN,WTR,ENE,URB,ENV&donor=WB,AFDB,AFD,UNDP,EU&language=en,fr&maxAge=30";
-  navigator.clipboard.writeText(url).then(()=>showToast("RSS URL copied to clipboard")).catch(()=>showToast("Copy: select text above manually"));
-}
-function exportPipeline(){
-  const data=JSON.stringify({pipeline,saved:[...saved],exported:new Date().toISOString()},null,2);
-  const a=document.createElement("a");a.href="data:application/json,"+encodeURIComponent(data);
-  a.download="skyrise-pipeline-"+new Date().toISOString().slice(0,10)+".json";a.click();
-}
-function clearPipeline(){
-  if(confirm("Clear all pipeline data? This cannot be undone.")){pipeline={};persist();updateStats();renderPipeline();renderTenders();showToast("Pipeline cleared");}}
+function setFreq(btn){document.querySelectorAll(".freqbtn").forEach(b=>b.classList.remove("on"));btn.classList.add("on");}
+function saveAlerts(){const b=document.getElementById("al-btn");b.textContent="✓ Configuration Saved";b.style.background="var(--green)";setTimeout(()=>{b.textContent="Activate Email Alerts";b.style.background="";},3000);}
+function copyRSS(){navigator.clipboard.writeText("https://www.dgmarket.com/tenders/rssfeed.do?noticeType=gpr&country=DJ,ET,KE,TZ,SN,CI,CM,MA,DZ,SA,AE,UG,RW&sector=TRN,WTR,ENE,URB,ENV&donor=WB,AFDB,AFD,UNDP,EU&language=en,fr&maxAge=30").then(()=>toast("RSS URL copied to clipboard")).catch(()=>toast("Select and copy the URL manually"));}
+function exportData(){const a=document.createElement("a");a.href="data:application/json,"+encodeURIComponent(JSON.stringify({pipeline:pipe,saved:[...saved],exported:new Date().toISOString()},null,2));a.download="skyrise-pipeline-"+new Date().toISOString().slice(0,10)+".json";a.click();}
+function clearAll(){if(confirm("Clear all pipeline and saved data? Cannot be undone.")){pipe={};saved=new Set();persist();updateStats();renderPipeline();renderTenders();renderDashboard();toast("All data cleared");}}
 
-// ═══════════════════════════════════════════════════════════════════
-// INIT
-// ═══════════════════════════════════════════════════════════════════
 document.addEventListener("DOMContentLoaded",()=>{
-  document.getElementById("live-time").textContent=new Date().toLocaleTimeString();
-  // country filter
+  document.getElementById("live-t").textContent=new Date().toLocaleTimeString();
   const sel=document.getElementById("fi-cty");
-  [...new Set(TENDERS.map(t=>t.country))].sort().forEach(c=>{const o=document.createElement("option");o.value=c;o.textContent=c;sel.appendChild(o);});
-  // restore api key
-  const k=localStorage.getItem("skyrise_api_key")||"";
-  if(k){document.getElementById("ai-key").value=k;document.getElementById("settings-key").value=k;}
+  [...new Set(T.map(t=>t.country))].sort().forEach(c=>{const o=document.createElement("option");o.value=c;o.textContent=c;sel.appendChild(o);});
+  const k=localStorage.getItem("sr_key")||"";
+  if(k){["ai-key","sk-key"].forEach(id=>{const e=document.getElementById(id);if(e)e.value=k;});}
   updateKeyStatus();
-  updateStats();renderTenders();renderSources();renderPipeline();
+  updateStats();renderTenders();renderSources();renderPipeline();renderDashboard();
 });
 </script>
 </body>
