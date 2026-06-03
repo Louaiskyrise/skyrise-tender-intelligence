@@ -3,266 +3,311 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Skyrise · Tender Intelligence</title>
+<title>Skyrise · BD Command Centre</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><rect width='36' height='36' rx='6' fill='url(%23g)'/><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23C9A96E'/><stop offset='1' stop-color='%233B6FD4'/></linearGradient></defs><text x='18' y='26' font-family='Georgia' font-size='22' font-weight='600' fill='%23000' text-anchor='middle'>S</text></svg>"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Poppins:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 :root{
-  --ink:#0D0D11;--ink2:#121219;--ink3:#181820;--ink4:#1F1F2A;--ink5:#262633;
-  --rule:rgba(255,255,255,.065);--rule2:rgba(255,255,255,.035);
-  --gold:#C9A96E;--gold2:#E8C98A;--gold3:rgba(201,169,110,.14);
-  --green:#00C98A;--green3:rgba(0,201,138,.12);
-  --blue:#4A7FE0;--blue3:rgba(74,127,224,.12);
-  --red:#D95F4B;--red3:rgba(217,95,75,.12);
-  --amber:#E8A020;--amber3:rgba(232,160,32,.12);
-  --white:#F5F4F0;--muted:#A8A89E;--dim:#6E6E66;
-  --serif:'Cormorant Garamond',Georgia,serif;--sans:'Poppins',system-ui,sans-serif;
+  --bg:#08080C;--s1:#0E0E14;--s2:#13131B;--s3:#18182200;--s4:#1E1E28;--s5:#252532;
+  --b1:rgba(255,255,255,.06);--b2:rgba(255,255,255,.03);
+  --gold:#C9A96E;--gold2:#E8C98A;--golda:rgba(201,169,110,.15);
+  --green:#00D68F;--greena:rgba(0,214,143,.12);
+  --red:#FF4D4D;--reda:rgba(255,77,77,.12);
+  --amber:#FFB020;--ambera:rgba(255,176,32,.12);
+  --blue:#4D8EFF;--bluea:rgba(77,142,255,.12);
+  --purple:#9B6DFF;--purplea:rgba(155,109,255,.12);
+  --w1:#FFFFFF;--w2:#E8E8E0;--w3:#B8B8B0;--w4:#787870;--w5:#484840;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Inter',system-ui,sans-serif;
+  --r4:4px;--r6:6px;--r8:8px;--r12:12px;
 }
-body{background:var(--ink);color:var(--white);font-family:var(--sans);font-weight:300;overflow-x:hidden;min-height:100vh}
-body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(255,255,255,.014) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.014) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0}
-::-webkit-scrollbar{width:3px;height:3px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--ink5);border-radius:2px}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
-@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-.fade-up{animation:fadeUp .32s ease forwards}
+body{background:var(--bg);color:var(--w2);font-family:var(--sans);font-weight:400;overflow-x:hidden;min-height:100vh;font-size:13px;line-height:1.5}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 40% at 50% 0%,rgba(201,169,110,.04) 0%,transparent 60%);pointer-events:none;z-index:0}
+::-webkit-scrollbar{width:3px;height:3px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--s5);border-radius:2px}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.5}}
+.fu{animation:fadeUp .28s ease forwards}
 .hidden{display:none!important}
 
-/* NAV */
-nav{position:sticky;top:0;display:flex;align-items:center;justify-content:space-between;padding:0 52px;height:66px;background:rgba(13,13,17,.96);backdrop-filter:blur(28px);border-bottom:1px solid var(--rule);z-index:900}
-.nav-brand{display:flex;align-items:center;gap:13px;text-decoration:none;user-select:none}
-.nav-logo{width:34px;height:34px;background:linear-gradient(135deg,var(--gold),var(--blue));border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:600;font-size:19px;color:#000;flex-shrink:0}
-.nav-name{font-family:var(--serif);font-size:19px;font-weight:400;letter-spacing:.3px}
-.nav-name em{color:var(--gold);font-style:italic}
-.nav-tagline{font-size:8.5px;letter-spacing:2.5px;text-transform:uppercase;color:var(--dim);margin-top:1px}
-.nav-right{display:flex;align-items:center;gap:14px}
-.live-pill{display:flex;align-items:center;gap:7px;font-size:9.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--green)}
-.live-dot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;flex-shrink:0}
-.nbtn{font-family:var(--sans);font-size:9.5px;letter-spacing:1px;text-transform:uppercase;background:transparent;border:1px solid var(--rule);color:var(--muted);padding:6px 13px;border-radius:4px;cursor:pointer;transition:all .2s}
+/* ── TOP NAV ── */
+nav{position:sticky;top:0;z-index:100;background:rgba(8,8,12,.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--b1);display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:58px}
+.nav-left{display:flex;align-items:center;gap:16px}
+.nav-logo{width:30px;height:30px;background:linear-gradient(135deg,var(--gold),var(--blue));border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:600;font-size:16px;color:#000;flex-shrink:0}
+.nav-title{font-family:var(--serif);font-size:17px;font-weight:500;color:var(--w1);letter-spacing:.2px}
+.nav-title em{color:var(--gold);font-style:italic}
+.nav-sub{font-size:10px;color:var(--w4);letter-spacing:1.5px;text-transform:uppercase;margin-top:1px}
+.nav-right{display:flex;align-items:center;gap:12px}
+.live-badge{display:flex;align-items:center;gap:6px;background:var(--greena);border:1px solid rgba(0,214,143,.2);border-radius:20px;padding:4px 10px;font-size:10px;color:var(--green);letter-spacing:1px;text-transform:uppercase}
+.live-dot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+.nbtn{font-family:var(--sans);font-size:11px;font-weight:500;background:transparent;border:1px solid var(--b1);color:var(--w4);padding:6px 12px;border-radius:var(--r4);cursor:pointer;transition:all .18s;letter-spacing:.3px}
 .nbtn:hover{border-color:var(--gold);color:var(--gold)}
 
-/* STATS */
-.sbar{display:flex;background:var(--ink2);border-bottom:1px solid var(--rule);overflow-x:auto;z-index:1;position:relative}
-.sbi{flex:1;min-width:120px;padding:13px 26px;border-right:1px solid var(--rule)}
-.sbi:last-child{border-right:none}
-.sbi-v{font-family:var(--serif);font-size:28px;font-weight:400;line-height:1;margin-bottom:3px}
-.sbi-l{font-size:8.5px;letter-spacing:2px;text-transform:uppercase;color:var(--dim)}
-
-/* TABS */
-.tabs{display:flex;padding:0 52px;background:var(--ink2);border-bottom:1px solid var(--rule);z-index:1;position:relative;overflow-x:auto}
+/* ── TABS ── */
+.tabs{display:flex;background:var(--s1);border-bottom:1px solid var(--b1);padding:0 40px;overflow-x:auto;z-index:1;position:relative}
 .tabs::-webkit-scrollbar{height:0}
-.tbtn{font-family:var(--sans);font-size:9.5px;letter-spacing:2px;text-transform:uppercase;background:none;border:none;border-bottom:2px solid transparent;color:var(--dim);padding:14px 16px;cursor:pointer;transition:all .2s;white-space:nowrap}
-.tbtn:hover{color:var(--muted)}
-.tbtn.active{color:var(--white);border-bottom-color:var(--gold)}
+.tbtn{font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:.5px;text-transform:uppercase;background:none;border:none;border-bottom:2px solid transparent;color:var(--w4);padding:13px 16px;cursor:pointer;transition:all .18s;white-space:nowrap}
+.tbtn:hover{color:var(--w3)}
+.tbtn.active{color:var(--w1);border-bottom-color:var(--gold)}
+.tbtn .badge{background:var(--red);color:#fff;font-size:9px;padding:1px 5px;border-radius:8px;margin-left:5px;vertical-align:middle}
 
-/* MAIN */
-.main{padding:36px 52px;position:relative;z-index:1;min-height:calc(100vh - 140px)}
-.sh{font-family:var(--serif);font-size:28px;font-weight:400;color:var(--white);margin-bottom:4px}
-.sh em{color:var(--gold);font-style:italic}
-.ss{font-size:8.5px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:28px}
+/* ── LAYOUT ── */
+.main{padding:28px 40px;position:relative;z-index:1}
+.ph{font-family:var(--serif);font-size:26px;font-weight:500;color:var(--w1);margin-bottom:3px;letter-spacing:.2px}
+.ph em{color:var(--gold);font-style:italic}
+.ps{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--w4);margin-bottom:24px}
 
-/* DASHBOARD */
-.dash-g3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:14px}
-.dash-g2{display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-bottom:14px}
-.dash-g2b{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.dcard{background:var(--ink2);border:1px solid var(--rule);border-radius:8px;padding:22px 24px}
-.dcard-l{font-size:8.5px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:10px}
-.dcard-v{font-family:var(--serif);font-size:40px;font-weight:400;line-height:1;margin-bottom:3px}
-.dcard-s{font-size:10px;color:var(--muted)}
-.trend{display:inline-flex;align-items:center;gap:5px;font-size:9.5px;margin-top:8px;padding:3px 9px;border-radius:10px}
-.tu{background:var(--green3);color:var(--green)}
-.tn{background:var(--amber3);color:var(--amber)}
-.dl-list{display:flex;flex-direction:column;gap:7px}
-.dl-item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 13px;background:var(--ink3);border-radius:6px;transition:background .2s;cursor:pointer}
-.dl-item:hover{background:var(--ink4)}
-.dl-ttl{font-size:11px;color:var(--white);font-family:var(--serif);line-height:1.3;flex:1}
-.dl-badge{font-size:8.5px;padding:2px 8px;border-radius:10px;white-space:nowrap;flex-shrink:0}
-.pipe-mini{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.pm-col{text-align:center;padding:14px 8px;background:var(--ink3);border-radius:6px}
-.pm-n{font-family:var(--serif);font-size:28px;line-height:1;margin-bottom:3px}
-.pm-l{font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim)}
-.chart-leg{display:flex;flex-wrap:wrap;gap:7px 13px;margin-top:13px}
-.leg-it{display:flex;align-items:center;gap:6px;font-size:9.5px;color:var(--muted)}
-.leg-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+/* ── COMMAND CENTRE LAYOUT ── */
+.cc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}
+.cc-wide{display:grid;grid-template-columns:3fr 2fr;gap:12px;margin-bottom:14px}
+.cc-wide2{display:grid;grid-template-columns:2fr 1fr 1fr;gap:12px}
 
-/* FILTERS */
-.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:22px;padding:14px 16px;background:var(--ink2);border:1px solid var(--rule);border-radius:8px}
-.fi{font-family:var(--sans);font-size:10.5px;background:var(--ink3);border:1px solid var(--rule);color:var(--white);padding:8px 11px;border-radius:4px;outline:none;transition:border-color .2s}
+/* ── KPI CARD ── */
+.kcard{background:var(--s2);border:1px solid var(--b1);border-radius:var(--r8);padding:18px 20px;position:relative;overflow:hidden;transition:border-color .2s}
+.kcard:hover{border-color:rgba(201,169,110,.2)}
+.kcard::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent,var(--gold))}
+.kcard-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--w4);margin-bottom:8px;font-weight:500}
+.kcard-val{font-family:var(--serif);font-size:36px;font-weight:500;line-height:1;color:var(--accent,var(--gold));margin-bottom:4px}
+.kcard-sub{font-size:11px;color:var(--w3);line-height:1.4}
+.kcard-trend{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:500;margin-top:8px;padding:3px 8px;border-radius:10px}
+.kcard-trend.up{background:var(--greena);color:var(--green)}
+.kcard-trend.warn{background:var(--ambera);color:var(--amber)}
+.kcard-trend.crit{background:var(--reda);color:var(--red)}
+
+/* ── ALERT PANEL ── */
+.alert-panel{background:var(--s2);border:1px solid var(--b1);border-radius:var(--r8);padding:18px 20px}
+.panel-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.panel-title{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--w3);font-weight:600}
+.panel-count{font-size:10px;color:var(--w4)}
+.alert-item{display:flex;align-items:center;gap:10px;padding:9px 12px;background:var(--s3);border-radius:var(--r6);margin-bottom:6px;border:1px solid var(--b2);cursor:pointer;transition:background .15s}
+.alert-item:hover{background:var(--s4)}
+.alert-item:last-child{margin-bottom:0}
+.alert-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.alert-text{flex:1;font-size:11px;color:var(--w2);line-height:1.3}
+.alert-text strong{color:var(--w1);font-weight:600}
+.alert-tag{font-size:9px;font-weight:600;padding:2px 7px;border-radius:3px;white-space:nowrap;flex-shrink:0;letter-spacing:.5px;text-transform:uppercase}
+
+/* ── PIPELINE VALUE PANEL ── */
+.pipe-val{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.pv-col{background:var(--s3);border-radius:var(--r6);padding:14px;border:1px solid var(--b2);text-align:center;position:relative}
+.pv-col::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;border-radius:2px 2px 0 0;background:var(--pc,var(--blue))}
+.pv-n{font-family:var(--serif);font-size:22px;font-weight:500;line-height:1;margin-bottom:2px;color:var(--pc,var(--blue))}
+.pv-val{font-size:11px;font-weight:600;color:var(--w2);margin-bottom:2px}
+.pv-lbl{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--w4)}
+
+/* ── DONUT CHART ── */
+.chart-donut-wrap{display:flex;align-items:center;gap:20px}
+.donut-legend{display:flex;flex-direction:column;gap:7px}
+.legend-row{display:flex;align-items:center;gap:8px;font-size:11px}
+.legend-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+.legend-label{color:var(--w3);flex:1}
+.legend-val{font-weight:600;color:var(--w2);font-family:var(--serif);font-size:13px}
+
+/* ── DEADLINE TIMELINE ── */
+.timeline{display:flex;flex-direction:column;gap:6px}
+.tl-item{display:grid;grid-template-columns:36px 1fr auto;gap:10px;align-items:center;padding:8px 12px;background:var(--s3);border-radius:var(--r6);border-left:2px solid var(--tc,var(--blue));cursor:pointer;transition:background .15s}
+.tl-item:hover{background:var(--s4)}
+.tl-days{font-family:var(--serif);font-size:20px;font-weight:500;color:var(--tc,var(--blue));text-align:center;line-height:1}
+.tl-days-lbl{font-size:8px;color:var(--w4);text-align:center;letter-spacing:.5px}
+.tl-title{font-size:11px;color:var(--w1);font-weight:500;margin-bottom:2px;line-height:1.3}
+.tl-meta{font-size:10px;color:var(--w4)}
+.tl-budget{font-family:var(--serif);font-size:13px;font-weight:500;color:var(--gold2);text-align:right;white-space:nowrap}
+.tl-budget-lbl{font-size:9px;color:var(--w4);text-align:right}
+
+/* ── OPPORTUNITY CARDS ── */
+.opp-list{display:flex;flex-direction:column;gap:10px}
+.ocard{background:var(--s2);border:1px solid var(--b1);border-radius:var(--r8);overflow:hidden;transition:border-color .2s,transform .15s}
+.ocard:hover{border-color:rgba(201,169,110,.3);transform:translateY(-1px)}
+.ocard-top{display:grid;grid-template-columns:80px 1fr 200px;gap:0}
+.ocard-score{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px 16px;border-right:1px solid var(--b1);background:var(--s1)}
+.score-ring{width:52px;height:52px;position:relative;display:flex;align-items:center;justify-content:center;margin-bottom:6px}
+.score-ring svg{position:absolute;inset:0;transform:rotate(-90deg)}
+.score-val{font-family:var(--serif);font-size:18px;font-weight:600;line-height:1;position:relative;z-index:1}
+.score-lbl{font-size:8px;letter-spacing:1px;color:var(--w4);text-transform:uppercase;text-align:center}
+.rec-badge{font-size:8px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 7px;border-radius:3px;margin-top:6px;text-align:center}
+.rec-bid{background:var(--greena);color:var(--green);border:1px solid rgba(0,214,143,.2)}
+.rec-watch{background:var(--ambera);color:var(--amber);border:1px solid rgba(255,176,32,.2)}
+.rec-pass{background:rgba(255,255,255,.04);color:var(--w4);border:1px solid var(--b1)}
+.rec-urgent{background:var(--reda);color:var(--red);border:1px solid rgba(255,77,77,.2);animation:blink 1.5s infinite}
+.ocard-body{padding:16px 18px}
+.ocard-chips{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px}
+.ochip{font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:2px 7px;border-radius:3px;font-weight:500}
+.ochip-src{background:var(--bluea);color:var(--blue)}
+.ochip-open{background:var(--greena);color:var(--green)}
+.ochip-closing{background:var(--reda);color:var(--red)}
+.ochip-live{background:var(--greena);color:var(--green);font-weight:700}
+.ochip-def{background:rgba(255,255,255,.07);color:var(--w3)}
+.ocard-title{font-family:var(--serif);font-size:16px;font-weight:600;color:var(--w1);margin-bottom:6px;line-height:1.35}
+.ocard-desc{font-size:11px;color:var(--w3);line-height:1.6;margin-bottom:10px}
+.ocard-criteria{display:flex;gap:14px;flex-wrap:wrap}
+.crit-item{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--w3)}
+.crit-item.yes{color:var(--green)}
+.crit-item.no{color:var(--w5)}
+.ocard-meta{display:flex;flex-direction:column;gap:0;border-left:1px solid var(--b1);padding:16px 18px;justify-content:space-between}
+.meta-row{display:flex;flex-direction:column;align-items:flex-end}
+.meta-val{font-family:var(--serif);font-size:18px;font-weight:500;color:var(--gold2);text-align:right;line-height:1}
+.meta-lbl{font-size:9px;color:var(--w4);text-transform:uppercase;letter-spacing:1px;margin-top:2px;text-align:right}
+.meta-days{font-size:16px;font-weight:700;text-align:right}
+.ocard-actions{display:flex;gap:6px;margin-top:auto}
+.oact{font-family:var(--sans);font-size:9px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;padding:6px 11px;border-radius:var(--r4);cursor:pointer;transition:all .15s;border:1px solid var(--b1);background:transparent;color:var(--w4)}
+.oact:hover{border-color:var(--gold);color:var(--gold)}
+.oact.on{background:var(--greena);border-color:var(--green);color:var(--green)}
+.oact.pipe{background:var(--golda);border-color:rgba(201,169,110,.3);color:var(--gold)}
+.oact.view{background:var(--bluea);border-color:rgba(77,142,255,.3);color:var(--blue);text-decoration:none;display:inline-flex;align-items:center}
+
+/* ── FILTERS ── */
+.filter-bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:20px;padding:12px 16px;background:var(--s2);border:1px solid var(--b1);border-radius:var(--r8)}
+.fi{font-family:var(--sans);font-size:11px;background:var(--s3);border:1px solid var(--b1);color:var(--w2);padding:7px 11px;border-radius:var(--r4);outline:none;transition:border-color .15s;font-weight:400}
 .fi:focus{border-color:var(--gold)}
-.fi::placeholder{color:var(--dim)}
-input.fi{width:190px}
-select.fi{cursor:pointer;appearance:none;padding-right:24px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23444'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center}
-.fct{margin-left:auto;font-size:9.5px;color:var(--dim)}
+.fi::placeholder{color:var(--w5)}
+input.fi{width:180px}
+select.fi{cursor:pointer;appearance:none;padding-right:22px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23484840'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center}
+.fi-count{margin-left:auto;font-size:10px;color:var(--w4);font-weight:500}
 
-/* TENDER CARD */
-.tlist{display:flex;flex-direction:column;gap:10px}
-.tc{background:var(--ink2);border:1px solid var(--rule);border-radius:8px;padding:19px 22px;display:grid;grid-template-columns:50px 1fr 148px;gap:16px;align-items:start;transition:border-color .22s,transform .18s}
-.tc:hover{border-color:rgba(201,169,110,.35);transform:translateY(-1px)}
-.tc.saved{border-left:2px solid var(--green)}
-.rring{width:44px;height:44px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1.5px solid currentColor;font-family:var(--serif);font-size:14px;font-weight:600}
-.rring small{font-size:5.5px;letter-spacing:1px;text-transform:uppercase;opacity:.4;margin-top:1px;font-family:var(--sans)}
-.chips{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:7px}
-.chip{font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;padding:2px 7px;border-radius:3px;background:rgba(255,255,255,.08);color:#B8B8B0}
-.chip.op{background:var(--green3);color:var(--green)}
-.chip.cl{background:var(--red3);color:var(--red)}
-.ttl{font-family:var(--serif);font-size:16px;font-weight:600;color:#FFFFFF;margin-bottom:6px;line-height:1.4}
-.tdesc{font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:8px}
-.ttags{display:flex;gap:4px;flex-wrap:wrap}
-.ttag{font-size:8.5px;padding:2px 6px;border-radius:2px;background:var(--gold3);color:rgba(201,169,110,.5);border:1px solid rgba(201,169,110,.08)}
-.tmeta{display:flex;flex-direction:column;gap:8px;align-items:flex-end}
-.tbudget{font-family:var(--serif);font-size:18px;color:var(--gold2);text-align:right}
-.tbdgl{font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);text-align:right;margin-top:1px}
-.tdays{font-size:11.5px;text-align:right}
-.tdaysl{font-size:8.5px;color:var(--dim);text-align:right}
-.tact{display:flex;gap:5px;margin-top:3px;flex-wrap:wrap;justify-content:flex-end}
-.ab{font-family:var(--sans);font-size:8.5px;letter-spacing:1px;text-transform:uppercase;padding:5px 9px;border-radius:4px;cursor:pointer;transition:all .2s;border:1px solid var(--rule)}
-.ab.sv{background:transparent;color:var(--dim)}
-.ab.sv:hover{border-color:var(--green);color:var(--green)}
-.ab.sv.on{background:var(--green3);border-color:var(--green);color:var(--green)}
-.ab.pp{background:var(--gold3);border-color:rgba(201,169,110,.2);color:var(--gold)}
-.ab.vw{background:var(--blue3);border-color:rgba(74,127,224,.25);color:var(--blue);text-decoration:none;display:inline-flex}
-
-/* PIPELINE */
-.pboard{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;align-items:start}
-.pcol{background:var(--ink2);border:1px solid var(--rule);border-radius:8px;padding:14px}
-.pcol-hd{font-size:8.5px;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between}
-.pcol-hd span{background:rgba(255,255,255,.06);border-radius:10px;padding:2px 7px;font-size:8.5px;color:var(--dim)}
-.pitem{background:var(--ink3);border:1px solid var(--rule);border-radius:6px;padding:12px 13px;margin-bottom:7px;transition:border-color .2s}
-.pitem:hover{border-color:rgba(201,169,110,.3)}
-.pitem-ttl{font-family:var(--serif);font-size:13px;font-weight:500;color:var(--white);margin-bottom:4px;line-height:1.3}
-.pitem-meta{font-size:9.5px;color:var(--dim);margin-bottom:8px}
+/* ── PIPELINE KANBAN ── */
+.pboard{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;align-items:start}
+.pcol{background:var(--s2);border:1px solid var(--b1);border-radius:var(--r8);padding:12px;position:relative;overflow:hidden}
+.pcol::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--pc,var(--blue))}
+.pcol-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;padding-top:4px}
+.pcol-title{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--pc,var(--blue))}
+.pcol-stats{text-align:right}
+.pcol-count{font-family:var(--serif);font-size:18px;font-weight:500;color:var(--pc,var(--blue));line-height:1}
+.pcol-val{font-size:9px;color:var(--w4)}
+.pitem{background:var(--s1);border:1px solid var(--b2);border-radius:var(--r6);padding:11px 12px;margin-bottom:7px;transition:border-color .15s}
+.pitem:hover{border-color:rgba(201,169,110,.25)}
+.pitem-ttl{font-size:11px;font-weight:600;color:var(--w1);margin-bottom:4px;line-height:1.35}
+.pitem-meta{font-size:9px;color:var(--w4);margin-bottom:8px}
+.pitem-budget{font-family:var(--serif);font-size:13px;color:var(--gold2);font-weight:500;margin-bottom:6px}
 .pitem-acts{display:flex;gap:4px;flex-wrap:wrap}
-.pitem-acts button{font-family:var(--sans);font-size:7.5px;letter-spacing:1px;text-transform:uppercase;padding:3px 7px;border-radius:3px;cursor:pointer;background:transparent;border:1px solid var(--rule);color:var(--dim);transition:all .2s}
+.pitem-acts button{font-family:var(--sans);font-size:8px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;padding:3px 7px;border-radius:3px;cursor:pointer;background:transparent;border:1px solid var(--b1);color:var(--w4);transition:all .15s}
 .pitem-acts button:hover{border-color:var(--gold);color:var(--gold)}
-.pitem-acts button.rm{border:none;color:var(--dim)}
-.pitem-acts button.rm:hover{color:var(--red)}
-.pempty{text-align:center;font-size:10px;color:var(--dim);font-style:italic;padding:18px 0;font-family:var(--serif)}
+.pitem-acts button.rm:hover{border-color:var(--red);color:var(--red)}
+.pempty{text-align:center;font-size:11px;color:var(--w5);padding:20px 0;font-style:italic}
+.pipe-total{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r8);padding:14px 20px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between}
+.pt-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--w4);font-weight:600}
+.pt-val{font-family:var(--serif);font-size:28px;font-weight:500;color:var(--gold2)}
+.pt-sub{font-size:10px;color:var(--w4);margin-top:2px}
 
-/* AI */
-.ai-wrap{max-width:720px;margin:0 auto}
-.keybar{display:flex;gap:8px;align-items:center;padding:13px 15px;background:var(--ink2);border:1px solid var(--rule);border-radius:6px;margin-bottom:18px}
-.keybar-l{font-size:8.5px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);white-space:nowrap}
-.keybar-i{flex:1;font-family:var(--sans);font-size:11px;background:var(--ink3);border:1px solid var(--rule);color:var(--white);padding:7px 11px;border-radius:4px;outline:none;transition:border-color .2s}
+/* ── AI ── */
+.ai-wrap{max-width:700px;margin:0 auto}
+.keybar{display:flex;gap:8px;align-items:center;padding:11px 14px;background:var(--s2);border:1px solid var(--b1);border-radius:var(--r6);margin-bottom:16px}
+.keybar-l{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--w4);font-weight:600;white-space:nowrap}
+.keybar-i{flex:1;font-family:var(--sans);font-size:11px;background:var(--s3);border:1px solid var(--b1);color:var(--w1);padding:7px 11px;border-radius:var(--r4);outline:none;transition:border-color .15s}
 .keybar-i:focus{border-color:var(--gold)}
-.keybar-s{font-size:9.5px;white-space:nowrap}
-.ai-ta{width:100%;background:var(--ink2);border:1px solid var(--rule);color:var(--white);padding:15px;border-radius:6px;font-family:var(--sans);font-size:11.5px;line-height:1.65;resize:vertical;outline:none;transition:border-color .2s}
+.keybar-s{font-size:10px;white-space:nowrap;font-weight:500}
+.ai-ta{width:100%;background:var(--s2);border:1px solid var(--b1);color:var(--w1);padding:14px;border-radius:var(--r6);font-family:var(--sans);font-size:12px;line-height:1.65;resize:vertical;outline:none;transition:border-color .15s}
 .ai-ta:focus{border-color:var(--gold)}
-.ai-ta::placeholder{color:var(--dim)}
-.btnpri{font-family:var(--sans);font-size:10.5px;letter-spacing:2px;text-transform:uppercase;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;border:none;padding:12px 26px;border-radius:4px;cursor:pointer;transition:opacity .2s;font-weight:500}
-.btnpri:hover{opacity:.85}
-.btnpri:disabled{background:var(--ink3);color:var(--dim);cursor:not-allowed;opacity:1}
-.aicard{background:var(--ink2);border:1px solid var(--rule);border-radius:8px;padding:20px;margin-bottom:10px}
-.aicard-l{font-size:8.5px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:9px}
-.aisy{font-size:13px;color:var(--muted);line-height:1.7}
-.alead{background:var(--ink3);border:1px solid var(--rule);border-radius:6px;padding:13px 15px;margin-bottom:7px;display:grid;grid-template-columns:1fr 48px;gap:12px;align-items:start}
+.ai-ta::placeholder{color:var(--w5)}
+.btn-primary{font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;border:none;padding:11px 24px;border-radius:var(--r4);cursor:pointer;transition:opacity .15s}
+.btn-primary:hover{opacity:.85}
+.btn-primary:disabled{background:var(--s3);color:var(--w5);cursor:not-allowed;opacity:1}
+.aicard{background:var(--s2);border:1px solid var(--b1);border-radius:var(--r8);padding:18px;margin-bottom:10px}
+.aicard-l{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;font-weight:600}
+.aisy{font-size:12px;color:var(--w3);line-height:1.7}
+.alead{background:var(--s3);border:1px solid var(--b1);border-radius:var(--r6);padding:12px 14px;margin-bottom:7px;display:grid;grid-template-columns:1fr 48px;gap:12px;align-items:start}
 
-/* CAPABILITIES */
-.cap-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:13px;margin-bottom:32px}
-.capcard{background:var(--ink2);border:1px solid var(--rule);border-radius:8px;padding:24px;transition:border-color .22s}
-.capcard:hover{border-color:rgba(201,169,110,.3)}
-.caplogo{width:44px;height:44px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:600;font-size:17px;margin-bottom:14px}
-.capname{font-family:var(--serif);font-size:19px;font-weight:500;color:var(--white);margin-bottom:2px}
-.captag{font-size:8.5px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:13px}
-.capdesc{font-size:11px;color:var(--muted);line-height:1.7;margin-bottom:14px}
+/* ── CAPABILITIES ── */
+.cap-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:12px;margin-bottom:28px}
+.capcard{background:var(--s2);border:1px solid var(--b1);border-radius:var(--r8);padding:22px;transition:border-color .2s}
+.capcard:hover{border-color:rgba(201,169,110,.25)}
+.caplogo{width:40px;height:40px;border-radius:var(--r6);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:600;font-size:16px;margin-bottom:12px}
+.capname{font-family:var(--serif);font-size:18px;font-weight:500;color:var(--w1);margin-bottom:2px}
+.captag{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;font-weight:600}
+.capdesc{font-size:11px;color:var(--w3);line-height:1.7;margin-bottom:12px}
 .capsecs{display:flex;flex-wrap:wrap;gap:5px}
-.capsec{font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;padding:3px 8px;border-radius:3px;background:rgba(255,255,255,.04);color:var(--dim)}
-.mx-wrap{background:var(--ink2);border:1px solid var(--rule);border-radius:8px;overflow:hidden}
-.mx-hd{padding:18px 24px;border-bottom:1px solid var(--rule)}
-.mx-ttl{font-family:var(--serif);font-size:19px;font-weight:400;color:var(--white)}
+.capsec{font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:2px 8px;border-radius:3px;background:rgba(255,255,255,.05);color:var(--w4);font-weight:500}
+.mx-wrap{background:var(--s2);border:1px solid var(--b1);border-radius:var(--r8);overflow:hidden}
+.mx-hd{padding:16px 22px;border-bottom:1px solid var(--b1)}
+.mx-title{font-family:var(--serif);font-size:18px;font-weight:500;color:var(--w1)}
 table.mx{width:100%;border-collapse:collapse}
-table.mx th{font-size:8.5px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);font-weight:400;padding:10px 16px;text-align:left;border-bottom:1px solid var(--rule);background:var(--ink3)}
-table.mx td{font-size:10.5px;color:var(--muted);padding:11px 16px;border-bottom:1px solid rgba(255,255,255,.035);vertical-align:middle}
+table.mx th{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--w4);font-weight:600;padding:9px 16px;text-align:left;border-bottom:1px solid var(--b1);background:var(--s1)}
+table.mx td{font-size:11px;color:var(--w3);padding:10px 16px;border-bottom:1px solid var(--b2);vertical-align:middle}
 table.mx tr:last-child td{border-bottom:none}
-table.mx tr:hover td{background:rgba(255,255,255,.012)}
-.dy{color:var(--green);font-size:12px}.dp{color:var(--gold);font-size:12px}.dn{color:var(--dim);font-size:12px}
+table.mx tr:hover td{background:rgba(255,255,255,.015)}
+.dy{color:var(--green);font-size:13px}.dp{color:var(--gold);font-size:13px}.dn{color:var(--w5);font-size:13px}
 
-/* AUTOMATION */
-.auto-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-bottom:13px}
+/* ── AUTOMATION ── */
+.auto-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
 @media(max-width:900px){.auto-grid{grid-template-columns:1fr}}
-.acard{background:var(--ink2);border:1px solid var(--rule);border-radius:8px;padding:24px}
-.acard-ico{font-size:24px;margin-bottom:11px}
-.acard-nm{font-family:var(--serif);font-size:18px;font-weight:500;color:var(--white);margin-bottom:2px}
-.acard-tag{font-size:8.5px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.acard{background:var(--s2);border:1px solid var(--b1);border-radius:var(--r8);padding:22px}
+.acard-ico{font-size:22px;margin-bottom:10px}
+.acard-nm{font-family:var(--serif);font-size:17px;font-weight:500;color:var(--w1);margin-bottom:2px}
+.acard-tag{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;font-weight:600}
 .steps{list-style:none;padding:0}
-.steps li{display:flex;gap:10px;align-items:flex-start;font-size:10.5px;color:var(--muted);line-height:1.6;margin-bottom:9px}
-.sn{min-width:18px;height:18px;border-radius:50%;background:var(--gold3);border:1px solid rgba(201,169,110,.18);color:var(--gold);font-size:8.5px;display:flex;align-items:center;justify-content:center;font-weight:500;flex-shrink:0;margin-top:2px}
-.cb{background:var(--ink3);border:1px solid var(--rule);border-radius:4px;padding:12px 14px;font-family:'Courier New',monospace;font-size:10px;color:var(--green);margin-top:11px;line-height:1.8;overflow-x:auto;white-space:pre-wrap;word-break:break-all}
-.cb .cm{color:var(--dim)}.cb .ky{color:var(--gold)}.cb .vl{color:var(--blue)}
-.rtbl{width:100%;border-collapse:collapse;margin-top:13px}
-.rtbl th{font-size:8.5px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);padding:8px 11px;text-align:left;background:var(--ink3);border-bottom:1px solid var(--rule)}
-.rtbl td{font-size:10.5px;color:var(--muted);padding:9px 11px;border-bottom:1px solid rgba(255,255,255,.035)}
-.rtbl tr:hover td{background:rgba(255,255,255,.012)}
-.rtbl code{font-size:9.5px;color:var(--green);background:var(--ink3);padding:1px 5px;border-radius:2px}
-.copybtn{font-family:var(--sans);font-size:8.5px;letter-spacing:1px;text-transform:uppercase;background:transparent;border:1px solid var(--rule);color:var(--dim);padding:5px 10px;border-radius:4px;cursor:pointer;transition:all .2s;margin-top:8px}
+.steps li{display:flex;gap:10px;align-items:flex-start;font-size:11px;color:var(--w3);line-height:1.6;margin-bottom:8px}
+.sn{min-width:18px;height:18px;border-radius:50%;background:var(--golda);border:1px solid rgba(201,169,110,.2);color:var(--gold);font-size:8px;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;margin-top:2px}
+.cb{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r4);padding:11px 13px;font-family:'Courier New',monospace;font-size:9.5px;color:var(--green);margin-top:10px;line-height:1.8;overflow-x:auto;white-space:pre-wrap;word-break:break-all}
+.cb .cm{color:var(--w5)}.cb .ky{color:var(--gold)}.cb .vl{color:var(--blue)}
+.rtbl{width:100%;border-collapse:collapse;margin-top:12px}
+.rtbl th{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--w4);padding:8px 10px;text-align:left;background:var(--s1);border-bottom:1px solid var(--b1);font-weight:600}
+.rtbl td{font-size:10.5px;color:var(--w3);padding:9px 10px;border-bottom:1px solid var(--b2)}
+.rtbl tr:hover td{background:rgba(255,255,255,.01)}
+.rtbl code{font-size:9px;color:var(--green);background:var(--s1);padding:1px 5px;border-radius:2px}
+.copybtn{font-family:var(--sans);font-size:9px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;background:transparent;border:1px solid var(--b1);color:var(--w4);padding:5px 10px;border-radius:var(--r4);cursor:pointer;transition:all .15s;margin-top:8px}
 .copybtn:hover{border-color:var(--green);color:var(--green)}
 
-/* SOURCES */
-.src-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:11px}
-.srccard{background:var(--ink2);border:1px solid var(--rule);border-radius:8px;padding:19px;text-decoration:none;display:block;transition:border-color .22s}
-.srccard:hover{border-color:rgba(201,169,110,.3)}
-.src-top{display:flex;align-items:center;gap:11px;margin-bottom:11px}
-.src-ico{font-size:19px}
-.src-nm{font-family:var(--serif);font-size:16px;font-weight:500;color:var(--white)}
-.src-dom{font-size:9.5px;color:var(--dim);margin-top:1px}
-.src-lnk{font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold)}
+/* ── SOURCES ── */
+.src-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.srccard{background:var(--s2);border:1px solid var(--b1);border-radius:var(--r8);padding:18px;text-decoration:none;display:block;transition:border-color .2s}
+.srccard:hover{border-color:rgba(201,169,110,.25)}
+.src-top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.src-ico{font-size:18px}
+.src-nm{font-family:var(--serif);font-size:15px;font-weight:500}
+.src-dom{font-size:9px;color:var(--w4);margin-top:1px}
+.src-lnk{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);font-weight:600}
 
-/* ALERTS / SETTINGS */
+/* ── ALERTS/SETTINGS ── */
 .wrap560{max-width:560px}
-.flbl{font-size:8.5px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);display:block;margin-bottom:6px}
-.finp,.fta{width:100%;background:var(--ink2);border:1px solid var(--rule);color:var(--white);padding:10px 13px;border-radius:4px;font-family:var(--sans);font-size:11.5px;outline:none;transition:border-color .2s}
+.flbl{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--w4);display:block;margin-bottom:6px;font-weight:600}
+.finp,.fta{width:100%;background:var(--s2);border:1px solid var(--b1);color:var(--w1);padding:9px 12px;border-radius:var(--r4);font-family:var(--sans);font-size:12px;outline:none;transition:border-color .15s}
 .finp:focus,.fta:focus{border-color:var(--gold)}
 .fta{resize:vertical;line-height:1.6}
-.fg{margin-bottom:18px}
+.fg{margin-bottom:16px}
 .freqrow{display:flex;gap:7px}
-.freqbtn{font-family:var(--sans);font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;background:var(--ink2);border:1px solid var(--rule);color:var(--dim);padding:7px 14px;border-radius:4px;cursor:pointer;transition:all .2s}
-.freqbtn.on{background:var(--gold3);border-color:var(--gold);color:var(--gold)}
+.freqbtn{font-family:var(--sans);font-size:9px;font-weight:600;letter-spacing:1px;text-transform:uppercase;background:var(--s2);border:1px solid var(--b1);color:var(--w4);padding:7px 14px;border-radius:var(--r4);cursor:pointer;transition:all .15s}
+.freqbtn.on{background:var(--golda);border-color:var(--gold);color:var(--gold)}
 .ccrow{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
-.cchip{font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;padding:3px 8px;border-radius:3px;background:var(--gold3);color:rgba(201,169,110,.5);border:1px solid rgba(201,169,110,.08)}
-.ibox{background:var(--blue3);border:1px solid rgba(74,127,224,.18);border-radius:6px;padding:14px 16px;font-size:10.5px;color:var(--muted);line-height:1.7}
-.ibox-l{font-size:8.5px;letter-spacing:2px;text-transform:uppercase;color:var(--blue);margin-bottom:7px}
-.scard{background:var(--ink2);border:1px solid var(--rule);border-radius:8px;padding:24px;margin-bottom:12px}
-.scard-nm{font-family:var(--serif);font-size:17px;font-weight:400;color:var(--white);margin-bottom:3px}
-.scard-d{font-size:10.5px;color:var(--dim);margin-bottom:14px;line-height:1.6}
+.cchip{font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:3px 8px;border-radius:3px;background:var(--golda);color:rgba(201,169,110,.6);border:1px solid rgba(201,169,110,.1);font-weight:500}
+.ibox{background:var(--bluea);border:1px solid rgba(77,142,255,.2);border-radius:var(--r6);padding:13px 16px;font-size:11px;color:var(--w3);line-height:1.7}
+.ibox-l{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--blue);margin-bottom:7px;font-weight:600}
+.scard{background:var(--s2);border:1px solid var(--b1);border-radius:var(--r8);padding:22px;margin-bottom:10px}
+.scard-nm{font-family:var(--serif);font-size:16px;font-weight:500;color:var(--w1);margin-bottom:3px}
+.scard-d{font-size:11px;color:var(--w4);margin-bottom:13px;line-height:1.6}
 .srow{display:flex;gap:8px;align-items:center}
 
-/* TOAST */
-#toast{position:fixed;bottom:26px;right:26px;background:var(--ink3);border:1px solid var(--rule);border-radius:6px;padding:10px 16px;font-size:10.5px;color:var(--white);z-index:9999;opacity:0;transform:translateY(10px);transition:all .28s;pointer-events:none;box-shadow:0 8px 32px rgba(0,0,0,.4)}
+/* ── TOAST ── */
+#toast{position:fixed;bottom:24px;right:24px;background:var(--s2);border:1px solid var(--b1);border-radius:var(--r6);padding:10px 16px;font-size:11px;font-weight:500;color:var(--w1);z-index:9999;opacity:0;transform:translateY(10px);transition:all .25s;pointer-events:none;box-shadow:0 8px 32px rgba(0,0,0,.5)}
 #toast.show{opacity:1;transform:translateY(0)}
-.empty-st{text-align:center;padding:68px 0;font-family:var(--serif);font-size:19px;font-style:italic;color:var(--dim)}
-hr.div{border:none;border-top:1px solid var(--rule);margin:32px 0}
+.empty-st{text-align:center;padding:60px 0;font-family:var(--serif);font-size:18px;font-style:italic;color:var(--w5)}
+hr.div{border:none;border-top:1px solid var(--b1);margin:28px 0}
 </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
-  <div class="nav-brand">
+  <div class="nav-left">
     <div class="nav-logo">S</div>
     <div>
-      <div class="nav-name">Skyrise · <em>Tender Intelligence</em></div>
-      <div class="nav-tagline">Africa &amp; Middle East · BD Platform</div>
+      <div class="nav-title">Skyrise · <em>BD Command Centre</em></div>
+      <div class="nav-sub">Africa &amp; Middle East · Infrastructure Advisory</div>
     </div>
   </div>
   <div class="nav-right">
-    <div class="live-pill"><div class="live-dot"></div><span id="live-t">—</span></div>
+    <div class="live-badge"><div class="live-dot"></div><span id="live-t">Live</span></div>
     <button class="nbtn" onclick="handleRefresh()">↻ Refresh</button>
-    <button class="nbtn" onclick="goTab('settings')">⚙ Settings</button>
+    <button class="nbtn" onclick="goTab('settings')">⚙</button>
   </div>
 </nav>
 
-<div class="sbar">
-  <div class="sbi"><div class="sbi-v" style="color:var(--green)" id="st-open">—</div><div class="sbi-l">Open Tenders</div></div>
-  <div class="sbi"><div class="sbi-v" style="color:var(--red)" id="st-cl">—</div><div class="sbi-l">Closing ≤ 7 Days</div></div>
-  <div class="sbi"><div class="sbi-v" style="color:var(--gold)" id="st-hi">—</div><div class="sbi-l">High Relevance ≥ 90</div></div>
-  <div class="sbi"><div class="sbi-v" style="color:var(--blue)" id="st-sv">0</div><div class="sbi-l">Saved / Watchlist</div></div>
-  <div class="sbi"><div class="sbi-v" style="color:var(--amber)" id="st-pp">0</div><div class="sbi-l">In BD Pipeline</div></div>
-  <div class="sbi"><div class="sbi-v" style="color:var(--muted)">6</div><div class="sbi-l">Sources Active</div></div>
-</div>
-
+<!-- TABS -->
 <div class="tabs">
-  <button class="tbtn active" data-tab="dashboard" onclick="goTab('dashboard')">Dashboard</button>
-  <button class="tbtn" data-tab="opportunities" onclick="goTab('opportunities')">Opportunities</button>
+  <button class="tbtn active" data-tab="command" onclick="goTab('command')">Command Centre</button>
+  <button class="tbtn" data-tab="opportunities" onclick="goTab('opportunities')">Opportunities <span class="badge" id="tab-urgent-badge" style="display:none">0</span></button>
   <button class="tbtn" data-tab="pipeline" onclick="goTab('pipeline')">BD Pipeline</button>
   <button class="tbtn" data-tab="ai" onclick="goTab('ai')">AI Prospector</button>
   <button class="tbtn" data-tab="capabilities" onclick="goTab('capabilities')">Capabilities</button>
@@ -274,103 +319,134 @@ hr.div{border:none;border-top:1px solid var(--rule);margin:32px 0}
 
 <div class="main">
 
-<!-- DASHBOARD -->
-<div id="tab-dashboard" class="fade-up">
-  <div class="sh">Intelligence <em>Dashboard</em></div>
-  <div class="ss">Live snapshot · Africa &amp; Middle East infrastructure pipeline</div>
-  <div class="dash-g3" id="dash-kpis"></div>
-  <div class="dash-g2">
-    <div class="dcard">
-      <div class="dcard-l">Tenders by Sector</div>
-      <svg id="ch-sec" width="100%" height="200" viewBox="0 0 420 200" preserveAspectRatio="xMidYMid meet"></svg>
-      <div class="chart-leg" id="leg-sec"></div>
+<!-- ══════════ COMMAND CENTRE ══════════════════════════════════ -->
+<div id="tab-command" class="fu">
+  <div class="ph">BD <em>Command Centre</em></div>
+  <div class="ps">Executive overview · Decision support · As of <span id="cc-date"></span></div>
+
+  <!-- KPIs -->
+  <div class="cc-grid" id="cc-kpis"></div>
+
+  <!-- Action Required + Pipeline Value -->
+  <div class="cc-wide">
+    <div class="alert-panel">
+      <div class="panel-hd">
+        <div class="panel-title">⚡ Action Required</div>
+        <div class="panel-count" id="action-count"></div>
+      </div>
+      <div id="action-list"></div>
     </div>
-    <div class="dcard">
-      <div class="dcard-l">Upcoming Deadlines</div>
-      <div class="dl-list" id="dash-dl"></div>
+    <div class="alert-panel">
+      <div class="panel-hd"><div class="panel-title">📊 Deadline Timeline</div></div>
+      <div class="timeline" id="cc-timeline"></div>
     </div>
   </div>
-  <div class="dash-g2b">
-    <div class="dcard">
-      <div class="dcard-l">BD Pipeline Status</div>
-      <div class="pipe-mini" id="dash-pm"></div>
+
+  <!-- Pipeline Value + Charts -->
+  <div class="cc-wide2">
+    <div class="alert-panel">
+      <div class="panel-hd"><div class="panel-title">💼 Pipeline by Stage</div></div>
+      <div class="pipe-val" id="cc-pipe-val"></div>
     </div>
-    <div class="dcard">
-      <div class="dcard-l">Tenders by Source</div>
-      <svg id="ch-src" width="100%" height="160" viewBox="0 0 340 160" preserveAspectRatio="xMidYMid meet"></svg>
+    <div class="alert-panel">
+      <div class="panel-hd"><div class="panel-title">🌍 By Source</div></div>
+      <svg id="cc-src-chart" width="100%" height="130" viewBox="0 0 260 130"></svg>
+    </div>
+    <div class="alert-panel">
+      <div class="panel-hd"><div class="panel-title">📁 By Sector</div></div>
+      <div class="chart-donut-wrap">
+        <svg id="cc-donut" width="100" height="100" viewBox="0 0 100 100"></svg>
+        <div class="donut-legend" id="cc-donut-legend"></div>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- OPPORTUNITIES -->
+<!-- ══════════ OPPORTUNITIES ══════════════════════════════════ -->
 <div id="tab-opportunities" class="hidden">
-  <div class="sh">Active <em>Opportunities</em></div>
-  <div class="ss">World Bank · AfDB · AFD · UNDP · dgMarket · Devex — scored &amp; monitored</div>
-  <div class="filters">
-    <input class="fi" id="fi-q" placeholder="Search title, country, tags…" oninput="renderTenders()"/>
+  <div class="ph">Live <em>Opportunities</em></div>
+  <div class="ps">Scored · Filtered · Bid recommendation engine</div>
+
+  <div class="filter-bar">
+    <input class="fi" id="fi-q" placeholder="Search opportunities…" oninput="renderTenders()"/>
     <select class="fi" id="fi-src" onchange="renderTenders()">
       <option value="all">All Sources</option>
-      <option value="worldbank">World Bank</option><option value="afdb">AfDB</option>
-      <option value="afd">AFD</option><option value="undp">UNDP</option>
-      <option value="dgmarket">dgMarket</option><option value="devex">Devex</option>
+      <option value="World Bank">World Bank</option><option value="AfDB">AfDB</option>
+      <option value="AFD">AFD</option><option value="UNDP">UNDP</option>
+      <option value="dgMarket">dgMarket</option><option value="Devex">Devex</option>
+      <option value="Google Alert">Google Alert</option>
     </select>
     <select class="fi" id="fi-sec" onchange="renderTenders()">
       <option value="all">All Sectors</option>
       <option>Infrastructure</option><option>Transport</option><option>Water &amp; Sanitation</option>
-      <option>Port &amp; Maritime</option><option>Energy</option><option>Urban Development</option>
-      <option>Project Management / PMO</option><option>Engineering Supervision</option>
-      <option>Advisory &amp; Studies</option><option>Environment &amp; ESIA</option>
-      <option>Procurement Advisory</option>
+      <option>Port &amp; Maritime</option><option>Energy</option><option>Project Management / PMO</option>
+      <option>Engineering Supervision</option><option>Advisory &amp; Studies</option>
+      <option>Environment &amp; ESIA</option><option>Procurement Advisory</option>
     </select>
     <select class="fi" id="fi-cty" onchange="renderTenders()"><option value="all">All Countries</option></select>
+    <select class="fi" id="fi-rec" onchange="renderTenders()">
+      <option value="all">All Recommendations</option>
+      <option value="BID">Bid — Strong/Good Fit</option>
+      <option value="URGENT">Urgent — Decide Now</option>
+      <option value="WATCH">Watch</option>
+      <option value="PASS">Pass</option>
+    </select>
     <select class="fi" id="fi-sort" onchange="renderTenders()">
-      <option value="relevance">Sort: Relevance</option>
+      <option value="score">Sort: Score</option>
       <option value="deadline">Sort: Deadline</option>
+      <option value="budget">Sort: Budget</option>
       <option value="newest">Sort: Newest</option>
     </select>
-    <div class="fct" id="fi-ct"></div>
+    <div class="fi-count" id="fi-ct"></div>
   </div>
-  <div class="tlist" id="tlist"></div>
+  <div class="opp-list" id="opp-list"></div>
 </div>
 
-<!-- PIPELINE -->
+<!-- ══════════ PIPELINE ════════════════════════════════════════ -->
 <div id="tab-pipeline" class="hidden">
-  <div class="sh">BD <em>Pipeline</em></div>
-  <div class="ss">Track saved opportunities through the full bid lifecycle</div>
+  <div class="ph">BD <em>Pipeline</em></div>
+  <div class="ps">Value-tracked · Lifecycle management · Win probability</div>
+  <div class="pipe-total">
+    <div>
+      <div class="pt-label">Total Pipeline Value</div>
+      <div class="pt-sub" id="pipe-total-sub"></div>
+    </div>
+    <div class="pt-val" id="pipe-total-val">—</div>
+  </div>
   <div class="pboard" id="pboard"></div>
 </div>
 
-<!-- AI -->
+<!-- ══════════ AI PROSPECTOR ═════════════════════════════════ -->
 <div id="tab-ai" class="hidden">
   <div class="ai-wrap">
-    <div class="sh">AI <em>Prospector</em></div>
-    <div class="ss">Claude-powered tender intelligence &amp; consortium partner matching</div>
+    <div class="ph">AI <em>Prospector</em></div>
+    <div class="ps">Claude-powered intelligence · Partner matching · Market analysis</div>
     <div class="keybar">
       <span class="keybar-l">API Key</span>
-      <input class="keybar-i" id="ai-key" type="password" placeholder="sk-ant-api03-… (saved in browser, sent only to Anthropic)" oninput="onKeyIn()"/>
-      <span class="keybar-s" id="ai-kst" style="color:var(--dim)">Not set</span>
+      <input class="keybar-i" id="ai-key" type="password" placeholder="sk-ant-api03-… (stored in browser only)" oninput="onKeyIn()"/>
+      <span class="keybar-s" id="ai-kst" style="color:var(--w4)">Not set</span>
     </div>
-    <textarea class="ai-ta" id="ai-q" rows="5" placeholder="Examples:&#10;• Find port supervision tenders in East Africa with AfDB or World Bank funding&#10;• What AMO opportunities exist in francophone West Africa this quarter?&#10;• Suggest consortium partners for a railway advisory bid in Morocco or Algeria&#10;• Identify upcoming QCBS feasibility studies in the Horn of Africa"></textarea>
-    <div style="margin:13px 0 24px"><button class="btnpri" id="ai-btn" onclick="runAI()">→ Run Intelligence Search</button></div>
+    <textarea class="ai-ta" id="ai-q" rows="4" placeholder="Examples:&#10;• Find port supervision tenders in East Africa with AfDB or World Bank funding&#10;• Suggest consortium partners for a railway advisory bid in Morocco&#10;• What AMO opportunities are closing this month in francophone West Africa?"></textarea>
+    <div style="margin:12px 0 22px"><button class="btn-primary" id="ai-btn" onclick="runAI()">→ Run Intelligence Search</button></div>
     <div id="ai-res"></div>
   </div>
 </div>
 
-<!-- CAPABILITIES -->
+<!-- ══════════ CAPABILITIES ════════════════════════════════════ -->
 <div id="tab-capabilities" class="hidden">
-  <div class="sh">Consortium <em>Capabilities</em></div>
-  <div class="ss">Partner firms — expertise depth &amp; geographic reach for joint bids</div>
+  <div class="ph">Consortium <em>Capabilities</em></div>
+  <div class="ps">Partner depth · Geographic reach · Bid positioning</div>
   <div class="cap-grid">
-    <div class="capcard"><div class="caplogo" style="background:linear-gradient(135deg,var(--gold),var(--blue));color:#000">S</div><div class="capname">Skyrise Capital PM</div><div class="captag">Lead Coordinator · Dubai, UAE</div><div class="capdesc">Senior-led independent advisory boutique specialised in AMO, PMO, procurement engineering, and infrastructure project management. Primary structuring entity for consortium bids. Strong anchor in the Horn of Africa and Gulf region. Accredited on World Bank, AfDB, AFD procurement frameworks.</div><div class="capsecs"><span class="capsec">AMO / Owner's Engineer</span><span class="capsec">PMO</span><span class="capsec">Procurement Advisory</span><span class="capsec">Feasibility &amp; Studies</span><span class="capsec">Port &amp; Maritime</span></div></div>
-    <div class="capcard"><div class="caplogo" style="background:var(--green3);color:var(--green)">FS</div><div class="capname">FS Consulting Engineers</div><div class="captag">Engineering Consultancy · Djibouti</div><div class="capdesc">Djibouti-based engineering consultancy with deep on-ground track record in the Horn of Africa. Accredited on AfDB, World Bank, AFD, and EU-financed projects. Critical for local partnering, national staff mobilisation, and government stakeholder access in East Africa.</div><div class="capsecs"><span class="capsec">Engineering Supervision</span><span class="capsec">Road &amp; Transport</span><span class="capsec">Water &amp; Sanitation</span><span class="capsec">Infrastructure</span><span class="capsec">ESIA</span></div></div>
-    <div class="capcard"><div class="caplogo" style="background:var(--blue3);color:var(--blue)">CP</div><div class="capname">CPCS</div><div class="captag">Transport Advisory · Ottawa / Global</div><div class="capdesc">Canadian multinational with 35+ years of transport advisory across 100+ countries. Best-in-class for railway, port, and logistics corridor mandates. Strong MDB track record (World Bank, AfDB, ADB, IFC). Brings credibility and technical depth to transport feasibility and PPP bids.</div><div class="capsecs"><span class="capsec">Railway &amp; Urban Transit</span><span class="capsec">Port &amp; Maritime</span><span class="capsec">PPP Advisory</span><span class="capsec">Freight Logistics</span><span class="capsec">Transport Policy</span></div></div>
-    <div class="capcard"><div class="caplogo" style="background:var(--red3);color:var(--red)">VL</div><div class="capname">Vulcan</div><div class="captag">Engineering &amp; Construction Management · MEA</div><div class="capdesc">Engineering and construction management firm with deep expertise in complex civil and structural works across the Middle East and Africa. Brings technical design capacity, resident engineer services, and regional contractor networks for large-scale infrastructure bids.</div><div class="capsecs"><span class="capsec">Civil &amp; Structural Engineering</span><span class="capsec">Construction Management</span><span class="capsec">Site Supervision</span><span class="capsec">Urban Infrastructure</span><span class="capsec">Industrial Facilities</span></div></div>
-    <div class="capcard"><div class="caplogo" style="background:var(--gold3);color:var(--gold)">CH</div><div class="capname">Chico Engineering</div><div class="captag">Infrastructure Engineering · Sub-Saharan Africa</div><div class="capdesc">African-rooted engineering consultancy with strong presence in francophone and anglophone sub-Saharan Africa. Specialised in water and sanitation, municipal infrastructure, and donor-financed community development. Ideal for AFD and EU-funded tenders requiring local presence.</div><div class="capsecs"><span class="capsec">Water &amp; Sanitation</span><span class="capsec">Municipal Infrastructure</span><span class="capsec">Social Infrastructure</span><span class="capsec">Rural Development</span><span class="capsec">Environment</span></div></div>
-    <div class="capcard"><div class="caplogo" style="background:rgba(255,255,255,.05);color:var(--muted)">GE</div><div class="capname">Good Engineering</div><div class="captag">Technical Advisory &amp; Checking · International</div><div class="capdesc">Boutique technical advisory firm providing structural and geotechnical engineering at the highest level. Excels in independent checking engineer, peer review, and QA roles for complex civil works — ideal for supervision mandates requiring a credible technical authority.</div><div class="capsecs"><span class="capsec">Structural Engineering</span><span class="capsec">Geotechnical</span><span class="capsec">QA / Checking Engineer</span><span class="capsec">Peer Review</span><span class="capsec">Supervision</span></div></div>
+    <div class="capcard"><div class="caplogo" style="background:linear-gradient(135deg,var(--gold),var(--blue));color:#000">S</div><div class="capname">Skyrise Capital PM</div><div class="captag">Lead Coordinator · Dubai, UAE</div><div class="capdesc">Senior-led independent advisory boutique specialised in AMO, PMO, procurement engineering, and infrastructure project management. Primary structuring entity for consortium bids.</div><div class="capsecs"><span class="capsec">AMO / Owner's Engineer</span><span class="capsec">PMO</span><span class="capsec">Procurement Advisory</span><span class="capsec">Feasibility</span><span class="capsec">Port &amp; Maritime</span></div></div>
+    <div class="capcard"><div class="caplogo" style="background:var(--greena);color:var(--green)">FS</div><div class="capname">FS Consulting Engineers</div><div class="captag">Engineering Consultancy · Djibouti</div><div class="capdesc">Djibouti-based engineering consultancy with deep on-ground track record in the Horn of Africa. Accredited on AfDB, World Bank, AFD, and EU-financed projects.</div><div class="capsecs"><span class="capsec">Engineering Supervision</span><span class="capsec">Road &amp; Transport</span><span class="capsec">Water &amp; Sanitation</span><span class="capsec">ESIA</span></div></div>
+    <div class="capcard"><div class="caplogo" style="background:var(--bluea);color:var(--blue)">CP</div><div class="capname">CPCS</div><div class="captag">Transport Advisory · Ottawa / Global</div><div class="capdesc">Canadian multinational with 35+ years of transport advisory across 100+ countries. Best-in-class for railway, port, and logistics corridor mandates with MDB track record.</div><div class="capsecs"><span class="capsec">Railway &amp; Transit</span><span class="capsec">Port &amp; Maritime</span><span class="capsec">PPP Advisory</span><span class="capsec">Freight Logistics</span></div></div>
+    <div class="capcard"><div class="caplogo" style="background:var(--reda);color:var(--red)">VL</div><div class="capname">Vulcan</div><div class="captag">Engineering &amp; Construction · MEA</div><div class="capdesc">Engineering and construction management firm with deep expertise in complex civil and structural works. Brings technical design capacity and regional contractor networks.</div><div class="capsecs"><span class="capsec">Civil &amp; Structural</span><span class="capsec">Construction Management</span><span class="capsec">Site Supervision</span><span class="capsec">Urban Infrastructure</span></div></div>
+    <div class="capcard"><div class="caplogo" style="background:var(--golda);color:var(--gold)">CH</div><div class="capname">Chico Engineering</div><div class="captag">Infrastructure Engineering · Sub-Saharan Africa</div><div class="capdesc">African-rooted engineering consultancy with strong presence in francophone and anglophone sub-Saharan Africa. Ideal for AFD and EU-funded tenders requiring local presence.</div><div class="capsecs"><span class="capsec">Water &amp; Sanitation</span><span class="capsec">Municipal Infrastructure</span><span class="capsec">Rural Development</span><span class="capsec">Environment</span></div></div>
+    <div class="capcard"><div class="caplogo" style="background:rgba(255,255,255,.06);color:var(--w4)">GE</div><div class="capname">Good Engineering</div><div class="captag">Technical Advisory &amp; Checking · International</div><div class="capdesc">Boutique technical advisory firm excelling in independent checking engineer, peer review, and QA roles for complex civil works — ideal for supervision mandates.</div><div class="capsecs"><span class="capsec">Structural Engineering</span><span class="capsec">Geotechnical</span><span class="capsec">QA / Checking</span><span class="capsec">Peer Review</span></div></div>
   </div>
   <hr class="div"/>
   <div class="mx-wrap">
-    <div class="mx-hd"><div class="mx-ttl">Consortium Capability <em style="color:var(--gold);font-style:italic">Matrix</em></div></div>
+    <div class="mx-hd"><div class="mx-title">Capability Matrix — Bid Coverage</div></div>
     <table class="mx">
       <thead><tr><th>Tender Type / Sector</th><th>Skyrise</th><th>FS Consulting</th><th>CPCS</th><th>Vulcan</th><th>Chico</th><th>Good Eng.</th></tr></thead>
       <tbody>
@@ -381,408 +457,153 @@ hr.div{border:none;border-top:1px solid var(--rule);margin:32px 0}
         <tr><td>Road &amp; Transport</td><td class="dp">◐</td><td class="dy">●</td><td class="dy">●</td><td class="dy">●</td><td class="dp">◐</td><td class="dy">●</td></tr>
         <tr><td>Water &amp; Sanitation</td><td class="dn">○</td><td class="dy">●</td><td class="dn">○</td><td class="dp">◐</td><td class="dy">●</td><td class="dp">◐</td></tr>
         <tr><td>Feasibility &amp; Studies</td><td class="dy">●</td><td class="dy">●</td><td class="dy">●</td><td class="dp">◐</td><td class="dp">◐</td><td class="dp">◐</td></tr>
-        <tr><td>ESIA / Environment</td><td class="dp">◐</td><td class="dy">●</td><td class="dp">◐</td><td class="dn">○</td><td class="dy">●</td><td class="dn">○</td></tr>
         <tr><td>Procurement Advisory</td><td class="dy">●</td><td class="dp">◐</td><td class="dp">◐</td><td class="dn">○</td><td class="dn">○</td><td class="dn">○</td></tr>
-        <tr><td>PPP / Concession Advisory</td><td class="dy">●</td><td class="dn">○</td><td class="dy">●</td><td class="dn">○</td><td class="dn">○</td><td class="dn">○</td></tr>
+        <tr><td>ESIA / Environment</td><td class="dp">◐</td><td class="dy">●</td><td class="dp">◐</td><td class="dn">○</td><td class="dy">●</td><td class="dn">○</td></tr>
+        <tr><td>PPP / Concession</td><td class="dy">●</td><td class="dn">○</td><td class="dy">●</td><td class="dn">○</td><td class="dn">○</td><td class="dn">○</td></tr>
       </tbody>
     </table>
-    <div style="padding:11px 24px;font-size:9.5px;color:var(--dim);border-top:1px solid var(--rule)">● Full capability &nbsp;·&nbsp; ◐ Partial / associate &nbsp;·&nbsp; ○ Not applicable</div>
+    <div style="padding:10px 22px;font-size:10px;color:var(--w5);border-top:1px solid var(--b1)">● Full capability &nbsp;·&nbsp; ◐ Partial / associate &nbsp;·&nbsp; ○ Not applicable</div>
   </div>
 </div>
 
-<!-- AUTOMATION -->
+<!-- ══════════ AUTOMATION ══════════════════════════════════════ -->
 <div id="tab-automation" class="hidden">
-  <div class="sh">Feed <em>Automation</em></div>
-  <div class="ss">Zapier · Make · RSS — complete live pipeline configuration</div>
+  <div class="ph">Feed <em>Automation</em></div>
+  <div class="ps">Zapier · Make · RSS · Airtable — live pipeline configuration</div>
   <div class="auto-grid">
     <div class="acard">
-      <div class="acard-ico">⚡</div><div class="acard-nm">Zapier Workflow</div><div class="acard-tag">dgMarket RSS → Gmail digest</div>
+      <div class="acard-ico">⚡</div><div class="acard-nm">Zapier Workflow</div><div class="acard-tag">Google Alert RSS → Email + Airtable</div>
       <ol class="steps">
-        <li><div class="sn">1</div><span>Go to <strong style="color:var(--white)">zapier.com</strong> → Create Zap → Trigger: <em>RSS by Zapier</em></span></li>
-        <li><div class="sn">2</div><span>Paste the full dgMarket RSS URL from the panel below into the Feed URL field</span></li>
-        <li><div class="sn">3</div><span>Add <strong style="color:var(--white)">Filter</strong>: only continue if Title contains: supervision, AMO, consultant, advisory, PMO, étude, feasibility, port</span></li>
-        <li><div class="sn">4</div><span>Action 1 — <strong style="color:var(--white)">Gmail → Send Email</strong>: To: louai@skyrisecapitalpm.com · Subject: [Tender Alert] {{Title}}</span></li>
-        <li><div class="sn">5</div><span>Action 2 (optional) — <strong style="color:var(--white)">Google Sheets → Append Row</strong>: log Title, Country, Deadline, URL</span></li>
-        <li><div class="sn">6</div><span>Schedule: every 6 hours. Enable Zap.</span></li>
+        <li><div class="sn">1</div><span>Trigger: <strong style="color:var(--w2)">RSS by Zapier</strong> → New Item in Feed → paste Google Alert RSS URL</span></li>
+        <li><div class="sn">2</div><span>Action 1: <strong style="color:var(--w2)">Email by Zapier</strong> → Send to l.ahmed@skyrise-capital.com</span></li>
+        <li><div class="sn">3</div><span>Action 2: <strong style="color:var(--w2)">Airtable → Create Record</strong> → Skyrise Tenders base</span></li>
+        <li><div class="sn">4</div><span>Schedule: every 2 minutes. Dashboard auto-refreshes every 2 minutes.</span></li>
       </ol>
     </div>
     <div class="acard">
       <div class="acard-ico">🔄</div><div class="acard-nm">Make (Integromat)</div><div class="acard-tag">Multi-source · AI scoring scenario</div>
       <ol class="steps">
-        <li><div class="sn">1</div><span>New Scenario → <strong style="color:var(--white)">RSS Feed</strong> module — one per source (dgMarket, UNDP, Devex)</span></li>
-        <li><div class="sn">2</div><span>Add <strong style="color:var(--white)">Router</strong> to split by source and apply keyword filters per feed</span></li>
-        <li><div class="sn">3</div><span>Add <strong style="color:var(--white)">HTTP → Make a Request</strong> — POST to Claude API with scorer payload below</span></li>
-        <li><div class="sn">4</div><span>Add <strong style="color:var(--white)">JSON → Parse JSON</strong> — extract score and reason</span></li>
-        <li><div class="sn">5</div><span>Add <strong style="color:var(--white)">Filter</strong>: only pass tenders with score ≥ 75</span></li>
-        <li><div class="sn">6</div><span>Action: <strong style="color:var(--white)">Gmail</strong> digest + <strong style="color:var(--white)">Airtable</strong> row</span></li>
-        <li><div class="sn">7</div><span>Schedule every 4 hours. Activate scenario.</span></li>
+        <li><div class="sn">1</div><span>New Scenario → <strong style="color:var(--w2)">RSS Feed</strong> module — one per source</span></li>
+        <li><div class="sn">2</div><span><strong style="color:var(--w2)">Router</strong> → apply keyword filters per feed</span></li>
+        <li><div class="sn">3</div><span><strong style="color:var(--w2)">HTTP Request</strong> → POST to Claude API scorer</span></li>
+        <li><div class="sn">4</div><span><strong style="color:var(--w2)">Filter</strong>: score ≥ 75 → <strong style="color:var(--w2)">Airtable</strong> + <strong style="color:var(--w2)">Email</strong></span></li>
       </ol>
     </div>
   </div>
-  <div class="acard" style="margin-bottom:13px">
-    <div class="acard-ico">📡</div><div class="acard-nm">dgMarket RSS Configuration</div><div class="acard-tag">Ready-to-paste URL — all priority countries &amp; sectors</div>
-    <table class="rtbl">
-      <thead><tr><th>Parameter</th><th>Value</th><th>Description</th></tr></thead>
-      <tbody>
-        <tr><td>Base URL</td><td><code>https://www.dgmarket.com/tenders/rssfeed.do</code></td><td>dgMarket RSS endpoint</td></tr>
-        <tr><td>noticeType</td><td><code>gpr</code></td><td>General procurement (use <code>con</code> for contracts awarded)</td></tr>
-        <tr><td>country</td><td><code>DJ,ET,KE,TZ,SN,CI,CM,MA,DZ,SA,AE,UG,RW</code></td><td>All priority countries</td></tr>
-        <tr><td>sector</td><td><code>TRN,WTR,ENE,URB,ENV</code></td><td>Transport, Water, Energy, Urban, Environment</td></tr>
-        <tr><td>donor</td><td><code>WB,AFDB,AFD,UNDP,EU</code></td><td>Filter by financier</td></tr>
-        <tr><td>language</td><td><code>en,fr</code></td><td>English + French notices</td></tr>
-        <tr><td>maxAge</td><td><code>30</code></td><td>Published in last 30 days only</td></tr>
-      </tbody>
-    </table>
-    <div class="cb"><span class="cm"># Full dgMarket RSS URL — paste into Zapier / Make / Feedly / Inoreader</span>
-<span class="ky">https://</span>www.dgmarket.com/tenders/rssfeed.do<span class="ky">?noticeType=</span><span class="vl">gpr</span><span class="ky">&amp;country=</span><span class="vl">DJ,ET,KE,TZ,SN,CI,CM,MA,DZ,SA,AE,UG,RW</span><span class="ky">&amp;sector=</span><span class="vl">TRN,WTR,ENE,URB,ENV</span><span class="ky">&amp;donor=</span><span class="vl">WB,AFDB,AFD,UNDP,EU</span><span class="ky">&amp;language=</span><span class="vl">en,fr</span><span class="ky">&amp;maxAge=</span><span class="vl">30</span></div>
-    <button class="copybtn" onclick="copyRSS()">⎘ Copy Full URL</button>
+  <div class="acard" style="margin-bottom:12px">
+    <div class="acard-ico">📡</div><div class="acard-nm">Google Alert RSS Feed</div><div class="acard-tag">Your live tender monitoring feed</div>
+    <div class="cb"><span class="cm"># Your Google Alert RSS — already connected to Zapier</span>
+<span class="ky">https://</span>www.google.com/alerts/feeds/<span class="vl">09408318463998752709/6794624128923363940</span></div>
+    <button class="copybtn" onclick="navigator.clipboard.writeText('https://www.google.com/alerts/feeds/09408318463998752709/6794624128923363940').then(()=>toast('Copied'))">⎘ Copy URL</button>
   </div>
   <div class="acard">
-    <div class="acard-ico">🤖</div><div class="acard-nm">Claude API — Auto Relevance Scorer</div><div class="acard-tag">Paste into Make HTTP module · returns JSON score</div>
-    <div class="cb"><span class="cm">// POST https://api.anthropic.com/v1/messages</span>
-<span class="cm">// Headers: x-api-key: YOUR_KEY · anthropic-version: 2023-06-01 · Content-Type: application/json</span>
-
+    <div class="acard-ico">🤖</div><div class="acard-nm">Claude API — Relevance Scorer</div><div class="acard-tag">Paste into Make HTTP module</div>
+    <div class="cb"><span class="cm">// POST https://api.anthropic.com/v1/messages · Headers: x-api-key: YOUR_KEY</span>
 {
-  <span class="ky">"model"</span>: <span class="vl">"claude-haiku-4-5-20251001"</span>,
-  <span class="ky">"max_tokens"</span>: <span class="vl">150</span>,
-  <span class="ky">"system"</span>: <span class="vl">"Score 0-100 relevance for Skyrise (AMO, PMO, supervision, advisory, port &amp; infrastructure in Africa/ME). JSON only: {\"score\":N,\"reason\":\"one line\"}"</span>,
-  <span class="ky">"messages"</span>: [{ <span class="ky">"role"</span>: <span class="vl">"user"</span>, <span class="ky">"content"</span>: <span class="vl">"{{1.title}} — {{1.summary}}"</span> }]
+  <span class="ky">"model"</span>: <span class="vl">"claude-haiku-4-5-20251001"</span>, <span class="ky">"max_tokens"</span>: <span class="vl">150</span>,
+  <span class="ky">"system"</span>: <span class="vl">"Score 0-100 relevance for Skyrise (AMO, PMO, supervision, advisory, port, infrastructure in Africa/ME). JSON only: {\"score\":N,\"reason\":\"one line\"}"</span>,
+  <span class="ky">"messages"</span>: [{<span class="ky">"role"</span>:<span class="vl">"user"</span>,<span class="ky">"content"</span>:<span class="vl">"{{title}} — {{summary}}"</span>}]
 }</div>
   </div>
 </div>
 
-<!-- SOURCES -->
+<!-- ══════════ SOURCES ═════════════════════════════════════════ -->
 <div id="tab-sources" class="hidden">
-  <div class="sh">Monitored <em>Sources</em></div>
-  <div class="ss">All active procurement portals — click to access directly</div>
+  <div class="ph">Monitored <em>Sources</em></div>
+  <div class="ps">All active procurement portals</div>
   <div class="src-grid" id="src-grid"></div>
-  <div style="margin-top:26px;background:var(--ink2);border:1px solid var(--rule);border-radius:8px;padding:24px">
-    <div style="font-family:var(--serif);font-size:18px;color:var(--white);margin-bottom:13px">Manual <em style="color:var(--gold);font-style:italic">Registration Guide</em></div>
-    <div style="font-size:10.5px;color:var(--muted);line-height:2.1;columns:2;gap:40px">
-      <strong style="color:var(--white)">World Bank</strong> — projects.worldbank.org → Create account → Save search → Email notifications<br/>
-      <strong style="color:var(--white)">AfDB</strong> — afdb.org/en/procurement → Procurement newsletter + country alerts<br/>
-      <strong style="color:var(--white)">UNDP</strong> — procurement-notices.undp.org → Register as supplier → Filter by country/sector<br/>
-      <strong style="color:var(--white)">dgMarket</strong> — dgmarket.com → Free account → Keyword + region watchlists + RSS feed<br/>
-      <strong style="color:var(--white)">Devex</strong> — devex.com → Devex Pro (paid) — best for MDB consulting BD + partner search<br/>
-      <strong style="color:var(--white)">AFD</strong> — afd.fr → Subscribe to appels d'offres mailing list (French)
-    </div>
-  </div>
 </div>
 
-<!-- ALERTS -->
+<!-- ══════════ ALERTS ══════════════════════════════════════════ -->
 <div id="tab-alerts" class="hidden">
   <div class="wrap560">
-    <div class="sh">Alert <em>Configuration</em></div>
-    <div class="ss">BD digest — matching tenders delivered to your inbox</div>
-    <div class="fg"><label class="flbl">Recipient Email</label><input class="finp" placeholder="louai@skyrisecapitalpm.com" type="email"/></div>
+    <div class="ph">Alert <em>Configuration</em></div>
+    <div class="ps">BD digest · Email delivery</div>
+    <div class="fg"><label class="flbl">Recipient Email</label><input class="finp" placeholder="l.ahmed@skyrise-capital.com" type="email"/></div>
     <div class="fg"><label class="flbl">Digest Frequency</label><div class="freqrow"><button class="freqbtn on" onclick="setFreq(this)">Instant</button><button class="freqbtn" onclick="setFreq(this)">Daily</button><button class="freqbtn" onclick="setFreq(this)">Weekly</button></div></div>
-    <div class="fg"><label class="flbl">Keyword Watchlist</label><textarea class="fta" rows="3">supervision, AMO, maîtrise d'ouvrage, advisory, consultant, PMO, project management, feasibility, étude, port, infrastructure, procurement, transport, water, railway, road</textarea></div>
+    <div class="fg"><label class="flbl">Keyword Watchlist</label><textarea class="fta" rows="3">supervision, AMO, maîtrise d'ouvrage, advisory, consultant, PMO, project management, feasibility, étude, port, infrastructure, procurement, transport, water, railway</textarea></div>
     <div class="fg"><label class="flbl">Priority Countries</label><div class="ccrow"><span class="cchip">Djibouti</span><span class="cchip">Ethiopia</span><span class="cchip">Somalia</span><span class="cchip">Kenya</span><span class="cchip">Tanzania</span><span class="cchip">Uganda</span><span class="cchip">Rwanda</span><span class="cchip">Senegal</span><span class="cchip">Côte d'Ivoire</span><span class="cchip">Cameroon</span><span class="cchip">Morocco</span><span class="cchip">Algeria</span><span class="cchip">Saudi Arabia</span><span class="cchip">UAE</span></div></div>
-    <div class="fg"><div style="display:flex;align-items:center;justify-content:space-between;background:var(--ink2);border:1px solid var(--rule);border-radius:6px;padding:14px 17px"><div><div style="font-size:11.5px;color:var(--white);margin-bottom:2px">Minimum Relevance Score</div><div style="font-size:9.5px;color:var(--dim)">Only alert on tenders scoring ≥ 75</div></div><div style="font-family:var(--serif);font-size:24px;color:var(--gold)">75+</div></div></div>
-    <button class="btnpri" id="al-btn" onclick="saveAlerts()" style="width:100%;text-align:center">Activate Email Alerts</button>
-    <div style="margin-top:16px" class="ibox"><div class="ibox-l">Live Integration Required</div>This dashboard uses curated seed data. To activate live delivery, connect via the Automation tab — Zapier (dgMarket RSS → Gmail) or Make (multi-source + AI scoring).</div>
+    <button class="btn-primary" id="al-btn" onclick="saveAlerts()" style="width:100%;text-align:center">Activate Email Alerts</button>
   </div>
 </div>
 
-<!-- SETTINGS -->
+<!-- ══════════ SETTINGS ════════════════════════════════════════ -->
 <div id="tab-settings" class="hidden">
   <div class="wrap560">
-    <div class="sh">Platform <em>Settings</em></div>
-    <div class="ss">API keys · preferences · data management</div>
-    <div class="scard">
-      <div class="scard-nm">Anthropic API Key</div>
-      <div class="scard-d">Powers the AI Prospector. Stored in your browser's localStorage only — sent exclusively to the Anthropic API.</div>
-      <div class="srow"><input class="fi" id="sk-key" type="password" placeholder="sk-ant-api03-…" style="flex:1" oninput="onKeyIn()"/><button class="nbtn" onclick="clearKey()">Clear</button></div>
-      <div style="margin-top:9px;font-size:9.5px" id="sk-st"></div>
-    </div>
+    <div class="ph">Platform <em>Settings</em></div>
+    <div class="ps">API keys · data management</div>
     <div class="scard">
       <div class="scard-nm">Airtable Live Feed</div>
-      <div class="scard-d">Paste your Airtable Personal Access Token to populate the dashboard with real tenders from Zapier automatically. Dashboard refreshes every 2 minutes.</div>
-      <div class="srow"><input class="fi" id="sk-at" type="password" placeholder="patXXXXXXXXXXXXXX.XXXX" style="flex:1" oninput="saveATToken()"/><button class="nbtn" onclick="fetchAirtable();toast('Fetching live tenders…')">Sync Now</button></div>
-      <div style="margin-top:9px;font-size:9.5px" id="sk-at-st"></div>
+      <div class="scard-d">Paste your Airtable Personal Access Token to receive live tenders automatically from Zapier. Dashboard refreshes every 2 minutes.</div>
+      <div class="srow"><input class="fi" id="sk-at" type="password" placeholder="patXXXXXXXXXXXXXX.XXXX" style="flex:1" oninput="saveATToken()"/><button class="nbtn" onclick="fetchAirtable();toast('Syncing live tenders…')">Sync Now</button></div>
+      <div style="margin-top:8px;font-size:10px;font-weight:500" id="sk-at-st"></div>
+    </div>
+    <div class="scard">
+      <div class="scard-nm">Anthropic API Key</div>
+      <div class="scard-d">Powers the AI Prospector. Stored in your browser only — never committed to any file.</div>
+      <div class="srow"><input class="fi" id="sk-key" type="password" placeholder="sk-ant-api03-…" style="flex:1" oninput="onKeyIn()"/><button class="nbtn" onclick="clearKey()">Clear</button></div>
+      <div style="margin-top:8px;font-size:10px;font-weight:500" id="sk-st"></div>
     </div>
     <div class="scard">
       <div class="scard-nm">Pipeline Data</div>
-      <div class="scard-d">Pipeline statuses and saved tenders are stored in localStorage. Export a backup or clear all data.</div>
-      <div class="srow"><button class="nbtn" onclick="exportData()">Export JSON</button><button class="nbtn" style="color:var(--red);border-color:rgba(217,95,75,.2)" onclick="clearAll()">Clear All Data</button></div>
+      <div class="scard-d">Export or clear your BD pipeline and watchlist data.</div>
+      <div class="srow"><button class="nbtn" onclick="exportData()">Export JSON</button><button class="nbtn" style="color:var(--red);border-color:rgba(255,77,77,.2)" onclick="clearAll()">Clear All</button></div>
     </div>
     <div class="scard">
       <div class="scard-nm">About</div>
-      <div style="font-size:10.5px;color:var(--muted);line-height:1.9"><strong style="color:var(--white)">Skyrise Tender Intelligence Platform</strong> v5.0<br/>Built for Skyrise Capital PM &amp; FS Consulting Engineers.<br/>Sources: World Bank · AfDB · AFD · UNDP · dgMarket · Devex<br/>Coverage: Africa &amp; Middle East · Infrastructure · Advisory · PMO<br/><span style="color:var(--dim)">Self-contained · No server required · localStorage persistence</span></div>
+      <div style="font-size:11px;color:var(--w4);line-height:1.9"><strong style="color:var(--w2)">Skyrise BD Command Centre</strong> v6.0<br/>Built for Skyrise Capital PM &amp; FS Consulting Engineers.<br/>Sources: World Bank · AfDB · AFD · UNDP · dgMarket · Devex · Google Alert<br/>Coverage: Africa &amp; Middle East · Infrastructure · Advisory · PMO</div>
     </div>
   </div>
 </div>
 
-</div>
+</div><!-- /main -->
 <div id="toast"></div>
 
 <script>
+// ═══════════ SOURCES ═══════════════════════════════════════════════
 const SRCS=[
-  {id:"worldbank",name:"World Bank",icon:"🏛",color:"#4A7FE0",site:"https://projects.worldbank.org/en/projects-operations/procurement"},
-  {id:"afdb",name:"AfDB",icon:"🌍",color:"#00C98A",site:"https://www.afdb.org/en/procurement"},
-  {id:"afd",name:"AFD",icon:"🇫🇷",color:"#C9A96E",site:"https://www.afd.fr/en/calls-for-tenders"},
-  {id:"undp",name:"UNDP",icon:"🌐",color:"#5B9BD5",site:"https://procurement-notices.undp.org/"},
-  {id:"dgmarket",name:"dgMarket",icon:"📋",color:"#8B6FD4",site:"https://www.dgmarket.com/"},
-  {id:"devex",name:"Devex",icon:"🔍",color:"#D4753B",site:"https://www.devex.com/funding"},
-];
-const T=[
-  {id:"wb-dj-001",title:"Supervision of Doraleh Port Infrastructure Works – Phase II",source:"worldbank",country:"Djibouti",sector:"Port & Maritime",type:"QCBS",budget:"EUR 1.2M",deadline:"2026-06-28",pub:"2026-05-20",rel:98,tags:["port","supervision","Djibouti"],url:"https://projects.worldbank.org",desc:"Construction supervision services for the second phase of port infrastructure expansion at Doraleh, Djibouti.",st:"open"},
-  {id:"dgm-dj-005",title:"Project Management Support – ADR Djibouti Green Mobility Programme",source:"dgmarket",country:"Djibouti",sector:"Project Management / PMO",type:"QCBS",budget:"EUR 320K",deadline:"2026-06-30",pub:"2026-05-22",rel:96,tags:["PMO","Djibouti","green","ADR"],url:"https://dgmarket.com",desc:"Project management and advisory support to ADR for implementation of the green fleet and mobility programme.",st:"open"},
-  {id:"wb-dj-019",title:"Independent Technical Audit – Djibouti Port Multimodal Hub",source:"worldbank",country:"Djibouti",sector:"Advisory & Studies",type:"CQS",budget:"EUR 190K",deadline:"2026-06-25",pub:"2026-05-21",rel:94,tags:["audit","Djibouti","port","multimodal"],url:"https://projects.worldbank.org",desc:"Independent technical audit of the ongoing construction of the Djibouti multimodal port hub.",st:"open"},
-  {id:"afdb-ci-017",title:"Supervision des travaux – Port de San Pedro Extension",source:"afdb",country:"Côte d'Ivoire",sector:"Port & Maritime",type:"QCBS",budget:"EUR 1.8M",deadline:"2026-08-01",pub:"2026-05-25",rel:93,tags:["port","supervision","West Africa"],url:"https://afdb.org",desc:"Engineer's representative services for the expansion of San Pedro port, financed by AfDB.",st:"open"},
-  {id:"afdb-cm-025",title:"AMO – Port de Kribi Phase 2 Extension",source:"afdb",country:"Cameroon",sector:"Port & Maritime",type:"QCBS",budget:"EUR 2.2M",deadline:"2026-08-20",pub:"2026-06-03",rel:92,tags:["AMO","port","Cameroon"],url:"https://afdb.org",desc:"Owner's engineer mandate for the second phase of Kribi deep-sea port expansion, AfDB-financed.",st:"open"},
-  {id:"afdb-et-012",title:"AMO – Addis Ababa Urban Corridor Project (Road & Drainage)",source:"afdb",country:"Ethiopia",sector:"Transport",type:"QBS",budget:"USD 900K",deadline:"2026-07-10",pub:"2026-05-28",rel:91,tags:["AMO","road","urban","Ethiopia"],url:"https://afdb.org",desc:"Owner's engineer services for urban road and drainage corridor in Addis Ababa, financed by AfDB.",st:"open"},
-  {id:"dgm-sa-007",title:"PMO – Saudi Green Ports Initiative Phase 1",source:"dgmarket",country:"Saudi Arabia",sector:"Project Management / PMO",type:"QCBS",budget:"USD 2.8M",deadline:"2026-08-15",pub:"2026-06-02",rel:90,tags:["PMO","Saudi Arabia","port","green"],url:"https://dgmarket.com",desc:"Programme management office for the first phase of the Saudi Green Ports sustainability initiative.",st:"open"},
-  {id:"devex-cm-004",title:"Engineering Supervision – Douala Outer Ring Road Phase 3",source:"devex",country:"Cameroon",sector:"Engineering Supervision",type:"QCBS",budget:"EUR 2.4M",deadline:"2026-07-15",pub:"2026-05-28",rel:89,tags:["supervision","road","Cameroon"],url:"https://devex.com",desc:"Resident engineer and supervision team for the third phase of the Douala ring road, EU-funded.",st:"open"},
-  {id:"wb-ma-022",title:"Railway AMO – Tanger-Marrakech High Speed Rail Extension Study",source:"worldbank",country:"Morocco",sector:"Transport",type:"QCBS",budget:"USD 2.1M",deadline:"2026-07-25",pub:"2026-05-30",rel:88,tags:["railway","AMO","Morocco","study"],url:"https://projects.worldbank.org",desc:"Technical and financial feasibility study for the southern extension of Morocco's high speed rail network.",st:"open"},
-  {id:"afd-ci-009",title:"Supervision des travaux – Réhabilitation RN3 Abidjan-Bouaké",source:"afd",country:"Côte d'Ivoire",sector:"Engineering Supervision",type:"QCBS",budget:"EUR 1.5M",deadline:"2026-07-30",pub:"2026-05-27",rel:87,tags:["supervision","road","Côte d'Ivoire"],url:"https://afd.fr",desc:"Resident engineer services for rehabilitation of the RN3 national road between Abidjan and Bouaké, AFD-financed.",st:"open"},
-  {id:"devex-ma-018",title:"Engineering Advisory – Casablanca Port Logistics Hub Masterplan",source:"devex",country:"Morocco",sector:"Port & Maritime",type:"QCBS",budget:"EUR 950K",deadline:"2026-07-08",pub:"2026-05-29",rel:86,tags:["port","masterplan","Morocco","logistics"],url:"https://devex.com",desc:"Technical advisory and masterplan development for the Casablanca port logistics hub expansion.",st:"open"},
-  {id:"afd-sn-008",title:"Étude de faisabilité – Plateforme logistique Dakar Nord",source:"afd",country:"Senegal",sector:"Advisory & Studies",type:"QCBS",budget:"EUR 450K",deadline:"2026-06-20",pub:"2026-05-15",rel:85,tags:["feasibility","logistics","Senegal"],url:"https://afd.fr",desc:"Feasibility and technical study for a new logistics hub in northern Dakar, co-financed by AFD.",st:"open"},
-  {id:"afdb-dz-020",title:"Feasibility Study – Algiers Metro Network Extension Lines 4 & 5",source:"afdb",country:"Algeria",sector:"Transport",type:"QCBS",budget:"USD 1.8M",deadline:"2026-08-10",pub:"2026-06-01",rel:83,tags:["metro","feasibility","Algeria"],url:"https://afdb.org",desc:"Technical and economic feasibility for two new metro lines in Algiers, AfDB co-financed.",st:"open"},
-  {id:"afdb-rw-011",title:"PMO Advisory – Rwanda Urban Development Programme",source:"afdb",country:"Rwanda",sector:"Project Management / PMO",type:"QBS",budget:"USD 650K",deadline:"2026-06-22",pub:"2026-05-20",rel:82,tags:["PMO","urban","Rwanda"],url:"https://afdb.org",desc:"Programme management office support for the Ministry of Infrastructure, Rwanda, financed by AfDB.",st:"open"},
-  {id:"wb-tz-015",title:"AMO – Dar es Salaam Bus Rapid Transit Corridor Extension",source:"worldbank",country:"Tanzania",sector:"Transport",type:"QCBS",budget:"USD 1.1M",deadline:"2026-07-18",pub:"2026-05-26",rel:80,tags:["AMO","BRT","Tanzania"],url:"https://projects.worldbank.org",desc:"Owner's engineer for the extension of the Dar es Salaam BRT system, World Bank-financed.",st:"open"},
-  {id:"undp-ke-003",title:"Procurement Advisory Services – Kenya National Water Authority",source:"undp",country:"Kenya",sector:"Procurement Advisory",type:"IC",budget:"USD 180K",deadline:"2026-06-09",pub:"2026-05-10",rel:78,tags:["water","procurement","Kenya"],url:"https://procurement-notices.undp.org",desc:"Consultant firm to provide procurement advisory for the water utility capital programme.",st:"closing_soon"},
-  {id:"wb-et-031",title:"Procurement Support – Ethiopia Road Fund Capital Works Programme",source:"worldbank",country:"Ethiopia",sector:"Procurement Advisory",type:"QBS",budget:"USD 420K",deadline:"2026-07-20",pub:"2026-06-01",rel:76,tags:["procurement","road","Ethiopia"],url:"https://projects.worldbank.org",desc:"Procurement advisory and capacity building for the Ethiopian Roads Authority capital programme.",st:"open"},
-  {id:"afd-sn-014",title:"Contrôle et supervision – Programme eau potable Ziguinchor",source:"afd",country:"Senegal",sector:"Water & Sanitation",type:"QCBS",budget:"EUR 280K",deadline:"2026-07-01",pub:"2026-05-24",rel:71,tags:["water","supervision","Senegal"],url:"https://afd.fr",desc:"Control and supervision mission for the drinking water infrastructure programme in Ziguinchor region.",st:"open"},
-  {id:"wb-ug-009",title:"ESIA – Kampala-Jinja Expressway Phase 2",source:"worldbank",country:"Uganda",sector:"Environment & ESIA",type:"QCBS",budget:"USD 380K",deadline:"2026-07-05",pub:"2026-05-18",rel:72,tags:["ESIA","road","Uganda"],url:"https://projects.worldbank.org",desc:"Environmental and social impact assessment for the second phase of the Kampala-Jinja expressway.",st:"open"},
-  {id:"undp-ug-022",title:"Energy Access Advisory – Uganda Rural Electrification Programme",source:"undp",country:"Uganda",sector:"Energy",type:"IC",budget:"USD 210K",deadline:"2026-07-12",pub:"2026-05-31",rel:65,tags:["energy","rural","Uganda"],url:"https://procurement-notices.undp.org",desc:"Advisory services for the implementation of the rural electrification programme in northern Uganda.",st:"open"},
+  {id:"World Bank",name:"World Bank",icon:"🏛",color:"#4D8EFF",site:"https://projects.worldbank.org/en/projects-operations/procurement"},
+  {id:"AfDB",name:"AfDB",icon:"🌍",color:"#00D68F",site:"https://www.afdb.org/en/procurement"},
+  {id:"AFD",name:"AFD",icon:"🇫🇷",color:"#C9A96E",site:"https://www.afd.fr/en/calls-for-tenders"},
+  {id:"UNDP",name:"UNDP",icon:"🌐",color:"#5B9BD5",site:"https://procurement-notices.undp.org/"},
+  {id:"dgMarket",name:"dgMarket",icon:"📋",color:"#9B6DFF",site:"https://www.dgmarket.com/"},
+  {id:"Devex",name:"Devex",icon:"🔍",color:"#FF7A3D",site:"https://www.devex.com/funding"},
+  {id:"Google Alert",name:"Google Alert",icon:"🔔",color:"#FFB020",site:"https://www.google.com/alerts"},
 ];
 
+// ═══════════ PIPELINE ══════════════════════════════════════════════
 const PS=["reviewing","bid_prep","submitted","won_lost"];
 const PL={reviewing:"Reviewing",bid_prep:"Bid Prep",submitted:"Submitted",won_lost:"Won / Lost"};
 const PC={reviewing:"var(--blue)",bid_prep:"var(--amber)",submitted:"var(--gold)",won_lost:"var(--green)"};
+const BUDGETS={"AMO":1200000,"PMO":800000,"Feasibility":500000,"Supervision":1800000,"Advisory":400000,"Audit":250000,"Procurement":350000,"Study":600000};
+
 let saved=new Set(JSON.parse(localStorage.getItem("sr_saved")||"[]"));
 let pipe=JSON.parse(localStorage.getItem("sr_pipe")||"{}");
 function persist(){localStorage.setItem("sr_saved",JSON.stringify([...saved]));localStorage.setItem("sr_pipe",JSON.stringify(pipe));}
-function du(d){return Math.ceil((new Date(d)-new Date())/864e5)}
-function rc(s){return s>=90?"var(--green)":s>=75?"var(--gold)":"var(--red)"}
-function si(id){return SRCS.find(s=>s.id===id)||{name:id,icon:"•",color:"#888"}}
-function toast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2600)}
 
-function updateStats(){
-  const all=allTenders();
-  document.getElementById("st-open").textContent=all.filter(t=>t.st==="open").length;
-  document.getElementById("st-cl").textContent=all.filter(t=>du(t.deadline)<=7&&du(t.deadline)>0).length;
-  document.getElementById("st-hi").textContent=all.filter(t=>t.rel>=90).length;
-  document.getElementById("st-sv").textContent=saved.size;
-  document.getElementById("st-pp").textContent=Object.keys(pipe).length;
+// ═══════════ UTILS ═════════════════════════════════════════════════
+function du(d){if(!d)return 999;return Math.ceil((new Date(d)-new Date())/864e5)}
+function si(id){return SRCS.find(s=>s.id===id)||{name:id,icon:"•",color:"#888",site:"#"}}
+function toast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2500)}
+function parseBudget(s){if(!s||s==="—")return 0;const n=parseFloat(s.replace(/[^0-9.]/g,""));const m=s.includes("M")?1e6:s.includes("K")?1e3:1;return n*m;}
+function formatBudget(n){if(n>=1e6)return"EUR "+(n/1e6).toFixed(1)+"M";if(n>=1e3)return"EUR "+(n/1e3).toFixed(0)+"K";return"EUR "+n;}
+
+// BID RECOMMENDATION ENGINE
+function recommend(t){
+  const d=du(t.deadline);const s=t.rel||75;
+  if(d<=0)return{label:"EXPIRED",cls:"rec-pass",color:"var(--w5)"};
+  if(d<=7&&s>=70)return{label:"URGENT",cls:"rec-urgent",color:"var(--red)"};
+  if(s>=85&&d>7)return{label:"BID — STRONG FIT",cls:"rec-bid",color:"var(--green)"};
+  if(s>=70&&d>7)return{label:"BID — GOOD FIT",cls:"rec-bid",color:"var(--green)"};
+  if(s>=55)return{label:"WATCH",cls:"rec-watch",color:"var(--amber)"};
+  return{label:"PASS",cls:"rec-pass",color:"var(--w4)"};
 }
+function recKey(t){const r=recommend(t);if(r.label.startsWith("BID"))return"BID";if(r.label==="URGENT")return"URGENT";if(r.label==="WATCH")return"WATCH";return"PASS";}
 
-function renderDashboard(){
-  const totalBudget="EUR 23.7M+";
-  const avgRel=Math.round(T.reduce((a,b)=>a+b.rel,0)/T.length);
-  const expiring=T.filter(t=>du(t.deadline)<=14&&du(t.deadline)>0).length;
-  document.getElementById("dash-kpis").innerHTML=[
-    {l:"Total Budget Tracked",v:totalBudget,s:"Across 20 active tenders",c:"var(--gold)",tr:"↑ 4 new this week",tc:"tu"},
-    {l:"Avg Relevance Score",v:avgRel,s:"Across all monitored tenders",c:"var(--green)",tr:"▲ Above 80 threshold",tc:"tu"},
-    {l:"Expiring Within 14 Days",v:expiring,s:"Deadlines requiring action",c:"var(--amber)",tr:"⚠ Review urgently",tc:"tn"},
-  ].map(k=>`<div class="dcard"><div class="dcard-l">${k.l}</div><div class="dcard-v" style="color:${k.c}">${k.v}</div><div class="dcard-s">${k.s}</div><div class="trend ${k.tc}">${k.tr}</div></div>`).join("");
+// SCORE COLOR
+function sc(s){return s>=85?"var(--green)":s>=70?"var(--amber)":"var(--red)"}
 
-  // Deadlines
-  const dl=T.filter(t=>du(t.deadline)>0).sort((a,b)=>new Date(a.deadline)-new Date(b.deadline)).slice(0,6);
-  document.getElementById("dash-dl").innerHTML=dl.map(t=>{
-    const d=du(t.deadline);
-    const bc=d<=7?"var(--red3)":d<=14?"var(--amber3)":"rgba(255,255,255,.05)";
-    const fc=d<=7?"var(--red)":d<=14?"var(--amber)":"var(--muted)";
-    return`<div class="dl-item" onclick="goTab('opportunities')"><div class="dl-ttl">${t.title.length>52?t.title.slice(0,49)+"…":t.title}</div><span class="dl-badge" style="background:${bc};color:${fc}">${d}d · ${t.country}</span></div>`;
-  }).join("");
-
-  // Pipeline mini
-  document.getElementById("dash-pm").innerHTML=PS.map(s=>{
-    const n=Object.values(pipe).filter(v=>v===s).length;
-    return`<div class="pm-col"><div class="pm-n" style="color:${PC[s]}">${n}</div><div class="pm-l">${PL[s]}</div></div>`;
-  }).join("");
-
-  drawSectorChart();
-  drawSourceChart();
-}
-
-function drawSectorChart(){
-  const sec={};T.forEach(t=>{sec[t.sector]=(sec[t.sector]||0)+1});
-  const entries=Object.entries(sec).sort((a,b)=>b[1]-a[1]).slice(0,6);
-  const total=entries.reduce((a,b)=>a+b[1],0);
-  const cols=["#C9A96E","#00C98A","#4A7FE0","#D95F4B","#8B6FD4","#E8A020"];
-  const svg=document.getElementById("ch-sec");
-  const cx=100,cy=100,r=78,ir=46;
-  let angle=-Math.PI/2,paths="";
-  entries.forEach(([nm,cnt],i)=>{
-    const sl=(cnt/total)*2*Math.PI;
-    const x1=cx+r*Math.cos(angle),y1=cy+r*Math.sin(angle);
-    const x2=cx+r*Math.cos(angle+sl),y2=cy+r*Math.sin(angle+sl);
-    const ix1=cx+ir*Math.cos(angle),iy1=cy+ir*Math.sin(angle);
-    const ix2=cx+ir*Math.cos(angle+sl),iy2=cy+ir*Math.sin(angle+sl);
-    const lg=sl>Math.PI?1:0;
-    paths+=`<path d="M${ix1},${iy1}L${x1},${y1}A${r},${r} 0 ${lg},1 ${x2},${y2}L${ix2},${iy2}A${ir},${ir} 0 ${lg},0 ${ix1},${iy1}" fill="${cols[i]}" opacity=".82"/>`;
-    angle+=sl;
-  });
-  paths+=`<text x="${cx}" y="${cy-5}" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="22" fill="#F0EEE8">${total}</text>`;
-  paths+=`<text x="${cx}" y="${cy+12}" text-anchor="middle" font-family="Poppins,sans-serif" font-size="7.5" fill="#3E3E3A" letter-spacing="1.5">TENDERS</text>`;
-  svg.innerHTML=paths;
-  document.getElementById("leg-sec").innerHTML=entries.map(([nm,cnt],i)=>`<div class="leg-it"><div class="leg-dot" style="background:${cols[i]}"></div>${nm} (${cnt})</div>`).join("");
-}
-
-function drawSourceChart(){
-  const svg=document.getElementById("ch-src");
-  const W=340,H=150,pad=36,bp=28;
-  const counts=SRCS.map(s=>({name:s.name,count:T.filter(t=>t.source===s.id).length,color:s.color}));
-  const max=Math.max(...counts.map(c=>c.count))||1;
-  const bw=22;const gap=(W-pad*2)/counts.length;
-  let bars="";
-  counts.forEach((c,i)=>{
-    const bh=((c.count/max)*(H-bp-18));
-    const x=pad+i*gap+(gap-bw)/2;const y=H-bp-bh;
-    if(c.count>0){
-      bars+=`<rect x="${x}" y="${y}" width="${bw}" height="${bh}" rx="3" fill="${c.color}" opacity=".82"/>`;
-      bars+=`<text x="${x+bw/2}" y="${y-5}" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="13" fill="${c.color}">${c.count}</text>`;
-    }
-    bars+=`<text x="${x+bw/2}" y="${H-bp+13}" text-anchor="middle" font-family="Poppins,sans-serif" font-size="7" fill="#3E3E3A" letter-spacing=".5">${c.name}</text>`;
-  });
-  svg.innerHTML=bars;
-}
-
-function renderTenders(){
-  const q=(document.getElementById("fi-q").value||"").toLowerCase();
-  const src=document.getElementById("fi-src").value;
-  const sec=document.getElementById("fi-sec").value;
-  const cty=document.getElementById("fi-cty").value;
-  const srt=document.getElementById("fi-sort").value;
-  let list=[...allTenders()].filter(t=>{
-    const mq=!q||t.title.toLowerCase().includes(q)||t.country.toLowerCase().includes(q)||t.tags.some(g=>g.toLowerCase().includes(q));
-    return mq&&(src==="all"||t.source===src)&&(sec==="all"||t.sector===sec)&&(cty==="all"||t.country===cty);
-  }).sort((a,b)=>srt==="relevance"?b.rel-a.rel:srt==="deadline"?new Date(a.deadline)-new Date(b.deadline):new Date(b.pub)-new Date(a.pub));
-  document.getElementById("fi-ct").textContent=list.length+" of "+T.length+" results";
-  const el=document.getElementById("tlist");
-  if(!list.length){el.innerHTML='<div class="empty-st">No live tenders yet — Zapier will populate this automatically within 24 hours as Google Alert finds new results.</div>';return;}
-  el.innerHTML=list.map(t=>{
-    const s=si(t.source);const d=du(t.deadline);const sv=saved.has(t.id);const pp=pipe[t.id];
-    const dc=d<=7?"var(--red)":d<=14?"var(--amber)":"var(--muted)";
-    const sc=(t.st==="closing_soon"||d<=7)?'<span class="chip cl">Closing Soon</span>':t.st==="open"?'<span class="chip op">Open</span>':'<span class="chip">Closed</span>';
-    return`<div class="tc${sv?" saved":""}">
-      <div style="display:flex;flex-direction:column;align-items:center;gap:3px"><div class="rring" style="color:${rc(t.rel)}">${t.rel}<small>match</small></div></div>
-      <div>
-        <div class="chips"><span class="chip" style="background:${s.color}1E;color:${s.color}">${s.icon} ${s.name}</span><span class="chip">${t.country}</span><span class="chip">${t.sector}</span><span class="chip">${t.type}</span>${sc}${t.live?'<span class="chip" style="background:rgba(0,201,138,.2);color:var(--green);font-weight:500">⬤ LIVE</span>':""}${pp?`<span class="chip" style="background:${PC[pp]}1E;color:${PC[pp]}">● ${PL[pp]}</span>`:""}</div>
-        <div class="ttl">${t.title}</div>
-        <div class="tdesc">${t.desc}</div>
-        <div class="ttags">${t.tags.map(g=>`<span class="ttag">#${g}</span>`).join("")}</div>
-      </div>
-      <div class="tmeta">
-        <div><div class="tbudget">${t.budget}</div><div class="tbdgl">estimated value</div></div>
-        <div><div class="tdays" style="color:${dc}">${d>0?d+"d left":"Expired"}</div><div class="tdaysl">${t.deadline}</div></div>
-        <div class="tact">
-          <button class="ab sv${sv?" on":""}" onclick="toggleSave('${t.id}')">${sv?"★ Saved":"☆ Save"}</button>
-          <button class="ab pp" onclick="addPipe('${t.id}')">+ Pipeline</button>
-          <a class="ab vw" href="${t.url}" target="_blank" rel="noopener">View ↗</a>
-        </div>
-      </div>
-    </div>`;
-  }).join("");
-}
-
-function toggleSave(id){saved.has(id)?saved.delete(id):saved.add(id);persist();updateStats();renderTenders();}
-
-function addPipe(id){
-  if(!pipe[id]){pipe[id]="reviewing";persist();updateStats();renderPipeline();renderTenders();renderDashboard();toast("Added to Pipeline → Reviewing");}
-  else toast("Already in pipeline — update status in BD Pipeline tab");
-}
-function movePipe(id,stage){pipe[id]=stage;persist();updateStats();renderPipeline();renderTenders();renderDashboard();toast("Moved to: "+PL[stage]);}
-function removePipe(id){delete pipe[id];persist();updateStats();renderPipeline();renderTenders();renderDashboard();toast("Removed from pipeline");}
-
-function renderPipeline(){
-  document.getElementById("pboard").innerHTML=PS.map(stage=>{
-    const items=Object.entries(pipe).filter(([,s])=>s===stage);
-    return`<div class="pcol">
-      <div class="pcol-hd" style="color:${PC[stage]}">${PL[stage]}<span>${items.length}</span></div>
-      ${items.length?items.map(([id])=>{
-        const t=T.find(x=>x.id===id);if(!t)return"";
-        return`<div class="pitem">
-          <div class="pitem-ttl">${t.title.length>58?t.title.slice(0,55)+"…":t.title}</div>
-          <div class="pitem-meta">${t.country} · ${t.budget} · ${du(t.deadline)}d left · ${t.type}</div>
-          <div class="pitem-acts">
-            ${PS.filter(s=>s!==stage).map(s=>`<button onclick="movePipe('${id}','${s}')">${PL[s]}</button>`).join("")}
-            <button class="rm" onclick="removePipe('${id}')">✕</button>
-          </div>
-        </div>`;}).join(""):'<div class="pempty">No tenders yet</div>'}
-    </div>`;
-  }).join("");
-}
-
-function saveATToken(){
-  const v=document.getElementById("sk-at")?.value||"";
-  if(v){localStorage.setItem("sr_at_token",v);const e=document.getElementById("sk-at-st");if(e){e.textContent="✓ Token saved — fetching live tenders";e.style.color="var(--green)";}fetchAirtable();}
-}
-function onKeyIn(){
-  const ak=document.getElementById("ai-key"),sk=document.getElementById("sk-key");
-  const v=(document.activeElement===ak?ak:sk)?.value||"";
-  if(v)localStorage.setItem("sr_key",v);
-  if(ak&&sk){if(document.activeElement===ak)sk.value=ak.value;else if(document.activeElement===sk)ak.value=sk.value;}
-  updateKeyStatus();
-}
-function updateKeyStatus(){
-  const k=localStorage.getItem("sr_key")||"";
-  const msg=k?"✓ Key saved — AI Prospector active":"Not set — enter your Anthropic API key to activate";
-  const col=k?"var(--green)":"var(--dim)";
-  ["ai-kst","sk-st"].forEach(id=>{const e=document.getElementById(id);if(e){e.textContent=msg;e.style.color=col;}});
-}
-function clearKey(){localStorage.removeItem("sr_key");["ai-key","sk-key"].forEach(id=>{const e=document.getElementById(id);if(e)e.value="";});updateKeyStatus();toast("API key cleared");}
-
-async function runAI(){
-  const k=localStorage.getItem("sr_key");
-  const q=(document.getElementById("ai-q").value||"").trim();
-  if(!q){toast("Please enter a query");return;}
-  if(!k){toast("Add your Anthropic API key in Settings first");return;}
-  const btn=document.getElementById("ai-btn"),res=document.getElementById("ai-res");
-  btn.disabled=true;btn.textContent="Analysing…";
-  res.innerHTML='<div style="font-family:var(--serif);font-size:18px;font-style:italic;color:var(--dim);padding:48px 0;text-align:center">Running intelligence search…</div>';
-  try{
-    const r=await fetch("https://api.anthropic.com/v1/messages",{
-      method:"POST",
-      headers:{"Content-Type":"application/json","x-api-key":k,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-calls":"true"},
-      body:JSON.stringify({model:"claude-haiku-4-5-20251001",max_tokens:1300,
-        system:`You are a senior BD analyst for Skyrise Capital PM (Dubai) — AMO, PMO, supervision, advisory for infrastructure, port, transport, water in Africa & Middle East. MDB procurement: WB, AfDB, AFD, UNDP, EU. Respond ONLY with valid JSON, no markdown:
-{"summary":"2-3 sentence assessment","leads":[{"title":"...","source":"worldbank|afdb|afd|undp|dgmarket|devex","country":"...","sector":"...","type":"QCBS|QBS|IC|CQS","relevance":0-100,"rationale":"one line","url":"https://..."}],"partnerSuggestions":["..."],"watchWords":["..."]}`,
-        messages:[{role:"user",content:q}]})
-    });
-    const d=await r.json();
-    const txt=d.content?.find(b=>b.type==="text")?.text||"";
-    renderAIRes(JSON.parse(txt.replace(/```json|```/g,"").trim()));
-  }catch(e){res.innerHTML='<div class="ibox"><div class="ibox-l" style="color:var(--red)">Error</div>Could not parse response. Check your API key in Settings and try again.</div>';}
-  btn.disabled=false;btn.textContent="→ Run Intelligence Search";
-}
-
-function renderAIRes(r){
-  let h=`<div class="aicard fade-up"><div class="aicard-l">Assessment</div><div class="aisy">${r.summary||""}</div></div>`;
-  if(r.leads?.length){
-    h+=`<div style="font-size:8.5px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin:14px 0 9px">Identified Leads</div>`;
-    h+=r.leads.map(l=>{const s=si(l.source);return`<div class="alead fade-up"><div><div class="chips" style="margin-bottom:6px"><span class="chip" style="background:${s.color}1E;color:${s.color}">${s.icon} ${s.name}</span><span class="chip">${l.country}</span><span class="chip">${l.sector}</span></div><div style="font-family:var(--serif);font-size:15px;color:var(--white);margin-bottom:3px">${l.title}</div><div style="font-size:10.5px;color:var(--dim)">${l.rationale}</div></div><div style="text-align:right"><div style="font-family:var(--serif);font-size:22px;color:${rc(l.relevance)}">${l.relevance}</div><div style="font-size:8.5px;color:var(--dim)">match</div></div></div>`;}).join("");}
-  if(r.partnerSuggestions?.length)h+=`<div class="aicard fade-up" style="border-color:rgba(74,127,224,.2);margin-top:10px"><div class="aicard-l" style="color:var(--blue)">Partner Suggestions</div>${r.partnerSuggestions.map(p=>`<div style="font-size:11.5px;color:var(--muted);margin-bottom:5px">→ ${p}</div>`).join("")}</div>`;
-  if(r.watchWords?.length)h+=`<div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:10px">${r.watchWords.map(w=>`<span class="ttag">#${w}</span>`).join("")}</div>`;
-  document.getElementById("ai-res").innerHTML=h;
-}
-
-function renderSources(){
-  document.getElementById("src-grid").innerHTML=SRCS.map(s=>`<a class="srccard" href="${s.site}" target="_blank" rel="noopener"><div class="src-top"><div class="src-ico">${s.icon}</div><div><div class="src-nm" style="color:${s.color}">${s.name}</div><div class="src-dom">${s.site.replace("https://","")}</div></div></div><div style="font-size:10.5px;color:var(--muted);margin-bottom:9px">${T.filter(t=>t.source===s.id).length} active tenders tracked</div><div class="src-lnk">Open portal ↗</div></a>`).join("");
-}
-
-function goTab(id){
-  document.querySelectorAll(".tbtn").forEach(b=>b.classList.toggle("active",b.dataset.tab===id));
-  document.querySelectorAll("[id^='tab-']").forEach(el=>{el.classList.add("hidden");el.classList.remove("fade-up")});
-  const t=document.getElementById("tab-"+id);
-  t.classList.remove("hidden");requestAnimationFrame(()=>t.classList.add("fade-up"));
-}
-
-function handleRefresh(){
-  document.getElementById("live-t").textContent="Fetching…";
-  setTimeout(()=>{document.getElementById("live-t").textContent=new Date().toLocaleTimeString();toast("Feed refreshed");},1400);
-}
-function setFreq(btn){document.querySelectorAll(".freqbtn").forEach(b=>b.classList.remove("on"));btn.classList.add("on");}
-function saveAlerts(){const b=document.getElementById("al-btn");b.textContent="✓ Configuration Saved";b.style.background="var(--green)";setTimeout(()=>{b.textContent="Activate Email Alerts";b.style.background="";},3000);}
-function copyRSS(){navigator.clipboard.writeText("https://www.dgmarket.com/tenders/rssfeed.do?noticeType=gpr&country=DJ,ET,KE,TZ,SN,CI,CM,MA,DZ,SA,AE,UG,RW&sector=TRN,WTR,ENE,URB,ENV&donor=WB,AFDB,AFD,UNDP,EU&language=en,fr&maxAge=30").then(()=>toast("RSS URL copied to clipboard")).catch(()=>toast("Select and copy the URL manually"));}
-function exportData(){const a=document.createElement("a");a.href="data:application/json,"+encodeURIComponent(JSON.stringify({pipeline:pipe,saved:[...saved],exported:new Date().toISOString()},null,2));a.download="skyrise-pipeline-"+new Date().toISOString().slice(0,10)+".json";a.click();}
-function clearAll(){if(confirm("Clear all pipeline and saved data? Cannot be undone.")){pipe={};saved=new Set();persist();updateStats();renderPipeline();renderTenders();renderDashboard();toast("All data cleared");}}
-
-// ════════════════════════════════════════════════════════════════
-// AIRTABLE LIVE FEED
-// ════════════════════════════════════════════════════════════════
+// ═══════════ AIRTABLE LIVE FEED ════════════════════════════════════
 const AT_BASE="appS3v2RPM3TnNsA8";
 const AT_TABLE="tblE9vnb6Jj9pOeSK";
 let liveT=[];
@@ -791,49 +612,413 @@ async function fetchAirtable(){
   const token=localStorage.getItem("sr_at_token")||"";
   if(!token)return;
   try{
-    const r=await fetch(`https://api.airtable.com/v0/${AT_BASE}/${AT_TABLE}?maxRecords=100&sort[0][field]=Published&sort[0][direction]=desc`,{
+    const r=await fetch(`https://api.airtable.com/v0/${AT_BASE}/${AT_TABLE}?maxRecords=200&sort[0][field]=Published&sort[0][direction]=desc`,{
       headers:{"Authorization":"Bearer "+token}
     });
     const d=await r.json();
     if(!d.records)return;
     liveT=d.records.map(rec=>{
       const f=rec.fields;
+      const title=f.Title||f.Name||"";
+      if(!title||title==="Untitled")return null;
+      // Auto-score based on keywords
+      const kw=["supervision","AMO","advisory","PMO","port","infrastructure","feasibility","consultant","maîtrise","procurement"];
+      let score=65;
+      kw.forEach(k=>{if(title.toLowerCase().includes(k)||((f.Description||"").toLowerCase().includes(k)))score+=3;});
+      score=Math.min(score,97);
       return{
         id:"at-"+rec.id,
-        title:f.Title||f.Name||"Untitled",
-        source:f.Source||"dgmarket",
+        title,
+        source:f.Source||"Google Alert",
         country:f.Country||"—",
-        sector:f.Sector||"Advisory & Studies",
+        sector:f.Sector||guessSector(title),
         type:f.Type||"QCBS",
-        budget:f.Budget||"—",
+        budget:f.Budget||guessBudget(title),
         deadline:f.Deadline||"",
         pub:f.Published||new Date().toISOString().slice(0,10),
-        rel:parseInt(f.Relevance)||75,
-        tags:(f.Tags||"").split(",").map(t=>t.trim()).filter(Boolean),
+        rel:parseInt(f.Relevance)||score,
+        tags:[],
         url:f.URL||"#",
-        desc:f.Description||f.Summary||"",
+        desc:f.Description||"",
         st:"open",
         live:true
       };
-    }).filter(t=>t.title&&t.title!=="Untitled");
+    }).filter(Boolean);
     updateStats();renderTenders();renderDashboard();
+    const e=document.getElementById("sk-at-st");if(e){e.textContent="✓ "+liveT.length+" live tenders synced · "+new Date().toLocaleTimeString();e.style.color="var(--green)";}
     document.getElementById("live-t").textContent=new Date().toLocaleTimeString()+" · "+liveT.length+" live";
   }catch(e){console.log("Airtable fetch error",e);}
 }
 
+function guessSector(title){
+  const t=title.toLowerCase();
+  if(t.includes("port")||t.includes("maritime"))return"Port & Maritime";
+  if(t.includes("pmo")||t.includes("project management"))return"Project Management / PMO";
+  if(t.includes("amo")||t.includes("maîtrise"))return"Advisory & Studies";
+  if(t.includes("road")||t.includes("railway")||t.includes("transport")||t.includes("expressway")||t.includes("corridor"))return"Transport";
+  if(t.includes("water")||t.includes("sanitation")||t.includes("eau"))return"Water & Sanitation";
+  if(t.includes("supervision")||t.includes("contrôle"))return"Engineering Supervision";
+  if(t.includes("feasibility")||t.includes("faisabilité")||t.includes("étude")||t.includes("study"))return"Advisory & Studies";
+  if(t.includes("procurement"))return"Procurement Advisory";
+  if(t.includes("esia")||t.includes("environment"))return"Environment & ESIA";
+  return"Advisory & Studies";
+}
+function guessBudget(title){
+  const t=title.toLowerCase();
+  if(t.includes("supervision")||t.includes("amo"))return"EUR 1.2M–2.5M";
+  if(t.includes("pmo"))return"USD 500K–1.5M";
+  if(t.includes("feasibility")||t.includes("étude"))return"EUR 300K–600K";
+  if(t.includes("audit"))return"EUR 150K–300K";
+  if(t.includes("procurement")||t.includes("advisory"))return"USD 200K–500K";
+  return"TBD";
+}
+
 function allTenders(){return liveT.length>0?liveT:[];}
 
+// ═══════════ STATS ══════════════════════════════════════════════════
+function updateStats(){
+  const all=allTenders();
+  const urgent=all.filter(t=>du(t.deadline)<=14&&du(t.deadline)>0).length;
+  if(urgent>0){const b=document.getElementById("tab-urgent-badge");if(b){b.textContent=urgent;b.style.display="inline";}}
+}
+
+// ═══════════ COMMAND CENTRE ═════════════════════════════════════════
+function renderDashboard(){
+  const all=allTenders();
+  document.getElementById("cc-date").textContent=new Date().toLocaleDateString("en-GB",{day:"2-digit",month:"long",year:"numeric"});
+
+  // KPIs
+  const totalBudget=all.reduce((s,t)=>s+parseBudget(t.budget),0);
+  const highFit=all.filter(t=>t.rel>=80).length;
+  const urgent=all.filter(t=>du(t.deadline)<=14&&du(t.deadline)>0).length;
+  const pipeVal=Object.keys(pipe).reduce((s,id)=>{const t=all.find(x=>x.id===id);return s+(t?parseBudget(t.budget):0);},0);
+
+  document.getElementById("cc-kpis").innerHTML=[
+    {label:"Live Opportunities",val:all.length,sub:"Across all monitored sources",accent:"var(--blue)",trend:"⬤ Live feed active",tc:"up"},
+    {label:"Total Budget Value",val:totalBudget>=1e6?"EUR "+(totalBudget/1e6).toFixed(1)+"M":"—",sub:"Addressable pipeline",accent:"var(--gold)",trend:"Estimated across all tenders",tc:"up"},
+    {label:"Strong Fit (Score ≥ 80)",val:highFit,sub:"Bid recommended",accent:"var(--green)",trend:"→ Review and decide",tc:"up"},
+    {label:"Action Required",val:urgent,sub:"Deadlines within 14 days",accent:urgent>0?"var(--red)":"var(--w4)",trend:urgent>0?"⚠ Urgent attention needed":"All clear",tc:urgent>0?"crit":"up"},
+  ].map(k=>`<div class="kcard" style="--accent:${k.accent}"><div class="kcard-label">${k.label}</div><div class="kcard-val">${k.val}</div><div class="kcard-sub">${k.sub}</div><div class="kcard-trend ${k.tc}">${k.trend}</div></div>`).join("");
+
+  // Action required list
+  const actions=all.filter(t=>du(t.deadline)<=21&&du(t.deadline)>0).sort((a,b)=>du(a.deadline)-du(b.deadline)).slice(0,6);
+  document.getElementById("action-count").textContent=actions.length+" items";
+  document.getElementById("action-list").innerHTML=actions.length?actions.map(t=>{
+    const d=du(t.deadline);const rec=recommend(t);
+    const dot=d<=7?"var(--red)":d<=14?"var(--amber)":"var(--blue)";
+    return`<div class="alert-item" onclick="goTab('opportunities')">
+      <div class="alert-dot" style="background:${dot}"></div>
+      <div class="alert-text"><strong>${t.title.length>55?t.title.slice(0,52)+"…":t.title}</strong><br/>${t.country} · ${t.source}</div>
+      <span class="alert-tag ${rec.cls}">${d}d</span>
+    </div>`;}).join(""):`<div style="text-align:center;padding:20px;font-size:11px;color:var(--w5);font-style:italic">No urgent deadlines</div>`;
+
+  // Timeline
+  const tl=all.filter(t=>du(t.deadline)>0).sort((a,b)=>du(a.deadline)-du(b.deadline)).slice(0,5);
+  document.getElementById("cc-timeline").innerHTML=tl.map(t=>{
+    const d=du(t.deadline);
+    const tc=d<=7?"var(--red)":d<=14?"var(--amber)":"var(--blue)";
+    return`<div class="tl-item" style="--tc:${tc}" onclick="goTab('opportunities')">
+      <div><div class="tl-days" style="color:${tc}">${d}</div><div class="tl-days-lbl">days</div></div>
+      <div><div class="tl-title">${t.title.length>48?t.title.slice(0,45)+"…":t.title}</div><div class="tl-meta">${t.country} · ${t.source} · ${t.deadline}</div></div>
+      <div><div class="tl-budget">${t.budget}</div><div class="tl-budget-lbl">budget</div></div>
+    </div>`;}).join("")||`<div style="text-align:center;padding:20px;font-size:11px;color:var(--w5);font-style:italic">No upcoming deadlines</div>`;
+
+  // Pipeline value by stage
+  const PS_=[...PS];
+  document.getElementById("cc-pipe-val").innerHTML=PS_.map(s=>{
+    const items=Object.entries(pipe).filter(([,st])=>st===s);
+    const val=items.reduce((sum,[id])=>{const t=all.find(x=>x.id===id);return sum+(t?parseBudget(t.budget):0);},0);
+    return`<div class="pv-col" style="--pc:${PC[s]}">
+      <div class="pv-n" style="color:${PC[s]}">${items.length}</div>
+      <div class="pv-val">${val>0?formatBudget(val):"—"}</div>
+      <div class="pv-lbl">${PL[s]}</div>
+    </div>`;}).join("");
+
+  // Source bar chart
+  drawSourceBar();
+  // Sector donut
+  drawDonut(all);
+}
+
+function drawSourceBar(){
+  const all=allTenders();
+  const svg=document.getElementById("cc-src-chart");
+  const W=260,H=120,pad=30,bp=20;
+  const srcs=["World Bank","AfDB","AFD","UNDP","dgMarket","Google Alert"];
+  const counts=srcs.map(s=>({name:s.replace(" ","​"),count:all.filter(t=>t.source===s).length,color:SRCS.find(x=>x.id===s)?.color||"#888"}));
+  const max=Math.max(...counts.map(c=>c.count),1);
+  const bw=20;const gap=(W-pad*2)/counts.length;
+  let bars="";
+  counts.forEach((c,i)=>{
+    const bh=((c.count/max)*(H-bp-18));
+    const x=pad+i*gap+(gap-bw)/2;const y=H-bp-bh;
+    if(c.count>0){
+      bars+=`<rect x="${x}" y="${y}" width="${bw}" height="${bh}" rx="3" fill="${c.color}" opacity=".85"/>`;
+      bars+=`<text x="${x+bw/2}" y="${y-4}" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="${c.color}">${c.count}</text>`;
+    }
+    bars+=`<text x="${x+bw/2}" y="${H-bp+12}" text-anchor="middle" font-family="Inter,sans-serif" font-size="7" fill="var(--w4)">${c.name}</text>`;
+  });
+  svg.innerHTML=bars;
+}
+
+function drawDonut(all){
+  const sectors={};all.forEach(t=>{sectors[t.sector]=(sectors[t.sector]||0)+1});
+  const entries=Object.entries(sectors).sort((a,b)=>b[1]-a[1]).slice(0,5);
+  const total=entries.reduce((a,b)=>a+b[1],0)||1;
+  const cols=["#C9A96E","#00D68F","#4D8EFF","#FF4D4D","#9B6DFF"];
+  const svg=document.getElementById("cc-donut");
+  const cx=50,cy=50,r=40,ir=24;
+  let angle=-Math.PI/2,paths="";
+  entries.forEach(([nm,cnt],i)=>{
+    const sl=(cnt/total)*2*Math.PI;
+    const x1=cx+r*Math.cos(angle),y1=cy+r*Math.sin(angle);
+    const x2=cx+r*Math.cos(angle+sl),y2=cy+r*Math.sin(angle+sl);
+    const ix1=cx+ir*Math.cos(angle),iy1=cy+ir*Math.sin(angle);
+    const ix2=cx+ir*Math.cos(angle+sl),iy2=cy+ir*Math.sin(angle+sl);
+    const lg=sl>Math.PI?1:0;
+    paths+=`<path d="M${ix1},${iy1}L${x1},${y1}A${r},${r} 0 ${lg},1 ${x2},${y2}L${ix2},${iy2}A${ir},${ir} 0 ${lg},0 ${ix1},${iy1}" fill="${cols[i]}" opacity=".9"/>`;
+    angle+=sl;
+  });
+  paths+=`<text x="${cx}" y="${cy+5}" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="16" fill="var(--w1)" font-weight="500">${total}</text>`;
+  svg.innerHTML=paths;
+  document.getElementById("cc-donut-legend").innerHTML=entries.map(([nm,cnt],i)=>`
+    <div class="legend-row"><div class="legend-dot" style="background:${cols[i]}"></div><div class="legend-label">${nm.replace(" & "," &amp; ")}</div><div class="legend-val">${cnt}</div></div>`).join("");
+}
+
+// ═══════════ RENDER TENDERS ══════════════════════════════════════════
+function renderTenders(){
+  const q=(document.getElementById("fi-q").value||"").toLowerCase();
+  const src=document.getElementById("fi-src").value;
+  const sec=document.getElementById("fi-sec").value;
+  const cty=document.getElementById("fi-cty").value;
+  const rec=document.getElementById("fi-rec").value;
+  const srt=document.getElementById("fi-sort").value;
+  let list=[...allTenders()].filter(t=>{
+    const mq=!q||t.title.toLowerCase().includes(q)||t.country.toLowerCase().includes(q);
+    const msrc=src==="all"||t.source===src;
+    const msec=sec==="all"||t.sector===sec;
+    const mcty=cty==="all"||t.country===cty;
+    const mrec=rec==="all"||recKey(t)===rec;
+    return mq&&msrc&&msec&&mcty&&mrec;
+  }).sort((a,b)=>{
+    if(srt==="score")return b.rel-a.rel;
+    if(srt==="deadline")return du(a.deadline)-du(b.deadline);
+    if(srt==="budget")return parseBudget(b.budget)-parseBudget(a.budget);
+    return new Date(b.pub)-new Date(a.pub);
+  });
+  document.getElementById("fi-ct").textContent=list.length+" of "+allTenders().length+" results";
+  const el=document.getElementById("opp-list");
+  if(!list.length){el.innerHTML='<div class="empty-st">No live tenders yet — Zapier populates this automatically within 24h as Google Alert finds results. Go to Settings → Sync Now to check.</div>';return;}
+  el.innerHTML=list.map(t=>{
+    const s=si(t.source);const d=du(t.deadline);const sv=saved.has(t.id);const pp=pipe[t.id];
+    const rec=recommend(t);
+    const dc=d<=7?"var(--red)":d<=14?"var(--amber)":"var(--w3)";
+    const sc_=t.rel;
+    const criteria=[
+      {label:"Geographic fit",ok:["Djibouti","Ethiopia","Kenya","Morocco","Senegal","Cameroon","Saudi Arabia","Somalia","Tanzania","Uganda","Algeria","Rwanda","Côte d'Ivoire","UAE"].includes(t.country)},
+      {label:"Sector match",ok:["Port & Maritime","Transport","Project Management / PMO","Engineering Supervision","Advisory & Studies","Procurement Advisory"].includes(t.sector)},
+      {label:"MDB financed",ok:["World Bank","AfDB","AFD","UNDP"].includes(t.source)||t.desc.toLowerCase().includes("world bank")||t.desc.toLowerCase().includes("afdb")||t.desc.toLowerCase().includes("afd")},
+    ];
+    // SVG ring
+    const circ=2*Math.PI*20;const dash=(sc_/100)*circ;
+    const ringColor=sc_>=85?"var(--green)":sc_>=70?"var(--amber)":"var(--red)";
+    return`<div class="ocard">
+      <div class="ocard-top">
+        <div class="ocard-score">
+          <div class="score-ring">
+            <svg viewBox="0 0 44 44" width="52" height="52">
+              <circle cx="22" cy="22" r="20" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="3"/>
+              <circle cx="22" cy="22" r="20" fill="none" stroke="${ringColor}" stroke-width="3" stroke-dasharray="${dash} ${circ}" stroke-linecap="round"/>
+            </svg>
+            <span class="score-val" style="color:${ringColor}">${sc_}</span>
+          </div>
+          <div class="score-lbl">Fit Score</div>
+          <div class="rec-badge ${rec.cls}">${rec.label}</div>
+        </div>
+        <div class="ocard-body">
+          <div class="ocard-chips">
+            <span class="ochip ochip-src" style="background:${s.color}18;color:${s.color}">${s.icon} ${s.name}</span>
+            <span class="ochip ochip-def">${t.country}</span>
+            <span class="ochip ochip-def">${t.sector}</span>
+            <span class="ochip ochip-def">${t.type}</span>
+            ${d<=7&&d>0?'<span class="ochip ochip-closing">⚠ Closing Soon</span>':'<span class="ochip ochip-open">Open</span>'}
+            ${t.live?'<span class="ochip ochip-live">⬤ Live</span>':""}
+            ${pp?`<span class="ochip ochip-def" style="background:${PC[pp]}18;color:${PC[pp]}">● ${PL[pp]}</span>`:""}
+          </div>
+          <div class="ocard-title">${t.title}</div>
+          ${t.desc?`<div class="ocard-desc">${t.desc}</div>`:""}
+          <div class="ocard-criteria">
+            ${criteria.map(c=>`<div class="crit-item ${c.ok?"yes":"no"}">${c.ok?"✓":"✗"} ${c.label}</div>`).join("")}
+          </div>
+        </div>
+        <div class="ocard-meta">
+          <div class="meta-row">
+            <div class="meta-val">${t.budget||"—"}</div>
+            <div class="meta-lbl">Est. Value</div>
+          </div>
+          <div class="meta-row">
+            <div class="meta-days" style="color:${dc}">${d>0?d+"d":"Expired"}</div>
+            <div class="meta-lbl">${t.deadline||"No deadline"}</div>
+          </div>
+          <div class="ocard-actions">
+            <button class="oact sv${sv?" on":""}" onclick="toggleSave('${t.id}')">${sv?"★":"☆"}</button>
+            <button class="oact pipe" onclick="addPipe('${t.id}')">+ Pipeline</button>
+            <a class="oact view" href="${t.url}" target="_blank" rel="noopener">View ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+function toggleSave(id){saved.has(id)?saved.delete(id):saved.add(id);persist();updateStats();renderTenders();}
+function addPipe(id){
+  if(!pipe[id]){pipe[id]="reviewing";persist();updateStats();renderPipeline();renderTenders();renderDashboard();toast("Added to Pipeline → Reviewing");}
+  else toast("Already in pipeline — update in BD Pipeline tab");
+}
+function movePipe(id,stage){pipe[id]=stage;persist();updateStats();renderPipeline();renderTenders();renderDashboard();toast("→ "+PL[stage]);}
+function removePipe(id){delete pipe[id];persist();updateStats();renderPipeline();renderTenders();renderDashboard();toast("Removed from pipeline");}
+
+// ═══════════ PIPELINE ═══════════════════════════════════════════════
+function renderPipeline(){
+  const all=allTenders();
+  const totalPipeVal=Object.keys(pipe).reduce((s,id)=>{const t=all.find(x=>x.id===id);return s+(t?parseBudget(t.budget):0);},0);
+  const pipeCount=Object.keys(pipe).length;
+  document.getElementById("pipe-total-val").textContent=totalPipeVal>0?formatBudget(totalPipeVal):"—";
+  document.getElementById("pipe-total-sub").textContent=pipeCount+" opportunities in active pipeline";
+
+  document.getElementById("pboard").innerHTML=PS.map(stage=>{
+    const items=Object.entries(pipe).filter(([,s])=>s===stage);
+    const stageVal=items.reduce((s,[id])=>{const t=all.find(x=>x.id===id);return s+(t?parseBudget(t.budget):0);},0);
+    return`<div class="pcol" style="--pc:${PC[stage]}">
+      <div class="pcol-hd">
+        <div class="pcol-title">${PL[stage]}</div>
+        <div class="pcol-stats"><div class="pcol-count">${items.length}</div><div class="pcol-val">${stageVal>0?formatBudget(stageVal):""}</div></div>
+      </div>
+      ${items.length?items.map(([id])=>{
+        const t=all.find(x=>x.id===id);if(!t)return"";const d=du(t.deadline);
+        return`<div class="pitem">
+          <div class="pitem-ttl">${t.title.length>58?t.title.slice(0,55)+"…":t.title}</div>
+          <div class="pitem-meta">${t.country} · ${t.source} · ${d>0?d+"d left":"Expired"}</div>
+          <div class="pitem-budget">${t.budget||"—"}</div>
+          <div class="pitem-acts">
+            ${PS.filter(s=>s!==stage).map(s=>`<button onclick="movePipe('${id}','${s}')">${PL[s]}</button>`).join("")}
+            <button class="rm" onclick="removePipe('${id}')">✕ Remove</button>
+          </div>
+        </div>`;}).join(""):'<div class="pempty">No tenders</div>'}
+    </div>`;
+  }).join("");
+}
+
+// ═══════════ SOURCES ════════════════════════════════════════════════
+function renderSources(){
+  const all=allTenders();
+  document.getElementById("src-grid").innerHTML=SRCS.map(s=>`
+    <a class="srccard" href="${s.site}" target="_blank" rel="noopener">
+      <div class="src-top"><div class="src-ico">${s.icon}</div><div><div class="src-nm" style="color:${s.color}">${s.name}</div><div class="src-dom">${s.site.replace("https://","")}</div></div></div>
+      <div style="font-size:11px;color:var(--w3);margin-bottom:8px;font-weight:500">${all.filter(t=>t.source===s.id).length} active tenders tracked</div>
+      <div class="src-lnk">Open portal ↗</div>
+    </a>`).join("");
+}
+
+// ═══════════ AI ═════════════════════════════════════════════════════
+function onKeyIn(){
+  const ak=document.getElementById("ai-key"),sk=document.getElementById("sk-key");
+  const v=(document.activeElement===ak?ak?.value:sk?.value)||"";
+  if(v)localStorage.setItem("sr_key",v);
+  if(ak&&sk){if(document.activeElement===ak)sk.value=ak.value;else if(document.activeElement===sk)ak.value=sk.value;}
+  updateKeyStatus();
+}
+function updateKeyStatus(){
+  const k=localStorage.getItem("sr_key")||"";
+  const msg=k?"✓ Key active — AI Prospector ready":"Not set";
+  const col=k?"var(--green)":"var(--w4)";
+  ["ai-kst","sk-st"].forEach(id=>{const e=document.getElementById(id);if(e){e.textContent=msg;e.style.color=col;}});
+}
+function clearKey(){localStorage.removeItem("sr_key");["ai-key","sk-key"].forEach(id=>{const e=document.getElementById(id);if(e)e.value="";});updateKeyStatus();toast("API key cleared");}
+function saveATToken(){
+  const v=document.getElementById("sk-at")?.value||"";
+  if(v){localStorage.setItem("sr_at_token",v);fetchAirtable();}
+}
+
+async function runAI(){
+  const k=localStorage.getItem("sr_key");
+  const q=(document.getElementById("ai-q").value||"").trim();
+  if(!q){toast("Please enter a query");return;}
+  if(!k){toast("Add your Anthropic API key in Settings");return;}
+  const btn=document.getElementById("ai-btn"),res=document.getElementById("ai-res");
+  btn.disabled=true;btn.textContent="Analysing…";
+  res.innerHTML='<div class="empty-st" style="padding:36px 0">Running intelligence search…</div>';
+  try{
+    const r=await fetch("https://api.anthropic.com/v1/messages",{
+      method:"POST",
+      headers:{"Content-Type":"application/json","x-api-key":k,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-calls":"true"},
+      body:JSON.stringify({model:"claude-haiku-4-5-20251001",max_tokens:1300,
+        system:`Senior BD analyst for Skyrise Capital PM (Dubai) — AMO, PMO, supervision, advisory for infrastructure, port, transport, water in Africa & Middle East. MDB: WB, AfDB, AFD, UNDP, EU. Respond ONLY with valid JSON, no markdown:
+{"summary":"2-3 sentence assessment","leads":[{"title":"...","source":"World Bank|AfDB|AFD|UNDP|dgMarket|Devex","country":"...","sector":"...","type":"QCBS|QBS|IC|CQS","relevance":0-100,"rationale":"one line","url":"https://..."}],"partnerSuggestions":["..."],"watchWords":["..."]}`,
+        messages:[{role:"user",content:q}]})
+    });
+    const d=await r.json();
+    const txt=d.content?.find(b=>b.type==="text")?.text||"";
+    renderAIRes(JSON.parse(txt.replace(/```json|```/g,"").trim()));
+  }catch(e){res.innerHTML='<div class="ibox"><div class="ibox-l" style="color:var(--red)">Error</div>Check your API key in Settings and try again.</div>';}
+  btn.disabled=false;btn.textContent="→ Run Intelligence Search";
+}
+
+function renderAIRes(r){
+  let h=`<div class="aicard fu"><div class="aicard-l">Assessment</div><div class="aisy">${r.summary||""}</div></div>`;
+  if(r.leads?.length){
+    h+=`<div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--w4);margin:14px 0 8px;font-weight:600">Identified Leads</div>`;
+    h+=r.leads.map(l=>{const s=si(l.source);return`<div class="alead fu"><div><div class="ocard-chips" style="margin-bottom:6px"><span class="ochip ochip-src" style="background:${s.color}18;color:${s.color}">${s.icon} ${s.name}</span><span class="ochip ochip-def">${l.country}</span><span class="ochip ochip-def">${l.sector}</span></div><div style="font-family:var(--serif);font-size:15px;font-weight:500;color:var(--w1);margin-bottom:3px">${l.title}</div><div style="font-size:10px;color:var(--w4)">${l.rationale}</div></div><div style="text-align:right;flex-shrink:0"><div style="font-family:var(--serif);font-size:22px;font-weight:500;color:${sc(l.relevance)}">${l.relevance}</div><div style="font-size:9px;color:var(--w4)">match</div></div></div>`;}).join("");}
+  if(r.partnerSuggestions?.length)h+=`<div class="aicard fu" style="border-color:rgba(77,142,255,.2);margin-top:10px"><div class="aicard-l" style="color:var(--blue)">Partner Suggestions</div>${r.partnerSuggestions.map(p=>`<div style="font-size:11px;color:var(--w3);margin-bottom:5px;font-weight:500">→ ${p}</div>`).join("")}</div>`;
+  if(r.watchWords?.length)h+=`<div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:10px">${r.watchWords.map(w=>`<span style="font-size:9px;padding:2px 8px;border-radius:3px;background:var(--golda);color:rgba(201,169,110,.7);border:1px solid rgba(201,169,110,.1);font-weight:500">#${w}</span>`).join("")}</div>`;
+  document.getElementById("ai-res").innerHTML=h;
+}
+
+// ═══════════ TABS ════════════════════════════════════════════════════
+function goTab(id){
+  document.querySelectorAll(".tbtn").forEach(b=>b.classList.toggle("active",b.dataset.tab===id));
+  document.querySelectorAll("[id^='tab-']").forEach(el=>{el.classList.add("hidden");el.classList.remove("fu")});
+  const t=document.getElementById("tab-"+id);
+  t.classList.remove("hidden");requestAnimationFrame(()=>t.classList.add("fu"));
+}
+
+// ═══════════ MISC ════════════════════════════════════════════════════
+function handleRefresh(){
+  document.getElementById("live-t").textContent="Syncing…";
+  fetchAirtable().then(()=>{if(!liveT.length)document.getElementById("live-t").textContent="No data yet";});
+  setTimeout(()=>{if(liveT.length)document.getElementById("live-t").textContent=new Date().toLocaleTimeString()+" · "+liveT.length+" live";},3000);
+}
+function setFreq(btn){document.querySelectorAll(".freqbtn").forEach(b=>b.classList.remove("on"));btn.classList.add("on");}
+function saveAlerts(){const b=document.getElementById("al-btn");b.textContent="✓ Configuration Saved";b.style.background="var(--green)";setTimeout(()=>{b.textContent="Activate Email Alerts";b.style.background="";},3000);}
+function exportData(){const a=document.createElement("a");a.href="data:application/json,"+encodeURIComponent(JSON.stringify({pipeline:pipe,saved:[...saved],exported:new Date().toISOString()},null,2));a.download="skyrise-pipeline-"+new Date().toISOString().slice(0,10)+".json";a.click();}
+function clearAll(){if(confirm("Clear all pipeline and saved data?")){pipe={};saved=new Set();persist();updateStats();renderPipeline();renderTenders();renderDashboard();toast("Data cleared");}}
+
+// ═══════════ INIT ════════════════════════════════════════════════════
 document.addEventListener("DOMContentLoaded",()=>{
   document.getElementById("live-t").textContent=new Date().toLocaleTimeString();
+  document.getElementById("cc-date").textContent=new Date().toLocaleDateString("en-GB",{day:"2-digit",month:"long",year:"numeric"});
+
+  // Country filter
   const sel=document.getElementById("fi-cty");
-  [...new Set(T.map(t=>t.country))].sort().forEach(c=>{const o=document.createElement("option");o.value=c;o.textContent=c;sel.appendChild(o);});
+  ["Algeria","Cameroon","Côte d'Ivoire","Djibouti","Ethiopia","Kenya","Morocco","Rwanda","Saudi Arabia","Senegal","Somalia","Tanzania","UAE","Uganda"].forEach(c=>{const o=document.createElement("option");o.value=c;o.textContent=c;sel.appendChild(o);});
+
+  // Restore keys
   const k=localStorage.getItem("sr_key")||"";
   if(k){["ai-key","sk-key"].forEach(id=>{const e=document.getElementById(id);if(e)e.value=k;});}
   const at=localStorage.getItem("sr_at_token")||"";
   if(at){const e=document.getElementById("sk-at");if(e)e.value=at;}
+
   updateKeyStatus();
-  updateStats();renderTenders();renderSources();renderPipeline();renderDashboard();
-  fetchAirtable();
+  renderSources();renderPipeline();
+
+  // Fetch live data then render
+  fetchAirtable().then(()=>{
+    if(liveT.length===0){renderDashboard();renderTenders();}
+  });
+  renderDashboard();renderTenders();
+
+  // Auto-refresh every 2 min
   setInterval(fetchAirtable,120000);
 });
 </script>
