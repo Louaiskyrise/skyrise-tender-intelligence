@@ -496,6 +496,12 @@ hr.div{border:none;border-top:1px solid var(--rule);margin:32px 0}
       <div style="margin-top:9px;font-size:9.5px" id="sk-st"></div>
     </div>
     <div class="scard">
+      <div class="scard-nm">Airtable Live Feed</div>
+      <div class="scard-d">Paste your Airtable Personal Access Token to populate the dashboard with real tenders from Zapier automatically. Dashboard refreshes every 2 minutes.</div>
+      <div class="srow"><input class="fi" id="sk-at" type="password" placeholder="patXXXXXXXXXXXXXX.XXXX" style="flex:1" oninput="saveATToken()"/><button class="nbtn" onclick="fetchAirtable();toast('Fetching live tenders…')">Sync Now</button></div>
+      <div style="margin-top:9px;font-size:9.5px" id="sk-at-st"></div>
+    </div>
+    <div class="scard">
       <div class="scard-nm">Pipeline Data</div>
       <div class="scard-d">Pipeline statuses and saved tenders are stored in localStorage. Export a backup or clear all data.</div>
       <div class="srow"><button class="nbtn" onclick="exportData()">Export JSON</button><button class="nbtn" style="color:var(--red);border-color:rgba(217,95,75,.2)" onclick="clearAll()">Clear All Data</button></div>
@@ -554,9 +560,10 @@ function si(id){return SRCS.find(s=>s.id===id)||{name:id,icon:"•",color:"#888"
 function toast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2600)}
 
 function updateStats(){
-  document.getElementById("st-open").textContent=T.filter(t=>t.st==="open").length;
-  document.getElementById("st-cl").textContent=T.filter(t=>du(t.deadline)<=7&&du(t.deadline)>0).length;
-  document.getElementById("st-hi").textContent=T.filter(t=>t.rel>=90).length;
+  const all=allTenders();
+  document.getElementById("st-open").textContent=all.filter(t=>t.st==="open").length;
+  document.getElementById("st-cl").textContent=all.filter(t=>du(t.deadline)<=7&&du(t.deadline)>0).length;
+  document.getElementById("st-hi").textContent=all.filter(t=>t.rel>=90).length;
   document.getElementById("st-sv").textContent=saved.size;
   document.getElementById("st-pp").textContent=Object.keys(pipe).length;
 }
@@ -639,7 +646,7 @@ function renderTenders(){
   const sec=document.getElementById("fi-sec").value;
   const cty=document.getElementById("fi-cty").value;
   const srt=document.getElementById("fi-sort").value;
-  let list=[...T].filter(t=>{
+  let list=[...allTenders()].filter(t=>{
     const mq=!q||t.title.toLowerCase().includes(q)||t.country.toLowerCase().includes(q)||t.tags.some(g=>g.toLowerCase().includes(q));
     return mq&&(src==="all"||t.source===src)&&(sec==="all"||t.sector===sec)&&(cty==="all"||t.country===cty);
   }).sort((a,b)=>srt==="relevance"?b.rel-a.rel:srt==="deadline"?new Date(a.deadline)-new Date(b.deadline):new Date(b.pub)-new Date(a.pub));
@@ -653,7 +660,7 @@ function renderTenders(){
     return`<div class="tc${sv?" saved":""}">
       <div style="display:flex;flex-direction:column;align-items:center;gap:3px"><div class="rring" style="color:${rc(t.rel)}">${t.rel}<small>match</small></div></div>
       <div>
-        <div class="chips"><span class="chip" style="background:${s.color}1E;color:${s.color}">${s.icon} ${s.name}</span><span class="chip">${t.country}</span><span class="chip">${t.sector}</span><span class="chip">${t.type}</span>${sc}${pp?`<span class="chip" style="background:${PC[pp]}1E;color:${PC[pp]}">● ${PL[pp]}</span>`:""}</div>
+        <div class="chips"><span class="chip" style="background:${s.color}1E;color:${s.color}">${s.icon} ${s.name}</span><span class="chip">${t.country}</span><span class="chip">${t.sector}</span><span class="chip">${t.type}</span>${sc}${t.live?'<span class="chip" style="background:rgba(0,201,138,.2);color:var(--green);font-weight:500">⬤ LIVE</span>':""}${pp?`<span class="chip" style="background:${PC[pp]}1E;color:${PC[pp]}">● ${PL[pp]}</span>`:""}</div>
         <div class="ttl">${t.title}</div>
         <div class="tdesc">${t.desc}</div>
         <div class="ttags">${t.tags.map(g=>`<span class="ttag">#${g}</span>`).join("")}</div>
@@ -699,6 +706,10 @@ function renderPipeline(){
   }).join("");
 }
 
+function saveATToken(){
+  const v=document.getElementById("sk-at")?.value||"";
+  if(v){localStorage.setItem("sr_at_token",v);const e=document.getElementById("sk-at-st");if(e){e.textContent="✓ Token saved — fetching live tenders";e.style.color="var(--green)";}fetchAirtable();}
+}
 function onKeyIn(){
   const ak=document.getElementById("ai-key"),sk=document.getElementById("sk-key");
   const v=(document.activeElement===ak?ak:sk)?.value||"";
@@ -769,14 +780,61 @@ function copyRSS(){navigator.clipboard.writeText("https://www.dgmarket.com/tende
 function exportData(){const a=document.createElement("a");a.href="data:application/json,"+encodeURIComponent(JSON.stringify({pipeline:pipe,saved:[...saved],exported:new Date().toISOString()},null,2));a.download="skyrise-pipeline-"+new Date().toISOString().slice(0,10)+".json";a.click();}
 function clearAll(){if(confirm("Clear all pipeline and saved data? Cannot be undone.")){pipe={};saved=new Set();persist();updateStats();renderPipeline();renderTenders();renderDashboard();toast("All data cleared");}}
 
+// ════════════════════════════════════════════════════════════════
+// AIRTABLE LIVE FEED
+// ════════════════════════════════════════════════════════════════
+const AT_BASE="appS3v2RPM3TnNsA8";
+const AT_TABLE="tblE9vnb6Jj9pOeSK";
+let liveT=[];
+
+async function fetchAirtable(){
+  const token=localStorage.getItem("sr_at_token")||"";
+  if(!token)return;
+  try{
+    const r=await fetch(`https://api.airtable.com/v0/${AT_BASE}/${AT_TABLE}?maxRecords=100&sort[0][field]=Published&sort[0][direction]=desc`,{
+      headers:{"Authorization":"Bearer "+token}
+    });
+    const d=await r.json();
+    if(!d.records)return;
+    liveT=d.records.map(rec=>{
+      const f=rec.fields;
+      return{
+        id:"at-"+rec.id,
+        title:f.Title||f.Name||"Untitled",
+        source:f.Source||"dgmarket",
+        country:f.Country||"—",
+        sector:f.Sector||"Advisory & Studies",
+        type:f.Type||"QCBS",
+        budget:f.Budget||"—",
+        deadline:f.Deadline||"",
+        pub:f.Published||new Date().toISOString().slice(0,10),
+        rel:parseInt(f.Relevance)||75,
+        tags:(f.Tags||"").split(",").map(t=>t.trim()).filter(Boolean),
+        url:f.URL||"#",
+        desc:f.Description||f.Summary||"",
+        st:"open",
+        live:true
+      };
+    }).filter(t=>t.title&&t.title!=="Untitled");
+    updateStats();renderTenders();renderDashboard();
+    document.getElementById("live-t").textContent=new Date().toLocaleTimeString()+" · "+liveT.length+" live";
+  }catch(e){console.log("Airtable fetch error",e);}
+}
+
+function allTenders(){return[...liveT,...T.filter(t=>!liveT.find(l=>l.title===t.title))];}
+
 document.addEventListener("DOMContentLoaded",()=>{
   document.getElementById("live-t").textContent=new Date().toLocaleTimeString();
   const sel=document.getElementById("fi-cty");
   [...new Set(T.map(t=>t.country))].sort().forEach(c=>{const o=document.createElement("option");o.value=c;o.textContent=c;sel.appendChild(o);});
   const k=localStorage.getItem("sr_key")||"";
   if(k){["ai-key","sk-key"].forEach(id=>{const e=document.getElementById(id);if(e)e.value=k;});}
+  const at=localStorage.getItem("sr_at_token")||"";
+  if(at){const e=document.getElementById("sk-at");if(e)e.value=at;}
   updateKeyStatus();
   updateStats();renderTenders();renderSources();renderPipeline();renderDashboard();
+  fetchAirtable();
+  setInterval(fetchAirtable,120000);
 });
 </script>
 </body>
