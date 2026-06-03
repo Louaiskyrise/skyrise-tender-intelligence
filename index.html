@@ -652,7 +652,7 @@ function renderTenders(){
   }).sort((a,b)=>srt==="relevance"?b.rel-a.rel:srt==="deadline"?new Date(a.deadline)-new Date(b.deadline):new Date(b.pub)-new Date(a.pub));
   document.getElementById("fi-ct").textContent=list.length+" of "+T.length+" results";
   const el=document.getElementById("tlist");
-  if(!list.length){el.innerHTML='<div class="empty-st">No tenders match the current filters.</div>';return;}
+  if(!list.length){el.innerHTML='<div class="empty-st">No live tenders yet — Zapier will populate this automatically within 24 hours as Google Alert finds new results.</div>';return;}
   el.innerHTML=list.map(t=>{
     const s=si(t.source);const d=du(t.deadline);const sv=saved.has(t.id);const pp=pipe[t.id];
     const dc=d<=7?"var(--red)":d<=14?"var(--amber)":"var(--muted)";
@@ -821,7 +821,7 @@ async function fetchAirtable(){
   }catch(e){console.log("Airtable fetch error",e);}
 }
 
-function allTenders(){return[...liveT,...T.filter(t=>!liveT.find(l=>l.title===t.title))];}
+function allTenders(){return liveT.length>0?liveT:[];}
 
 document.addEventListener("DOMContentLoaded",()=>{
   document.getElementById("live-t").textContent=new Date().toLocaleTimeString();
